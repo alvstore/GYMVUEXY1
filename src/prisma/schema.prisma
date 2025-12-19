@@ -1,0 +1,3610 @@
+// Gym Management SaaS Database Schema
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "linux-arm64-openssl-1.1.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// NEXTAUTH MODELS (for OAuth & Social Login Support)
+// ============================================================================
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ============================================================================
+// TENANT & ORGANIZATION MANAGEMENT
+// ============================================================================
+
+model Tenant {
+  id                    String   @id @default(uuid())
+  name                  String
+  slug                  String   @unique
+  email                 String?
+  phone                 String?
+  address               String?
+  billingInfo           Json?
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  // Relationships
+  branches              Branch[]
+  users                 User[]
+  members               Member[]
+  membershipPlans       MembershipPlan[]
+  lockers               Locker[]
+  lockerAssignments     LockerAssignment[]
+  invoices              Invoice[]
+  attendanceRecords     AttendanceRecord[]
+  staffAttendance       StaffAttendance[]
+  rooms                 Room[]
+  accessDevices         AccessDevice[]
+  accessLogs            AccessLog[]
+  roomPermissions       RoomPermission[]
+  temporaryAccess       TemporaryAccess[]
+  accessAlerts          AccessAlert[]
+  transactions          Transaction[]
+  paymentGatewayConfigs PaymentGatewayConfig[]
+  paymentLogs           PaymentLog[]
+  financeCategories     FinanceCategory[]
+  expenses              Expense[]
+  products              Product[]
+  inventoryMovements    InventoryMovement[]
+  orders                Order[]
+  payroll               Payroll[]
+  planTemplates         PlanTemplate[]
+  trainerProfiles       TrainerProfile[]
+  vendors               Vendor[]
+  classes               Class[]
+  classSchedules        ClassSchedule[]
+  classBookings         ClassBooking[]
+
+  // Communication
+  emailSettings         EmailSetting[]
+  smsSettings           SmsSetting[]
+  whatsappSettings      WhatsAppSetting[]
+  communicationTemplates CommunicationTemplate[]
+  emailLogs             EmailLog[]
+  smsLogs               SmsLog[]
+  whatsappLogs          WhatsAppLog[]
+  campaigns             Campaign[]
+  announcements         Announcement[]
+  notifications         Notification[]
+  feedbacks             Feedback[]
+  
+  // People & Accounts
+  staffMembers          StaffMember[]
+  memberGoals           MemberGoal[]
+  
+  // Memberships & Entitlements
+  planBenefits          PlanBenefit[]
+  benefitBalances       MemberBenefitBalance[]
+  benefitTransactions   BenefitTransaction[]
+  coupons               Coupon[]
+  couponUsages          CouponUsage[]
+  lifecycleEvents       MembershipLifecycleEvent[]
+
+  // Settings
+  settings              Setting[]
+
+  // Internal Communication
+  inboxEmails           InboxEmail[]
+  chatConversations     ChatConversation[]
+  
+  // Ecommerce
+  carts                 Cart[]
+  customerOrders        CustomerOrder[]
+  
+  // Equipment Tracking
+  equipment             Equipment[]
+  
+  // Lead Pipeline
+  leads                 Lead[]
+
+  @@map("tenants")
+}
+
+model Branch {
+  id        String   @id @default(uuid())
+  tenantId  String
+  name      String
+  code      String   // Unique branch code within tenant
+  address   String?
+  city      String?
+  state     String?
+  pincode   String?
+  country   String?
+  phone     String?
+  email     String?
+  currency  String?  @default("INR")
+  timezone  String?  @default("Asia/Kolkata")
+  logo      String?  // Logo URL
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationships
+  tenant              Tenant                 @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  users               User[]
+  members             Member[]
+  membershipPlans     MembershipPlan[]
+  memberMemberships   MemberMembership[]
+  lockers             Locker[]
+  lockerAssignments   LockerAssignment[]
+  trainerProfiles     TrainerProfile[]
+  trainerAssignments  TrainerAssignment[]
+  invoices            Invoice[]
+  trainingSessions    TrainingSession[]
+  transactions        Transaction[]
+  attendanceRecords   AttendanceRecord[]
+  staffAttendance     StaffAttendance[]
+  rooms               Room[]
+  accessDevices       AccessDevice[]
+  accessLogs          AccessLog[]
+  roomPermissions     RoomPermission[]
+  temporaryAccess     TemporaryAccess[]
+  accessAlerts        AccessAlert[]
+  products            Product[]
+  inventoryMovements  InventoryMovement[]
+  orders              Order[]
+  expenses            Expense[]
+  payroll             Payroll[]
+  paymentGatewayConfigs PaymentGatewayConfig[]
+  paymentLogs         PaymentLog[]
+  financeCategories   FinanceCategory[]
+  planTemplates       PlanTemplate[]
+  planHistory         PlanHistory[]
+  memberPlans         MemberPlan[]
+  planFavorites       PlanFavorite[]
+  planReviews         PlanReview[]
+  trainerReviews      TrainerReview[]
+  measurements        Measurement[]
+  progressPhotos      ProgressPhoto[]
+  classes             Class[]
+  classBookings       ClassBooking[]
+  classSchedules      ClassSchedule[]
+
+  // Communication
+  emailSettings       EmailSetting[]
+  smsSettings         SmsSetting[]
+  whatsappSettings    WhatsAppSetting[]
+  communicationTemplates CommunicationTemplate[]
+  emailLogs           EmailLog[]
+  smsLogs             SmsLog[]
+  whatsappLogs        WhatsAppLog[]
+  campaigns           Campaign[]
+  announcements       Announcement[]
+  notifications       Notification[]
+  feedbacks           Feedback[]
+  
+  // People & Accounts
+  staffMembers        StaffMember[]
+  memberGoals         MemberGoal[]
+  
+  // Memberships & Entitlements
+  benefitBalances     MemberBenefitBalance[]
+  benefitTransactions BenefitTransaction[]
+  coupons             Coupon[]
+  couponUsages        CouponUsage[]
+  lifecycleEvents     MembershipLifecycleEvent[]
+
+  // Settings
+  settings            Setting[]
+
+  // Internal Communication
+  inboxEmails         InboxEmail[]
+  chatConversations   ChatConversation[]
+  
+  // Ecommerce
+  carts               Cart[]
+  customerOrders      CustomerOrder[]
+  
+  // Equipment Tracking
+  equipment           Equipment[]
+  
+  // Lead Pipeline
+  leads               Lead[]
+
+  @@unique([tenantId, code])
+  @@map("branches")
+}
+
+// ============================================================================
+// USER MANAGEMENT & AUTHENTICATION
+// ============================================================================
+
+model User {
+  id                   String    @id @default(uuid())
+  tenantId             String?   // Nullable for OAuth users before tenant assignment
+  branchId             String?   // Nullable for tenant-level users
+  email                String    @unique
+  emailVerified        DateTime? // For NextAuth email verification
+  passwordHash         String?   // Nullable for OAuth users
+  name                 String
+  phone                String?
+  avatar               String?
+  image                String?   // For NextAuth (OAuth profile image)
+  isActive             Boolean   @default(true)
+  lastLoginAt          DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  // NextAuth Relationships
+  accounts             Account[]
+  sessions             Session[]
+
+  // Gym Management Relationships
+  tenant               Tenant?                @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch               Branch?                @relation(fields: [branchId], references: [id])
+  roleAssignments      UserRoleAssignment[]
+  trainerProfile       TrainerProfile?
+  attendanceRecords    AttendanceRecord[]
+  staffAttendance      StaffAttendance[]
+  accessLogs           AccessLog[]
+  roomPermissions      RoomPermission[]
+  temporaryAccess      TemporaryAccess[]
+  temporaryAccessCreated TemporaryAccess[]      @relation("TemporaryAccessCreator")
+  accessAlerts         AccessAlert[]
+  accessAlertsResolved AccessAlert[]          @relation("AccessAlertResolver")
+  transactions         Transaction[]
+  expenses             Expense[]
+  expenseApprovals     Expense[]              @relation("ExpenseApprover")
+  payroll              Payroll[]
+  planTemplatesCreated PlanTemplate[]
+  planHistory          PlanHistory[]
+  notificationSettings NotificationSetting?
+
+  // Feedback
+  feedbackSubmitted    Feedback[] @relation("FeedbackSubmitter")
+  feedbackResolved     Feedback[] @relation("FeedbackResolver")
+  
+  // People & Accounts
+  staffMember          StaffMember?
+
+  // Communication
+  emailLogs            EmailLog[]
+  smsLogs              SmsLog[]
+  whatsappLogs         WhatsAppLog[]
+  createdCampaigns     Campaign[]
+  campaignRecipients   CampaignRecipient[]
+  createdAnnouncements Announcement[]
+  notifications        Notification[]
+
+  // Internal Communication
+  sentEmails           InboxEmail[]       @relation("SentEmails")
+  receivedEmails       EmailRecipient[]
+  chatParticipants     ChatParticipant[]
+  chatMessages         ChatMessage[]
+
+  @@map("users")
+}
+
+// ============================================================================
+// RBAC (Role-Based Access Control)
+// ============================================================================
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  isSystem    Boolean  @default(false) // System roles cannot be deleted
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  permissions     RolePermission[]
+  userAssignments UserRoleAssignment[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  name        String   @unique // e.g., 'members.create', 'finance.view'
+  description String?
+  module      String   // e.g., 'members', 'finance', 'settings'
+  action      String   // e.g., 'create', 'read', 'update', 'delete'
+  createdAt   DateTime @default(now())
+
+  // Relationships
+  roles RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  id           String @id @default(uuid())
+  roleId       String
+  permissionId String
+
+  // Relationships
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRoleAssignment {
+  id       String  @id @default(uuid())
+  userId   String
+  roleId   String
+  branchId String? // Nullable for tenant-level role assignments
+
+  // Relationships
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId, branchId])
+  @@map("user_role_assignments")
+}
+
+// ============================================================================
+// AUDIT LOG
+// ============================================================================
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  tenantId   String
+  branchId   String?  // Branch-level audit trail for multi-branch operations
+  userId     String?
+  action     String   // e.g., 'user.created', 'role.assigned'
+  resource   String   // e.g., 'User', 'Role'
+  resourceId String?
+  oldValues  Json?
+  newValues  Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+// ============================================================================
+// MEMBER MANAGEMENT
+// ============================================================================
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum ActivityLevel {
+  SEDENTARY
+  LIGHTLY_ACTIVE
+  MODERATELY_ACTIVE
+  VERY_ACTIVE
+  EXTREMELY_ACTIVE
+}
+
+enum FoodPreference {
+  VEGETARIAN
+  VEGAN
+  NON_VEGETARIAN
+  EGGETARIAN
+  PESCATARIAN
+  KETO
+  PALEO
+  GLUTEN_FREE
+  DAIRY_FREE
+  NONE
+}
+
+enum MemberStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING
+  CANCELLED
+  FROZEN
+}
+
+enum ReferralStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+model Member {
+  id                String   @id @default(uuid())
+  tenantId          String
+  branchId          String? // Nullable for tenant-wide operations
+  membershipId      String   @unique // Auto-generated membership ID
+  firstName         String
+  lastName          String
+  email             String?
+  phone             String
+  dateOfBirth       DateTime?
+  gender            Gender?
+  address           String?
+  emergencyContact  String?
+  emergencyPhone    String?
+  height            Float?   // in cm
+  weight            Float?   // in kg
+  bloodGroup        String?
+  medicalConditions String?
+  allergies         String?
+  foodPreference    FoodPreference?
+  activityLevel     ActivityLevel?
+  status            MemberStatus @default(ACTIVE)
+  joinDate          DateTime @default(now())
+  notes             String?
+  
+  // KYC & Identity Fields
+  avatarUrl         String? // Profile photo URL
+  idProofType       String? // e.g., "Aadhaar", "Passport", "DL"
+  idProofNumber     String? // Masked/encrypted in application
+  idProofFrontUrl   String? // Front photo of ID
+  idProofBackUrl    String? // Back photo of ID
+  tags              String[] @default([]) // For categorization
+  referralCode      String   @unique @default(cuid()) // Unique referral code for this member
+  referredBy        String? // Member ID who referred this member
+  
+  // Soft Delete Support
+  deletedAt         DateTime?
+  deletedBy         String? // User ID who deleted
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relationships
+  tenant            Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch            Branch?            @relation(fields: [branchId], references: [id])
+  memberships       MemberMembership[]
+  measurements      Measurement[]
+  lockerAssignments LockerAssignment[]
+  trainerAssignments TrainerAssignment[]
+  attendanceRecords AttendanceRecord[]
+  accessLogs        AccessLog[]
+  temporaryAccess   TemporaryAccess[]
+  trainingSessions  TrainingSession[]
+  trainerReviews    TrainerReview[]
+  transactions      Transaction[]
+  invoices          Invoice[]
+  planFavorites     PlanFavorite[]
+  planReviews       PlanReview[]
+  memberPlans       MemberPlan[]
+  progressPhotos    ProgressPhoto[]
+  referralsMade     ReferralTracking[] @relation("ReferralsMade")
+  referralsReceived ReferralTracking[] @relation("ReferralsReceived")
+  classBookings     ClassBooking[]
+  feedbacks         Feedback[]
+  
+  // New Relationships
+  goals             MemberGoal[]
+  benefitBalances   MemberBenefitBalance[]
+  benefitTransactions BenefitTransaction[]
+  couponUsages      CouponUsage[]
+  lifecycleEvents   MembershipLifecycleEvent[]
+
+  // Communication
+  emailLogs         EmailLog[]
+  smsLogs           SmsLog[]
+  whatsappLogs      WhatsAppLog[]
+  campaignRecipients CampaignRecipient[]
+  notifications     Notification[]
+  
+  // Ecommerce
+  carts             Cart[]
+  customerOrders    CustomerOrder[]
+
+  @@map("members")
+}
+
+model ReferralTracking {
+  id           String         @id @default(uuid())
+  referrerId   String // Member who made the referral
+  referredId   String // Member who was referred
+  bonusAwarded Decimal        @default(0) @db.Decimal(10, 2) // Any bonus/credit given to referrer
+  status       ReferralStatus @default(PENDING)
+  referredAt   DateTime       @default(now())
+  completedAt  DateTime?      // When the referral was completed (e.g., when referred member joined/paid)
+  notes        String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  // Relationships
+  referrer Member @relation("ReferralsMade", fields: [referrerId], references: [id], onDelete: Cascade)
+  referred Member @relation("ReferralsReceived", fields: [referredId], references: [id], onDelete: Cascade)
+
+  @@unique([referrerId, referredId])
+  @@map("referral_tracking")
+}
+
+// ============================================================================
+// MEMBERSHIP & PLANS
+// ============================================================================
+
+enum PlanStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum BillingCycle {
+  MONTHLY
+  QUARTERLY
+  HALF_YEARLY
+  YEARLY
+  LIFETIME
+}
+
+model MembershipPlan {
+  id              String   @id @default(uuid())
+  tenantId        String
+  branchId        String?  // Nullable for tenant-wide plans
+  name            String
+  description     String?
+  planType        PlanType
+  duration        Int // Duration in days
+  price           Decimal  @db.Decimal(10, 2)
+  setupFee        Decimal  @default(0) @db.Decimal(10, 2)
+  gymAccess       Boolean  @default(true)
+  poolAccess      Boolean  @default(false)
+  lockerAccess    Boolean  @default(false)
+  personalTrainer Boolean  @default(false)
+  groupClasses    Boolean  @default(false)
+  maxClasses      Int?     // Max classes per month
+  features        String[] // Additional features as array
+  status          PlanStatus @default(ACTIVE)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relationships
+  tenant          Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch?            @relation(fields: [branchId], references: [id])
+  memberPlans     MemberMembership[]
+  roomPermissions RoomPermission[]
+  benefits        PlanBenefit[]      // New: Benefit entitlements
+
+  @@map("membership_plans")
+}
+
+model MemberMembership {
+  id        String       @id @default(uuid())
+  memberId  String
+  planId    String
+  branchId  String? // Nullable for tenant-wide operations
+  startDate DateTime
+  endDate   DateTime
+  status    MemberStatus @default(ACTIVE)
+  freezeDays Int          @default(0)
+  notes     String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  // Relationships
+  member          Member                      @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  plan            MembershipPlan              @relation(fields: [planId], references: [id])
+  branch          Branch?                     @relation(fields: [branchId], references: [id])
+  invoices        Invoice[]
+  lifecycleEvents MembershipLifecycleEvent[]  // New: Lifecycle tracking
+
+  @@map("member_memberships")
+}
+
+// ============================================================================
+// MEMBER PROGRESS & MEASUREMENTS
+// ============================================================================
+
+model Measurement {
+  id              String   @id @default(uuid())
+  memberId        String
+  branchId        String? // Nullable for tenant-wide operations
+  weight          Float?   // in kg
+  height          Float?   // in cm
+  bodyFat         Float?   // percentage
+  muscleMass      Float?   // in kg
+  bmi             Float?   // calculated
+  chest           Float?   // in cm
+  waist           Float?   // in cm
+  hips            Float?   // in cm
+  biceps          Float?   // in cm
+  thighs          Float?   // in cm
+  notes           String?
+  measurementDate DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  // Relationships
+  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch Branch? @relation(fields: [branchId], references: [id])
+
+  @@map("measurements")
+}
+
+model ProgressPhoto {
+  id              String   @id @default(uuid())
+  memberPlanId    String
+  memberId        String
+  branchId        String? // Nullable for tenant-wide operations
+  imageUrl        String
+  caption         String?
+  photoType       String?  // 'before', 'progress', 'after'
+  measurementDate DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  // Relationships
+  memberPlan MemberPlan @relation(fields: [memberPlanId], references: [id], onDelete: Cascade)
+  member     Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch     Branch?    @relation(fields: [branchId], references: [id])
+
+  @@map("progress_photos")
+}
+
+// ============================================================================
+// TRAINER MANAGEMENT
+// ============================================================================
+
+enum TrainerSpecialization {
+  WEIGHT_TRAINING
+  CARDIO
+  YOGA
+  PILATES
+  CROSSFIT
+  FUNCTIONAL_TRAINING
+  BODYBUILDING
+  POWERLIFTING
+  MARTIAL_ARTS
+  DANCE_FITNESS
+  REHABILITATION
+  NUTRITION
+}
+
+enum TrainerStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  SUSPENDED
+}
+
+enum SessionType {
+  PERSONAL_TRAINING
+  GROUP_CLASS
+  CONSULTATION
+  ASSESSMENT
+}
+
+enum AssignmentStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  EXPIRED
+}
+
+enum SessionStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+model TrainerProfile {
+  id              String                  @id @default(uuid())
+  tenantId        String
+  branchId        String? // Nullable for tenant-wide operations
+  userId          String                  @unique
+  bio             String?
+  experience      Int? // Years of experience
+  certifications  String[] // Array of certification names
+  specializations TrainerSpecialization[]
+  languages       String[] // Languages spoken
+  rating          Float?                  @default(0)
+  totalSessions   Int                     @default(0)
+  status          TrainerStatus           @default(ACTIVE)
+  joinDate        DateTime                @default(now())
+  createdAt       DateTime                @default(now())
+  updatedAt       DateTime                @updatedAt
+
+  // Relationships
+  tenant          Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch?                 @relation(fields: [branchId], references: [id])
+  user            User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  availability    TrainerAvailability[]
+  rates           TrainerRate[]
+  assignments     TrainerAssignment[]
+  sessions        TrainingSession[]
+  reviews         TrainerReview[]
+  memberPlans     MemberPlan[]
+  classes         Class[]
+  classSchedules  ClassSchedule[]
+  assignedGoals   MemberGoal[]            // New: Goals assigned to this trainer
+
+  @@map("trainer_profiles")
+}
+
+model TrainerAvailability {
+  id        String    @id @default(uuid())
+  trainerId String
+  dayOfWeek DayOfWeek
+  startTime String // HH:MM format
+  endTime   String // HH:MM format
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  // Relationships
+  trainer TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@unique([trainerId, dayOfWeek, startTime])
+  @@map("trainer_availability")
+}
+
+model TrainerRate {
+  id          String      @id @default(uuid())
+  trainerId   String
+  sessionType SessionType
+  duration    Int // Duration in minutes
+  rate        Decimal     @db.Decimal(10, 2)
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relationships
+  trainer TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@unique([trainerId, sessionType, duration])
+  @@map("trainer_rates")
+}
+
+model TrainerAssignment {
+  id                String           @id @default(uuid())
+  memberId          String
+  trainerId         String
+  branchId          String? // Nullable for tenant-wide operations
+  sessionType       SessionType      @default(PERSONAL_TRAINING)
+  totalSessions     Int              @default(1)
+  completedSessions Int              @default(0)
+  rate              Decimal          @db.Decimal(10, 2)
+  startDate         DateTime
+  endDate           DateTime?
+  status            AssignmentStatus @default(PENDING)
+  notes             String?
+  requestedBy       String?          // Member who requested the assignment
+  approvedBy        String?          // Admin who approved
+  approvedAt        DateTime?
+  invoiceId         String?          @unique
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  // Relationships
+  member            Member           @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  trainer           TrainerProfile   @relation(fields: [trainerId], references: [id])
+  branch            Branch?          @relation(fields: [branchId], references: [id])
+  sessions          TrainingSession[]
+  invoice           Invoice?         @relation(fields: [invoiceId], references: [id])
+
+  @@map("trainer_assignments")
+}
+
+model TrainingSession {
+  id              String        @id @default(uuid())
+  assignmentId    String
+  trainerId       String
+  memberId        String
+  branchId        String? // Nullable for tenant-wide operations
+  roomId          String?
+  scheduledDate   DateTime
+  startTime       String // HH:MM format
+  endTime         String // HH:MM format
+  actualStartTime DateTime?
+  actualEndTime   DateTime?
+  sessionType     SessionType
+  rate            Decimal
+  status          SessionStatus @default(SCHEDULED)
+  notes           String?
+  memberNotes     String?       // Notes from member
+  trainerNotes    String?       // Notes from trainer
+  memberFeedback  String?
+  rating          Float?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relationships
+  assignment      TrainerAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  trainer         TrainerProfile    @relation(fields: [trainerId], references: [id])
+  member          Member            @relation(fields: [memberId], references: [id])
+  branch          Branch?           @relation(fields: [branchId], references: [id])
+  room            Room?             @relation(fields: [roomId], references: [id])
+  reviews         TrainerReview[]
+
+  @@map("training_sessions")
+}
+
+model TrainerReview {
+  id          String   @id @default(uuid())
+  trainerId   String
+  memberId    String
+  branchId    String? // Nullable for tenant-wide operations
+  sessionId   String?  @unique
+  rating      Int // 1-5 stars
+  review      String?
+  isAnonymous Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  trainer     TrainerProfile   @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+  member      Member           @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch      Branch?          @relation(fields: [branchId], references: [id])
+  session     TrainingSession? @relation(fields: [sessionId], references: [id])
+
+  @@unique([trainerId, memberId, sessionId])
+  @@map("trainer_reviews")
+}
+
+
+// ============================================================================
+// DIET & WORKOUT PLANS
+// ============================================================================
+
+enum PlanType {
+  DIET
+  WORKOUT
+  COMBINED
+}
+
+enum PlanCategory {
+  WEIGHT_LOSS
+  WEIGHT_GAIN
+  MUSCLE_BUILDING
+  STRENGTH_TRAINING
+  ENDURANCE
+  FLEXIBILITY
+  REHABILITATION
+  MAINTENANCE
+}
+
+enum PlanDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum PlanVisibility {
+  PUBLIC
+  PRIVATE
+  BRANCH_ONLY
+}
+
+enum MemberPlanStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum HistoryAction {
+  CREATED
+  MODIFIED
+  PAUSED
+  RESUMED
+  COMPLETED
+  CANCELLED
+  PROGRESS_UPDATED
+}
+
+model PlanTemplate {
+  id            String         @id @default(uuid())
+  tenantId      String
+  branchId      String?        // Nullable for tenant-wide templates
+  createdBy     String         // User who created the template
+  name          String
+  description   String?
+  planType      PlanType
+  category      PlanCategory
+  difficulty    PlanDifficulty
+  duration      Int // Duration in days
+  visibility    PlanVisibility @default(PUBLIC)
+  content       Json // Day-wise plan content
+  tags          String[]       // Searchable tags
+  isAiGenerated Boolean        @default(false)
+  isFeatured    Boolean        @default(false)
+  isActive      Boolean        @default(true)
+  usageCount    Int            @default(0)
+  rating        Float?
+  reviewCount   Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Relationships
+  tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch        Branch?        @relation(fields: [branchId], references: [id])
+  creator       User           @relation(fields: [createdBy], references: [id])
+  memberPlans   MemberPlan[]
+  favorites     PlanFavorite[]
+  reviews       PlanReview[]
+
+  @@map("plan_templates")
+}
+
+model MemberPlan {
+  id           String           @id @default(uuid())
+  memberId     String
+  branchId     String
+  templateId   String?          // Nullable for custom plans
+  trainerId    String?          // Assigned trainer
+  name         String
+  planType     PlanType
+  category     PlanCategory
+  difficulty   PlanDifficulty
+  content      Json // Plan content (can be customized from template)
+  startDate    DateTime
+  endDate      DateTime?
+  status       MemberPlanStatus @default(ACTIVE)
+  progress     Float            @default(0) // Percentage completion
+  isCustomized Boolean          @default(false)
+  customNotes  String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  // Relationships
+  member         Member           @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch         Branch           @relation(fields: [branchId], references: [id])
+  template       PlanTemplate?    @relation(fields: [templateId], references: [id])
+  trainer        TrainerProfile?  @relation(fields: [trainerId], references: [id])
+  history        PlanHistory[]
+  progressPhotos ProgressPhoto[]
+
+  @@map("member_plans")
+}
+
+model PlanHistory {
+  id           String        @id @default(uuid())
+  memberPlanId String
+  branchId     String
+  action       HistoryAction
+  description  String
+  oldData      Json?         // Previous state
+  newData      Json?         // New state
+  performedBy  String // User who performed the action
+  createdAt    DateTime      @default(now())
+
+  // Relationships
+  memberPlan MemberPlan @relation(fields: [memberPlanId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [performedBy], references: [id])
+  branch     Branch     @relation(fields: [branchId], references: [id])
+
+  @@map("plan_history")
+}
+
+model PlanFavorite {
+  id         String   @id @default(uuid())
+  memberId   String
+  branchId   String
+  templateId String
+  createdAt  DateTime @default(now())
+
+  // Relationships
+  member   Member       @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch   Branch       @relation(fields: [branchId], references: [id])
+  template PlanTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@unique([memberId, templateId])
+  @@map("plan_favorites")
+}
+
+model PlanReview {
+  id          String   @id @default(uuid())
+  templateId  String
+  memberId    String
+  branchId    String
+  rating      Int // 1-5 stars
+  review      String?
+  isAnonymous Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  template PlanTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  member   Member       @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch   Branch       @relation(fields: [branchId], references: [id])
+
+  @@unique([templateId, memberId])
+  @@map("plan_reviews")
+}
+
+
+// ============================================================================
+// ATTENDANCE & ACCESS CONTROL
+// ============================================================================
+
+enum EntryMethod {
+  MANUAL
+  BIOMETRIC
+  RFID_CARD
+  QR_CODE
+  MOBILE_APP
+  FACIAL_RECOGNITION
+}
+
+enum ShiftType {
+  REGULAR
+  OVERTIME
+  NIGHT_SHIFT
+  WEEKEND
+}
+
+enum RoomType {
+  GYM_FLOOR
+  CARDIO_AREA
+  WEIGHT_ROOM
+  YOGA_STUDIO
+  POOL
+  SPA
+  LOCKER_ROOM
+  RECEPTION
+  OFFICE
+  STORAGE
+}
+
+enum DeviceType {
+  RFID_READER
+  BIOMETRIC_SCANNER
+  QR_SCANNER
+  FACIAL_RECOGNITION
+  MAGNETIC_LOCK
+  TURNSTILE
+}
+
+enum AccessResult {
+  GRANTED
+  DENIED_EXPIRED_MEMBERSHIP
+  DENIED_NO_PERMISSION
+  DENIED_TIME_RESTRICTION
+  DENIED_DEVICE_ERROR
+  DENIED_INVALID_CREDENTIAL
+  DENIED_SUSPENDED_MEMBER
+  DENIED_CAPACITY_FULL
+}
+
+enum AccessLevel {
+  BASIC
+  EXTENDED
+  FULL
+  RESTRICTED
+}
+
+enum TemporaryAccessType {
+  GUEST_PASS
+  MAINTENANCE
+  EMERGENCY
+  VISITOR
+}
+
+enum AlertType {
+  EXPIRED_MEMBERSHIP_ACCESS
+  UNAUTHORIZED_ACCESS_ATTEMPT
+  DEVICE_OFFLINE
+  MULTIPLE_FAILED_ATTEMPTS
+  CAPACITY_EXCEEDED
+  EMERGENCY_ACCESS
+}
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model AttendanceRecord {
+  id           String      @id @default(uuid())
+  tenantId     String
+  branchId     String
+  memberId     String?
+  userId       String?     // For staff attendance
+  checkInTime  DateTime    @default(now())
+  checkOutTime DateTime?
+  duration     Int? // Duration in minutes
+  entryMethod  EntryMethod @default(MANUAL)
+  roomId       String?
+  notes        String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  // Relationships
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch  @relation(fields: [branchId], references: [id])
+  member Member? @relation(fields: [memberId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id])
+  room   Room?   @relation(fields: [roomId], references: [id])
+
+  @@map("attendance_records")
+}
+
+model StaffAttendance {
+  id           String    @id @default(uuid())
+  tenantId     String
+  branchId     String
+  userId       String
+  checkInTime  DateTime  @default(now())
+  checkOutTime DateTime?
+  duration     Int? // Duration in minutes
+  shiftType    ShiftType @default(REGULAR)
+  notes        String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relationships
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("staff_attendance")
+}
+
+model Room {
+  id          String    @id @default(uuid())
+  tenantId    String
+  branchId    String
+  name        String
+  code        String // Unique room code within branch
+  roomType    RoomType
+  capacity    Int?
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relationships
+  tenant            Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch            Branch              @relation(fields: [branchId], references: [id])
+  devices           AccessDevice[]
+  accessLogs        AccessLog[]
+  attendanceRecords AttendanceRecord[]
+  roomPermissions   RoomPermission[]
+  temporaryAccess   TemporaryAccess[]
+  trainingSessions  TrainingSession[]
+  classes           Class[]
+  classSchedules    ClassSchedule[]
+
+  @@unique([branchId, code])
+  @@map("rooms")
+}
+
+model AccessDevice {
+  id          String     @id @default(uuid())
+  tenantId    String
+  branchId    String
+  roomId      String
+  name        String
+  deviceId    String     @unique // Hardware device identifier
+  deviceType  DeviceType
+  ipAddress   String?
+  isOnline    Boolean    @default(false)
+  lastPing    DateTime?
+  isActive    Boolean    @default(true)
+  settings    Json? // Device-specific settings
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relationships
+  tenant     Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch     Branch      @relation(fields: [branchId], references: [id])
+  room       Room        @relation(fields: [roomId], references: [id])
+  accessLogs AccessLog[]
+
+  @@map("access_devices")
+}
+
+model AccessLog {
+  id            String       @id @default(uuid())
+  tenantId      String
+  branchId      String
+  roomId        String
+  deviceId      String
+  memberId      String?
+  userId        String?      // For staff access
+  accessMethod  EntryMethod
+  accessResult  AccessResult
+  accessTime    DateTime     @default(now())
+  exitTime      DateTime?
+  failureReason String?
+  cardId        String?      // RFID card ID
+  biometricId   String?      // Biometric template ID
+  ipAddress     String?
+  userAgent     String?
+
+  // Relationships
+  tenant Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch       @relation(fields: [branchId], references: [id])
+  room   Room         @relation(fields: [roomId], references: [id])
+  device AccessDevice @relation(fields: [deviceId], references: [id])
+  member Member?      @relation(fields: [memberId], references: [id])
+  user   User?        @relation(fields: [userId], references: [id])
+
+  @@map("access_logs")
+}
+
+model RoomPermission {
+  id               String      @id @default(uuid())
+  tenantId         String
+  branchId         String
+  roomId           String
+  membershipPlanId String?     // For plan-based access
+  userId           String?     // For individual user access
+  accessLevel      AccessLevel @default(BASIC)
+  timeRestrictions Json? // Time-based access rules
+  isActive         Boolean     @default(true)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  // Relationships
+  tenant         Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch         Branch          @relation(fields: [branchId], references: [id])
+  room           Room            @relation(fields: [roomId], references: [id])
+  membershipPlan MembershipPlan? @relation(fields: [membershipPlanId], references: [id])
+  user           User?           @relation(fields: [userId], references: [id])
+
+  @@map("room_permissions")
+}
+
+model TemporaryAccess {
+  id         String              @id @default(uuid())
+  tenantId   String
+  branchId   String
+  roomId     String
+  memberId   String?
+  userId     String?
+  guestName  String?
+  guestPhone String?
+  accessType TemporaryAccessType
+  startTime  DateTime
+  endTime    DateTime
+  isActive   Boolean             @default(true)
+  notes      String?
+  createdBy  String
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+
+  // Relationships
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch  Branch  @relation(fields: [branchId], references: [id])
+  room    Room    @relation(fields: [roomId], references: [id])
+  member  Member? @relation(fields: [memberId], references: [id])
+  user    User?   @relation(fields: [userId], references: [id])
+  creator User    @relation("TemporaryAccessCreator", fields: [createdBy], references: [id])
+
+  @@map("temporary_access")
+}
+
+model AccessAlert {
+  id         String        @id @default(uuid())
+  tenantId   String
+  branchId   String
+  userId     String?
+  alertType  AlertType
+  severity   AlertSeverity
+  title      String
+  message    String
+  metadata   Json? // Additional alert data
+  isRead     Boolean       @default(false)
+  isResolved Boolean       @default(false)
+  resolvedBy String?
+  resolvedAt DateTime?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  // Relationships
+  tenant   Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch  @relation(fields: [branchId], references: [id])
+  user     User?   @relation(fields: [userId], references: [id])
+  resolver User?   @relation("AccessAlertResolver", fields: [resolvedBy], references: [id])
+
+  @@map("access_alerts")
+}
+
+
+// ============================================================================
+// LOCKER & INVENTORY MANAGEMENT
+// ============================================================================
+
+enum LockerType {
+  STANDARD
+  PREMIUM
+  VIP
+  TEMPORARY
+}
+
+enum LockerSize {
+  SMALL
+  MEDIUM
+  LARGE
+  EXTRA_LARGE
+}
+
+enum LockerStatus {
+  AVAILABLE
+  OCCUPIED
+  MAINTENANCE
+  OUT_OF_ORDER
+}
+
+enum LockerAssignmentStatus {
+  ACTIVE
+  EXPIRED
+  TERMINATED
+  SUSPENDED
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  DISCONTINUED
+  OUT_OF_STOCK
+}
+
+enum InventoryMovementType {
+  PURCHASE
+  SALE
+  RETURN
+  ADJUSTMENT
+  TRANSFER
+  DAMAGE
+  EXPIRED
+}
+
+enum OrderType {
+  PURCHASE
+  SALE
+  TRANSFER
+  RETURN
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SHIPPED
+  RECEIVED
+  CANCELLED
+  RETURNED
+}
+
+model Locker {
+  id           String       @id @default(uuid())
+  tenantId     String
+  branchId     String
+  lockerNumber String
+  lockerType   LockerType   @default(STANDARD)
+  location     String?      // Floor, section, etc.
+  size         LockerSize   @default(MEDIUM)
+  monthlyRate  Decimal      @db.Decimal(10, 2)
+  status       LockerStatus @default(AVAILABLE)
+  isOccupied   Boolean      @default(false)
+  notes        String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  // Relations
+  tenant      Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch             @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  assignments LockerAssignment[]
+
+  @@unique([branchId, lockerNumber])
+  @@map("lockers")
+}
+
+model LockerAssignment {
+  id              String                 @id @default(uuid())
+  tenantId        String
+  lockerId        String
+  memberId        String
+  branchId        String
+  startDate       DateTime
+  endDate         DateTime
+  monthlyRate     Decimal                @db.Decimal(10, 2)
+  paymentStatus   PaymentStatus          @default(PENDING)
+  securityDeposit Decimal                @default(0) @db.Decimal(10, 2)
+  keyNumber       String?
+  status          LockerAssignmentStatus @default(ACTIVE)
+  notes           String?                @db.Text
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+
+  // Relations
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  locker Locker @relation(fields: [lockerId], references: [id], onDelete: Cascade)
+  member Member @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([branchId, lockerId, memberId])
+  @@map("locker_assignments")
+}
+
+model Product {
+  id             String        @id @default(uuid())
+  tenantId       String
+  branchId       String
+  name           String
+  description    String?       @db.Text
+  category       String
+  subcategory    String?
+  sku            String
+  barcode        String?
+  brand          String?
+  costPrice      Decimal       @default(0) @db.Decimal(10, 2)
+  sellingPrice   Decimal       @db.Decimal(10, 2)
+  mrp            Decimal?      @db.Decimal(10, 2)
+  taxRate        Decimal       @default(0) @db.Decimal(5, 2)
+  stockQuantity  Int           @default(0)
+  minStockLevel  Int           @default(0)
+  maxStockLevel  Int?
+  reorderPoint   Int?
+  unit           String        @default("piece") // piece, kg, liter, etc.
+  weight         Decimal?      @db.Decimal(8, 3)
+  dimensions     Json? // length, width, height
+  imageUrl       String?
+  images         String[] // Multiple product images
+  vendorId       String?
+  status         ProductStatus @default(ACTIVE)
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Relations
+  tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch             Branch              @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  vendor             Vendor?             @relation(fields: [vendorId], references: [id])
+  inventoryMovements InventoryMovement[]
+  invoiceItems       InvoiceItem[]
+  orderItems         OrderItem[]
+  cartItems          CartItem[]
+  customerOrderItems CustomerOrderItem[]
+
+  @@unique([branchId, sku])
+  @@map("products")
+}
+
+model Vendor {
+  id            String    @id @default(uuid())
+  tenantId      String
+  name          String
+  contactPerson String?
+  email         String?
+  phone         String?
+  address       String?   @db.Text
+  city          String?
+  state         String?
+  pincode       String?
+  gstin         String?   // GST Identification Number
+  panNumber     String?
+  bankDetails   Json? // Bank account details
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  tenant   Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  products Product[]
+  orders   Order[]
+
+  @@map("vendors")
+}
+
+model InventoryMovement {
+  id           String                @id @default(uuid())
+  tenantId     String
+  branchId     String
+  productId    String
+  movementType InventoryMovementType
+  quantity     Int
+  unitPrice    Decimal               @db.Decimal(10, 2)
+  totalAmount  Decimal               @db.Decimal(10, 2)
+  reference    String?               // Order ID, Invoice ID, etc.
+  notes        String?
+  createdAt    DateTime              @default(now())
+
+  // Relations
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch  Branch  @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("inventory_movements")
+}
+
+model Order {
+  id             String      @id @default(uuid())
+  tenantId       String
+  branchId       String
+  orderNumber    String
+  orderType      OrderType   @default(PURCHASE)
+  vendorId       String?
+  orderDate      DateTime    @default(now())
+  expectedDate   DateTime?
+  receivedDate   DateTime?
+  subtotal       Decimal     @default(0) @db.Decimal(10, 2)
+  taxAmount      Decimal     @default(0) @db.Decimal(10, 2)
+  discountAmount Decimal     @default(0) @db.Decimal(10, 2)
+  totalAmount    Decimal     @default(0) @db.Decimal(10, 2)
+  status         OrderStatus @default(PENDING)
+  notes          String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  // Relations
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch  @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  vendor Vendor? @relation(fields: [vendorId], references: [id])
+  items  OrderItem[]
+  payments OrderPayment[]
+
+  @@unique([branchId, orderNumber])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(uuid())
+  orderId     String
+  productId   String
+  quantity    Int
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  taxRate     Decimal  @default(0) @db.Decimal(5, 2)
+  discount    Decimal  @default(0) @db.Decimal(10, 2)
+  totalAmount Decimal  @db.Decimal(10, 2)
+  createdAt   DateTime @default(now())
+
+  // Relations
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+// ============================================================================
+// FINANCE & INVOICING
+// ============================================================================
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  PARTIALLY_PAID
+  OVERDUE
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  UPI
+  NET_BANKING
+  WALLET
+  CHEQUE
+  BANK_TRANSFER
+  EMI
+}
+
+enum TransactionType {
+  MEMBERSHIP
+  PRODUCT_SALE
+  TRAINING_SESSION
+  LOCKER_RENT
+  REFUND
+  EXPENSE
+  SALARY
+  OTHER_INCOME
+  OTHER_EXPENSE
+}
+
+enum PaymentGateway {
+  RAZORPAY
+  PAYU
+  PHONEPE
+  CCAVENUE
+  STRIPE
+  PAYPAL
+  MANUAL
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum CategoryType {
+  INCOME
+  EXPENSE
+}
+
+enum PayrollStatus {
+  DRAFT
+  APPROVED
+  PAID
+  CANCELLED
+}
+
+enum SalesChannel {
+  POS
+  MEMBER_PORTAL
+  MANUAL
+  WEBHOOK
+}
+
+model Invoice {
+  id               String         @id @default(uuid())
+  tenantId         String
+  branchId         String
+  invoiceNumber    String         @unique
+  memberId         String?
+  membershipId     String?
+  customerId       String?        // For non-member customers
+  customerName     String?
+  customerEmail    String?
+  customerPhone    String?
+  customerAddress  String?
+  customerGstin    String?        // GST number for B2B
+  issueDate        DateTime       @default(now())
+  dueDate          DateTime
+  subtotal         Decimal        @db.Decimal(10, 2)
+  taxAmount        Decimal        @default(0) @db.Decimal(10, 2)
+  discountAmount   Decimal        @default(0) @db.Decimal(10, 2)
+  totalAmount      Decimal        @db.Decimal(10, 2)
+  paidAmount       Decimal        @default(0) @db.Decimal(10, 2)
+  balanceAmount    Decimal        @db.Decimal(10, 2)
+  cgstAmount       Decimal        @default(0) @db.Decimal(10, 2)
+  sgstAmount       Decimal        @default(0) @db.Decimal(10, 2)
+  igstAmount       Decimal        @default(0) @db.Decimal(10, 2)
+  paymentMethod    PaymentMethod?
+  paymentGateway   PaymentGateway?
+  gatewayOrderId   String?
+  gatewayPaymentId String?
+  paymentLink      String?
+  qrCodeData       String?        // UPI QR code data
+  salesChannel     SalesChannel?  // Track source of sale
+  status           InvoiceStatus  @default(DRAFT)
+  notes            String?
+  termsConditions  String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  // Relationships
+  tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch             Branch              @relation(fields: [branchId], references: [id])
+  member             Member?             @relation(fields: [memberId], references: [id])
+  membership         MemberMembership?   @relation(fields: [membershipId], references: [id])
+  items              InvoiceItem[]
+  transactions       Transaction[]
+  trainerAssignments TrainerAssignment[]
+  paymentLogs        PaymentLog[]
+  payments           InvoicePayment[]
+  refunds            InvoiceRefund[]
+  couponUsages       CouponUsage[]       // New: Track coupon usage
+
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String   @id @default(uuid())
+  invoiceId   String
+  productId   String?  // For product sales
+  description String
+  quantity    Int      @default(1)
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  taxRate     Decimal  @default(0) @db.Decimal(5, 2)
+  discount    Decimal  @default(0) @db.Decimal(10, 2)
+  totalAmount Decimal  @db.Decimal(10, 2)
+
+  // Relationships
+  invoice Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id])
+
+  @@map("invoice_items")
+}
+
+model Transaction {
+  id               String            @id @default(uuid())
+  tenantId         String
+  branchId         String
+  invoiceId        String?
+  memberId         String?
+  userId           String?           // Staff member who processed
+  transactionType  TransactionType
+  paymentMethod    PaymentMethod
+  paymentGateway   PaymentGateway    @default(MANUAL)
+  amount           Decimal           @db.Decimal(10, 2)
+  currency         String            @default("INR")
+  gatewayOrderId   String?
+  gatewayPaymentId String?
+  gatewaySignature String?
+  gatewayResponse  Json?
+  status           TransactionStatus @default(PENDING)
+  failureReason    String?
+  reference        String?           // Internal reference
+  notes            String?
+  processedAt      DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  // Relationships
+  tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch       @relation(fields: [branchId], references: [id])
+  invoice     Invoice?     @relation(fields: [invoiceId], references: [id])
+  member      Member?      @relation(fields: [memberId], references: [id])
+  user        User?        @relation(fields: [userId], references: [id])
+  paymentLogs PaymentLog[]
+
+  @@map("transactions")
+}
+
+model PaymentGatewayConfig {
+  id            String         @id @default(uuid())
+  tenantId      String
+  branchId      String?        // Nullable for tenant-wide config
+  gateway       PaymentGateway
+  config        Json // API keys, secrets, etc. (encrypted)
+  isActive      Boolean        @default(true)
+  isDefault     Boolean        @default(false)
+  isTestMode    Boolean        @default(true)
+  currency      String         @default("INR")
+  webhookUrl    String?
+  webhookSecret String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Relations
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, branchId, gateway])
+  @@map("payment_gateway_configs")
+}
+
+model PaymentLog {
+  id               String        @id @default(uuid())
+  tenantId         String
+  branchId         String?
+  transactionId    String?       @unique
+  invoiceId        String?
+  gateway          PaymentGateway
+  gatewayOrderId   String?
+  gatewayPaymentId String?
+  amount           Decimal       @db.Decimal(10, 2)
+  currency         String        @default("INR")
+  status           PaymentStatus
+  request          Json?
+  response         Json?
+  webhookData      Json?
+  errorMessage     String?
+  processedAt      DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  // Relations
+  tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch?      @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  transaction Transaction? @relation(fields: [transactionId], references: [id])
+  invoice     Invoice?     @relation(fields: [invoiceId], references: [id])
+
+  @@map("payment_logs")
+}
+
+model FinanceCategory {
+  id           String       @id @default(uuid())
+  tenantId     String
+  branchId     String?
+  name         String
+  description  String?
+  categoryType CategoryType
+  parentId     String?      // For subcategories
+  color        String?
+  icon         String?
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  // Relations
+  tenant   Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch?           @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  parent   FinanceCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children FinanceCategory[] @relation("CategoryHierarchy")
+  expenses Expense[]
+
+  @@unique([tenantId, branchId, name])
+  @@map("finance_categories")
+}
+
+model Expense {
+  id            String        @id @default(uuid())
+  tenantId      String
+  branchId      String
+  categoryId    String
+  description   String
+  amount        Decimal       @db.Decimal(10, 2)
+  expenseDate   DateTime      @default(now())
+  paymentMethod PaymentMethod
+  vendorName    String?
+  vendorGstin   String?
+  billNumber    String?
+  billImageUrl  String?       // OCR uploaded bill
+  taxAmount     Decimal       @default(0) @db.Decimal(10, 2)
+  cgstAmount    Decimal       @default(0) @db.Decimal(10, 2)
+  sgstAmount    Decimal       @default(0) @db.Decimal(10, 2)
+  igstAmount    Decimal       @default(0) @db.Decimal(10, 2)
+  isApproved    Boolean       @default(false)
+  approvedBy    String?
+  approvedAt    DateTime?
+  notes         String?
+  createdBy     String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relationships
+  tenant   Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch          @relation(fields: [branchId], references: [id])
+  category FinanceCategory @relation(fields: [categoryId], references: [id])
+  creator  User            @relation(fields: [createdBy], references: [id])
+  approver User?           @relation("ExpenseApprover", fields: [approvedBy], references: [id])
+
+  @@map("expenses")
+}
+
+model Payroll {
+  id             String        @id @default(uuid())
+  tenantId       String
+  branchId       String
+  userId         String
+  payPeriodStart DateTime
+  payPeriodEnd   DateTime
+  basicSalary    Decimal       @db.Decimal(10, 2)
+  allowances     Decimal       @default(0) @db.Decimal(10, 2)
+  deductions     Decimal       @default(0) @db.Decimal(10, 2)
+  overtimeHours  Decimal       @default(0) @db.Decimal(5, 2)
+  overtimeRate   Decimal       @default(0) @db.Decimal(10, 2)
+  bonusAmount    Decimal       @default(0) @db.Decimal(10, 2)
+  grossSalary    Decimal       @db.Decimal(10, 2)
+  taxDeduction   Decimal       @default(0) @db.Decimal(10, 2)
+  netSalary      Decimal       @db.Decimal(10, 2)
+  workingDays    Int
+  presentDays    Int
+  leavesTaken    Int           @default(0)
+  status         PayrollStatus @default(DRAFT)
+  paidAt         DateTime?
+  processedAt    DateTime?
+  notes          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Relations
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([tenantId, branchId, userId, payPeriodStart])
+  @@map("payrolls")
+}
+
+// ============================================================================
+// ADDITIONAL FINANCE TABLES (for Enhanced Workflows)
+// ============================================================================
+
+// Multi-tender POS payments (e.g., cash + card split)
+model OrderPayment {
+  id             String        @id @default(uuid())
+  orderId        String
+  paymentMethod  PaymentMethod
+  amount         Decimal       @db.Decimal(10, 2)
+  gatewayOrderId String?
+  gatewayPaymentId String?
+  transactionRef String?
+  status         PaymentStatus @default(COMPLETED)
+  processedAt    DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+
+  // Relationships
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_payments")
+}
+
+// Invoice payment tracking for partial/split payments
+model InvoicePayment {
+  id               String        @id @default(uuid())
+  invoiceId        String
+  paymentMethod    PaymentMethod
+  amount           Decimal       @db.Decimal(10, 2)
+  gatewayOrderId   String?
+  gatewayPaymentId String?
+  transactionRef   String?
+  status           PaymentStatus @default(COMPLETED)
+  notes            String?
+  processedBy      String? // User who recorded payment
+  processedAt      DateTime      @default(now())
+  createdAt        DateTime      @default(now())
+
+  // Relationships
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_payments")
+}
+
+// Invoice refunds and credit notes
+model InvoiceRefund {
+  id             String        @id @default(uuid())
+  invoiceId      String
+  refundAmount   Decimal       @db.Decimal(10, 2)
+  refundMethod   PaymentMethod
+  reason         String
+  creditNoteNumber String?     @unique
+  gatewayRefundId String?
+  status         PaymentStatus @default(COMPLETED)
+  notes          String?
+  processedBy    String
+  processedAt    DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+
+  // Relationships
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_refunds")
+}
+
+// Webhook event logging for payment gateways
+model WebhookEvent {
+  id              String         @id @default(uuid())
+  tenantId        String
+  gateway         PaymentGateway
+  eventType       String // e.g., 'payment.success', 'payment.failed'
+  eventId         String? // Gateway's event ID
+  payload         Json
+  signature       String?
+  isVerified      Boolean        @default(false)
+  isProcessed     Boolean        @default(false)
+  processedAt     DateTime?
+  errorMessage    String?
+  relatedEntity   String? // 'Invoice', 'Order', etc.
+  relatedEntityId String?
+  createdAt       DateTime       @default(now())
+
+  @@index([gateway, eventType])
+  @@index([relatedEntity, relatedEntityId])
+  @@map("webhook_events")
+}
+
+// ============================================================================
+// HR & CONTRACTS
+// ============================================================================
+
+enum ContractType {
+  EMPLOYMENT
+  TRAINER
+  VENDOR
+  SERVICE_AGREEMENT
+  NDA
+}
+
+enum ContractStatus {
+  DRAFT
+  ACTIVE
+  EXPIRED
+  TERMINATED
+  RENEWED
+}
+
+model ContractTemplate {
+  id          String       @id @default(uuid())
+  tenantId    String
+  name        String
+  description String?
+  contractType ContractType
+  templateContent String @db.Text // HTML/Markdown template with variables
+  variables   String[] // List of variable placeholders like {{employee_name}}
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relationships
+  contracts Contract[]
+
+  @@map("contract_templates")
+}
+
+model Contract {
+  id               String         @id @default(uuid())
+  tenantId         String
+  branchId         String?
+  templateId       String?
+  contractType     ContractType
+  partyName        String // Employee/Trainer/Vendor name
+  partyEmail       String?
+  partyPhone       String?
+  userId           String? // If linked to a user account
+  content          String         @db.Text // Filled contract content
+  startDate        DateTime
+  endDate          DateTime?
+  autoRenew        Boolean        @default(false)
+  renewalPeriod    Int? // Days before expiry to auto-renew
+  status           ContractStatus @default(DRAFT)
+  signedAt         DateTime?
+  signedBy         String? // Digital signature ref
+  terminatedAt     DateTime?
+  terminationReason String?
+  notes            String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  // Relationships
+  template ContractTemplate? @relation(fields: [templateId], references: [id])
+
+  @@map("contracts")
+}
+
+// Salary breakdown components for detailed payroll
+model SalaryComponent {
+  id          String  @id @default(uuid())
+  payrollId   String
+  componentType String // 'allowance' or 'deduction'
+  name        String // 'HRA', 'PF', 'Tax', etc.
+  amount      Decimal @db.Decimal(10, 2)
+  isTaxable   Boolean @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("salary_components")
+}
+
+// ============================================================================
+// LEAD MANAGEMENT
+// ============================================================================
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model LeadTask {
+  id          String       @id @default(uuid())
+  leadId      String // References Member with status='lead'
+  title       String
+  description String?
+  priority    TaskPriority @default(MEDIUM)
+  status      TaskStatus   @default(PENDING)
+  assignedTo  String? // User ID
+  dueDate     DateTime?
+  completedAt DateTime?
+  notes       String?
+  createdBy   String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("lead_tasks")
+}
+
+// ============================================================================
+// CLASS & BOOKING
+// ============================================================================
+
+enum ClassType {
+  YOGA
+  PILATES
+  ZUMBA
+  AEROBICS
+  STRENGTH_TRAINING
+  CARDIO
+  HIIT
+  CROSSFIT
+  MARTIAL_ARTS
+  DANCE
+  MEDITATION
+  STRETCHING
+  FUNCTIONAL_TRAINING
+  BODYBUILDING
+  POWERLIFTING
+  CALISTHENICS
+  OTHER
+}
+
+enum ClassDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  ALL_LEVELS
+}
+
+enum BookingType {
+  REGULAR
+  DROP_IN
+  TRIAL
+  COMPLIMENTARY
+}
+
+enum BookingStatus {
+  CONFIRMED
+  WAITLISTED
+  ATTENDED
+  NO_SHOW
+  CANCELLED
+}
+
+enum ClassStatus {
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  CANCELLED
+  FULL
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model Class {
+  id            String          @id @default(uuid())
+  tenantId      String
+  branchId      String
+  trainerId     String?
+  name          String
+  description   String?
+  classType     ClassType
+  difficulty    ClassDifficulty @default(BEGINNER)
+  duration      Int // minutes
+  capacity      Int
+  price         Decimal?        @db.Decimal(10, 2)
+  isRecurring   Boolean         @default(false)
+  recurringDays DayOfWeek[]     @default([])
+  startTime     String // HH:MM format
+  endTime       String // HH:MM format
+  roomId        String?
+  imageUrl      String?
+  requirements  String?         // Equipment or prerequisites
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  // Relations
+  tenant    Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch    Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  trainer   TrainerProfile? @relation(fields: [trainerId], references: [id])
+  room      Room?           @relation(fields: [roomId], references: [id])
+  schedules ClassSchedule[]
+  bookings  ClassBooking[]
+
+  @@map("classes")
+}
+
+model ClassSchedule {
+  id            String      @id @default(uuid())
+  tenantId      String
+  branchId      String
+  classId       String
+  trainerId     String?
+  scheduledDate DateTime
+  startTime     String
+  endTime       String
+  capacity      Int
+  bookedCount   Int         @default(0)
+  waitlistCount Int         @default(0)
+  status        ClassStatus @default(SCHEDULED)
+  roomId        String?
+  notes         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // Relations
+  tenant   Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch          @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  class    Class           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  trainer  TrainerProfile? @relation(fields: [trainerId], references: [id])
+  room     Room?           @relation(fields: [roomId], references: [id])
+  bookings ClassBooking[]
+
+  @@map("class_schedules")
+}
+
+model ClassBooking {
+  id                 String        @id @default(uuid())
+  tenantId           String
+  branchId           String
+  classId            String
+  scheduleId         String
+  memberId           String
+  bookingType        BookingType   @default(REGULAR)
+  status             BookingStatus @default(CONFIRMED)
+  bookedAt           DateTime      @default(now())
+  attendedAt         DateTime?
+  cancelledAt        DateTime?
+  cancellationReason String?
+  waitlistPosition   Int?
+  notes              String?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  // Relations
+  tenant   Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch        @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  class    Class         @relation(fields: [classId], references: [id], onDelete: Cascade)
+  schedule ClassSchedule @relation(fields: [scheduleId], references: [id])
+  member   Member        @relation(fields: [memberId], references: [id])
+
+  @@unique([scheduleId, memberId])
+  @@map("class_bookings")
+}
+
+// ============================================================================
+// COMMUNICATION SYSTEM
+// ============================================================================
+
+enum EmailProvider {
+  SMTP
+  SENDGRID
+  MAILGUN
+  SES
+  POSTMARK
+}
+
+enum SmsProvider {
+  TWILIO
+  MSG91
+  TEXTLOCAL
+  FAST2SMS
+  KALEYRA
+  CUSTOM
+}
+
+enum WhatsAppProvider {
+  WHATSAPP_BUSINESS
+  TWILIO_WHATSAPP
+  MSG91_WHATSAPP
+  KALEYRA_WHATSAPP
+  CUSTOM
+}
+
+enum TemplateType {
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH_NOTIFICATION
+}
+
+enum TemplateCategory {
+  WELCOME
+  MEMBERSHIP_CONFIRMATION
+  PAYMENT_RECEIPT
+  PAYMENT_REMINDER
+  MEMBERSHIP_EXPIRY
+  BIRTHDAY_WISH
+  RENEWAL_REMINDER
+  TRAINER_ASSIGNMENT
+  CLASS_BOOKING
+  PROMOTIONAL
+  ANNOUNCEMENT
+  FEEDBACK_REQUEST
+  CUSTOM
+}
+
+enum MessageStatus {
+  PENDING
+  SENT
+  DELIVERED
+  READ
+  FAILED
+  BOUNCED
+  SPAM
+}
+
+enum CampaignType {
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH_NOTIFICATION
+  MULTI_CHANNEL
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  RUNNING
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum CampaignTrigger {
+  MANUAL
+  SCHEDULED
+  EVENT_BASED
+  DRIP_SEQUENCE
+}
+
+enum RecipientStatus {
+  PENDING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  FAILED
+  BOUNCED
+  UNSUBSCRIBED
+}
+
+enum NotificationType {
+  MEMBERSHIP_EXPIRY
+  PAYMENT_DUE
+  BIRTHDAY_WISH
+  TRAINER_ASSIGNMENT
+  CLASS_REMINDER
+  RENEWAL_REMINDER
+  PROMOTIONAL
+  SYSTEM_ALERT
+  CUSTOM
+}
+
+enum NotificationChannel {
+  IN_APP
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH
+}
+
+enum FeedbackType {
+  TRAINER_FEEDBACK
+  BRANCH_FEEDBACK
+  SERVICE_FEEDBACK
+}
+
+model EmailSetting {
+  id           String        @id @default(uuid())
+  tenantId     String
+  branchId     String?       // Nullable for tenant-wide settings
+  provider     EmailProvider
+  config       Json // Provider-specific config (encrypted)
+  fromName     String
+  fromEmail    String
+  replyToEmail String?
+  logoUrl      String?
+  brandColor   String?
+  footerText   String?
+  isActive     Boolean       @default(true)
+  isDefault    Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relationships
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, branchId, provider])
+  @@map("email_settings")
+}
+
+model SmsSetting {
+  id        String      @id @default(uuid())
+  tenantId  String
+  branchId  String?     // Nullable for tenant-wide settings
+  provider  SmsProvider
+  config    Json // Provider-specific config (encrypted)
+  senderId  String // DLT registered sender ID
+  isActive  Boolean     @default(false)
+  isDefault Boolean     @default(false)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  // Relationships
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch? @relation(fields: [branchId], references: [id])
+
+  @@unique([tenantId, branchId, provider])
+  @@map("sms_settings")
+}
+
+model WhatsAppSetting {
+  id             String           @id @default(uuid())
+  tenantId       String
+  branchId       String?          // Nullable for tenant-wide settings
+  provider       WhatsAppProvider
+  config         Json // Provider-specific config (encrypted)
+  businessNumber String
+  businessName   String
+  isActive       Boolean          @default(false)
+  isDefault      Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  // Relationships
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, branchId, provider])
+  @@map("whatsapp_settings")
+}
+
+model Setting {
+  id          String   @id @default(uuid())
+  tenantId    String
+  branchId    String?  // Nullable for tenant-wide settings
+  key         String   // e.g., 'branding.logo', 'payment.razorpay', 'backup.s3Config'
+  value       Json     // Store any configuration as JSON
+  description String?
+  isEncrypted Boolean  @default(false) // Flag for encrypted values
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, branchId, key])
+  @@map("settings")
+}
+
+model CommunicationTemplate {
+  id            String           @id @default(uuid())
+  tenantId      String
+  branchId      String?          // Nullable for tenant-wide templates
+  name          String
+  description   String?
+  templateType  TemplateType
+  category      TemplateCategory
+  subject       String?          // For email/push notifications
+  content       String // Template content with placeholders
+  htmlContent   String?          @db.Text // HTML version for emails
+  placeholders  String[] // Available placeholders
+  isActive      Boolean          @default(true)
+  isSystem      Boolean          @default(false) // System templates cannot be deleted
+  usageCount    Int              @default(0)
+  lastUsed      DateTime?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  // Relationships
+  tenant       Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch       Branch?       @relation(fields: [branchId], references: [id])
+  emailLogs    EmailLog[]
+  smsLogs      SmsLog[]
+  whatsappLogs WhatsAppLog[]
+  campaigns    Campaign[]    @relation("CampaignTemplates")
+
+  @@map("communication_templates")
+}
+
+model EmailLog {
+  id           String        @id @default(uuid())
+  tenantId     String
+  branchId     String
+  templateId   String?
+  memberId     String?
+  userId       String?
+  toEmail      String
+  fromEmail    String
+  subject      String
+  content      String        @db.Text
+  htmlContent  String?       @db.Text
+  status       MessageStatus @default(PENDING)
+  sentAt       DateTime?
+  deliveredAt  DateTime?
+  openedAt     DateTime?
+  clickedAt    DateTime?
+  provider     String?
+  messageId    String?       // Provider message ID
+  errorMessage String?
+  campaignId   String?
+  metadata     Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relationships
+  tenant   Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch                  @relation(fields: [branchId], references: [id])
+  template CommunicationTemplate?  @relation(fields: [templateId], references: [id])
+  member   Member?                 @relation(fields: [memberId], references: [id])
+  user     User?                   @relation(fields: [userId], references: [id])
+
+  @@map("email_logs")
+}
+
+model SmsLog {
+  id           String        @id @default(uuid())
+  tenantId     String
+  branchId     String
+  templateId   String?
+  memberId     String?
+  userId       String?
+  toPhone      String
+  fromPhone    String?
+  content      String
+  status       MessageStatus @default(PENDING)
+  sentAt       DateTime?
+  deliveredAt  DateTime?
+  provider     String?
+  messageId    String?       // Provider message ID
+  errorMessage String?
+  campaignId   String?
+  metadata     Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relationships
+  tenant   Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch                  @relation(fields: [branchId], references: [id])
+  template CommunicationTemplate?  @relation(fields: [templateId], references: [id])
+  member   Member?                 @relation(fields: [memberId], references: [id])
+  user     User?                   @relation(fields: [userId], references: [id])
+
+  @@map("sms_logs")
+}
+
+model WhatsAppLog {
+  id           String        @id @default(uuid())
+  tenantId     String
+  branchId     String
+  templateId   String?
+  memberId     String?
+  userId       String?
+  toPhone      String
+  fromPhone    String
+  content      String        @db.Text
+  messageType  String        @default("text") // text, image, document, etc.
+  mediaUrl     String?
+  status       MessageStatus @default(PENDING)
+  sentAt       DateTime?
+  deliveredAt  DateTime?
+  readAt       DateTime?
+  provider     String?
+  messageId    String?       // Provider message ID
+  errorMessage String?
+  campaignId   String?
+  metadata     Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relationships
+  tenant   Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch   Branch                  @relation(fields: [branchId], references: [id])
+  template CommunicationTemplate?  @relation(fields: [templateId], references: [id])
+  member   Member?                 @relation(fields: [memberId], references: [id])
+  user     User?                   @relation(fields: [userId], references: [id])
+
+  @@map("whatsapp_logs")
+}
+
+// Internal Email System (Inbox/Sent/Drafts)
+model InboxEmail {
+  id           String             @id @default(uuid())
+  tenantId     String
+  branchId     String?            // Nullable for tenant-wide emails
+  fromUserId   String
+  subject      String
+  message      String             @db.Text
+  isDraft      Boolean            @default(false)
+  replyToId    String?            // For threaded emails
+  threadId     String?            // For grouping email threads
+  cc           String[]           @default([])
+  bcc          String[]           @default([])
+  sentAt       DateTime?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  // Relationships
+  tenant      Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch?            @relation(fields: [branchId], references: [id])
+  fromUser    User               @relation("SentEmails", fields: [fromUserId], references: [id])
+  replyTo     InboxEmail?        @relation("EmailReplies", fields: [replyToId], references: [id])
+  replies     InboxEmail[]       @relation("EmailReplies")
+  recipients  EmailRecipient[]
+  attachments EmailAttachment[]
+
+  @@index([tenantId])
+  @@index([fromUserId])
+  @@index([threadId])
+  @@map("inbox_emails")
+}
+
+model EmailRecipient {
+  id        String      @id @default(uuid())
+  emailId   String
+  userId    String
+  type      String      @default("to") // to, cc, bcc
+  folder    String      @default("inbox") // inbox, sent, drafts, spam, trash (per-user)
+  isRead    Boolean     @default(false)
+  isStarred Boolean     @default(false)
+  labels    String[]    @default([])
+  readAt    DateTime?
+  deletedAt DateTime?   // Soft delete timestamp
+  createdAt DateTime    @default(now())
+
+  // Relationships
+  email InboxEmail @relation(fields: [emailId], references: [id], onDelete: Cascade)
+  user  User       @relation(fields: [userId], references: [id])
+
+  @@unique([emailId, userId, type])
+  @@index([userId, folder])
+  @@index([userId, isRead])
+  @@map("email_recipients")
+}
+
+model EmailAttachment {
+  id        String      @id @default(uuid())
+  emailId   String
+  fileName  String
+  fileUrl   String
+  fileSize  Int         // In bytes
+  mimeType  String
+  createdAt DateTime    @default(now())
+
+  // Relationships
+  email InboxEmail @relation(fields: [emailId], references: [id], onDelete: Cascade)
+
+  @@map("email_attachments")
+}
+
+// Internal Chat System
+model ChatConversation {
+  id             String        @id @default(uuid())
+  tenantId       String
+  branchId       String?       // Nullable for tenant-wide conversations
+  isGroupChat    Boolean       @default(false)
+  groupName      String?
+  groupAvatar    String?
+  lastMessageAt  DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  // Relationships
+  tenant       Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch       Branch?             @relation(fields: [branchId], references: [id])
+  participants ChatParticipant[]
+  messages     ChatMessage[]
+
+  @@index([tenantId])
+  @@map("chat_conversations")
+}
+
+model ChatParticipant {
+  id             String   @id @default(uuid())
+  conversationId String
+  userId         String
+  joinedAt       DateTime @default(now())
+  lastReadAt     DateTime?
+
+  // Relationships
+  conversation ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user         User             @relation(fields: [userId], references: [id])
+
+  @@unique([conversationId, userId])
+  @@map("chat_participants")
+}
+
+model ChatMessage {
+  id             String   @id @default(uuid())
+  conversationId String
+  senderId       String
+  tenantId       String
+  branchId       String?
+  message        String   @db.Text
+  attachmentUrl  String?
+  isSent         Boolean  @default(true)
+  isDelivered    Boolean  @default(false)
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relationships
+  conversation ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User             @relation(fields: [senderId], references: [id])
+
+  @@index([conversationId])
+  @@index([senderId])
+  @@index([tenantId])
+  @@map("chat_messages")
+}
+
+model Campaign {
+  id              String            @id @default(uuid())
+  tenantId        String
+  branchId        String?
+  name            String
+  description     String?
+  campaignType    CampaignType
+  triggerType     CampaignTrigger
+  targetAudience  Json // Criteria for targeting
+  templateIds     String[] // Templates to use
+  isActive        Boolean           @default(true)
+  scheduledAt     DateTime?
+  startedAt       DateTime?
+  completedAt     DateTime?
+  totalRecipients Int               @default(0)
+  sentCount       Int               @default(0)
+  deliveredCount  Int               @default(0)
+  failedCount     Int               @default(0)
+  createdBy       String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  // Relations
+  tenant     Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch     Branch?                 @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  creator    User                    @relation(fields: [createdBy], references: [id])
+  templates  CommunicationTemplate[] @relation("CampaignTemplates")
+  recipients CampaignRecipient[]
+
+  @@map("campaigns")
+}
+
+model CampaignRecipient {
+  id           String          @id @default(uuid())
+  campaignId   String
+  memberId     String?
+  userId       String?
+  email        String?
+  phone        String?
+  status       RecipientStatus @default(PENDING)
+  sentAt       DateTime?
+  deliveredAt  DateTime?
+  openedAt     DateTime?
+  clickedAt    DateTime?
+  errorMessage String?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  // Relationships
+  campaign Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  member   Member?  @relation(fields: [memberId], references: [id])
+  user     User?    @relation(fields: [userId], references: [id])
+
+  @@map("campaign_recipients")
+}
+
+model Announcement {
+  id        String   @id @default(uuid())
+  tenantId  String
+  branchId  String?
+  title     String
+  content   String   @db.Text
+  imageUrl  String?
+  target    String // e.g., ALL, ACTIVE_MEMBERS, STAFF
+  createdBy String
+  publishAt DateTime
+  isSent    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch  Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  creator User    @relation(fields: [createdBy], references: [id])
+
+  @@map("announcements")
+}
+
+model Notification {
+  id          String              @id @default(uuid())
+  tenantId    String
+  branchId    String
+  memberId    String?
+  userId      String?
+  type        NotificationType
+  channel     NotificationChannel
+  title       String
+  message     String              @db.Text
+  actionUrl   String?
+  isRead      Boolean             @default(false)
+  readAt      DateTime?
+  scheduledAt DateTime?
+  sentAt      DateTime?
+  metadata    Json?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  // Relationships
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch Branch  @relation(fields: [branchId], references: [id])
+  member Member? @relation(fields: [memberId], references: [id])
+  user   User?   @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}
+
+model NotificationSetting {
+  id               String  @id @default(uuid())
+  userId           String  @unique
+  membershipExpiry Boolean @default(true)
+  paymentReminders Boolean @default(true)
+  birthdayWishes   Boolean @default(true)
+  trainerUpdates   Boolean @default(true)
+  classReminders   Boolean @default(true)
+  promotional      Boolean @default(false)
+  emailEnabled     Boolean @default(true)
+  smsEnabled       Boolean @default(true)
+  whatsappEnabled  Boolean @default(false)
+  pushEnabled      Boolean @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relationships
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_settings")
+}
+
+model Feedback {
+  id           String       @id @default(uuid())
+  tenantId     String
+  branchId     String?
+  memberId     String?
+  userId       String?
+  feedbackType FeedbackType
+  rating       Int?         // 1-5 rating, validated in application logic
+  title        String?
+  content      String       @db.Text
+  isAnonymous  Boolean      @default(false)
+  isResolved   Boolean      @default(false)
+  resolvedBy   String?      // Foreign key for the User who resolved the feedback
+  resolvedAt   DateTime?
+  response     String?      @db.Text
+  metadata     Json?        // Additional context
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  // Relations
+  tenant   Tenant  @relation(fields: [tenantId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  branch   Branch? @relation(fields: [branchId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  member   Member? @relation(fields: [memberId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  user     User?   @relation("FeedbackSubmitter", fields: [userId], references: [id], onUpdate: Cascade, onDelete: SetNull)
+  resolver User?   @relation("FeedbackResolver", fields: [resolvedBy], references: [id], onUpdate: Cascade, onDelete: SetNull)
+
+  // Indexes for improved query performance
+  @@index([tenantId])
+  @@index([memberId])
+  @@index([userId])
+  @@index([isResolved])
+  @@map("feedbacks")
+}
+
+// ============================================================================
+// PEOPLE & ACCOUNTS - STAFF MANAGEMENT
+// ============================================================================
+
+enum StaffRole {
+  MANAGER
+  RECEPTIONIST
+  TRAINER
+  CLEANER
+  MAINTENANCE
+  ACCOUNTANT
+  SALES
+  CUSTOM
+}
+
+enum StaffStatus {
+  ACTIVE
+  INACTIVE
+  ON_LEAVE
+  TERMINATED
+}
+
+enum WorkShiftType {
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+  FULL_DAY
+  CUSTOM
+}
+
+model StaffMember {
+  id              String         @id @default(uuid())
+  tenantId        String
+  branchId        String? // Nullable for tenant-wide operations
+  userId          String?         @unique // Link to User account if they have system access
+  employeeId      String          @unique // Auto-generated employee ID
+  firstName       String
+  lastName        String
+  email           String?
+  phone           String
+  dateOfBirth     DateTime?
+  gender          Gender?
+  address         String?
+  emergencyContact String?
+  emergencyPhone  String?
+  role            StaffRole
+  department      String?
+  designation     String?
+  salary          Decimal?       @db.Decimal(10, 2)
+  joinDate        DateTime       @default(now())
+  status          StaffStatus    @default(ACTIVE)
+  
+  // Documents
+  documentUrls    String[]       @default([]) // Array of document URLs (resume, certificates, etc.)
+  avatarUrl       String?
+  
+  // Shift & Schedule
+  shiftType       WorkShiftType?
+  shiftStartTime  String?      // e.g., "09:00"
+  shiftEndTime    String?      // e.g., "18:00"
+  weeklyOffDays   Int[]        @default([]) // 0=Sunday, 1=Monday, etc.
+  
+  // Soft Delete
+  deletedAt       DateTime?
+  deletedBy       String?
+  
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  // Relationships
+  tenant          Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch?     @relation(fields: [branchId], references: [id])
+  user            User?       @relation(fields: [userId], references: [id])
+  
+  @@map("staff_members")
+}
+
+// ============================================================================
+// PEOPLE & ACCOUNTS - MEMBER GOALS & PROGRESS
+// ============================================================================
+
+enum GoalType {
+  WEIGHT_LOSS
+  WEIGHT_GAIN
+  MUSCLE_BUILDING
+  FAT_LOSS
+  STRENGTH_GAIN
+  ENDURANCE
+  FLEXIBILITY
+  GENERAL_FITNESS
+  CUSTOM
+}
+
+enum GoalStatus {
+  ACTIVE
+  ACHIEVED
+  ABANDONED
+  EXPIRED
+}
+
+model MemberGoal {
+  id              String      @id @default(uuid())
+  tenantId        String
+  branchId        String? // Nullable for tenant-wide operations
+  memberId        String
+  goalType        GoalType
+  title           String
+  description     String?
+  
+  // Target Metrics
+  targetWeight    Float?      // in kg
+  targetBodyFat   Float?      // percentage
+  targetMuscle    Float?      // in kg
+  customMetric    String?     // For custom goals
+  customTarget    String?
+  
+  // Timeline
+  startDate       DateTime    @default(now())
+  targetDate      DateTime
+  achievedDate    DateTime?
+  
+  // Coaching
+  assignedTrainerId String?
+  
+  status          GoalStatus  @default(ACTIVE)
+  progress        Float       @default(0) // Percentage 0-100
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  // Relationships
+  tenant          Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch?         @relation(fields: [branchId], references: [id])
+  member          Member          @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  assignedTrainer TrainerProfile? @relation(fields: [assignedTrainerId], references: [id])
+  
+  @@map("member_goals")
+}
+
+// ============================================================================
+// MEMBERSHIPS & ENTITLEMENTS - BENEFIT ENGINE
+// ============================================================================
+
+enum BenefitType {
+  SESSION_CREDIT         // e.g., Personal training sessions
+  FACILITY_ACCESS        // e.g., Ice bath, sauna, pool
+  CLASS_CREDIT          // e.g., Group class bookings
+  GUEST_PASS            // Bring-a-friend passes
+  DISCOUNT_VOUCHER      // Discount on products/services
+  MERCHANDISE_CREDIT    // Store credit
+  CUSTOM
+}
+
+enum BenefitAccrualType {
+  ONE_TIME              // Granted once at membership start
+  MONTHLY               // Accrued monthly
+  QUARTERLY             // Accrued quarterly
+  YEARLY                // Accrued yearly
+  PER_BILLING_CYCLE     // Based on billing cycle
+}
+
+model PlanBenefit {
+  id                  String              @id @default(uuid())
+  tenantId            String
+  planId              String              // Link to MembershipPlan
+  benefitType         BenefitType
+  name                String              // e.g., "Ice Bath Sessions"
+  description         String?
+  
+  // Accrual Settings
+  accrualType         BenefitAccrualType
+  accrualQuantity     Int                 // How many units accrue per period
+  maxBalance          Int?                // Max balance cap (null = unlimited)
+  
+  // Validity
+  expiryDays          Int?                // Days until unused credits expire (null = no expiry)
+  rolloverAllowed     Boolean             @default(false) // Can unused credits roll to next period?
+  
+  // Additional Settings
+  isActive            Boolean             @default(true)
+  metadata            Json?               // Additional configuration
+  
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  
+  // Relationships
+  tenant              Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  plan                MembershipPlan      @relation(fields: [planId], references: [id], onDelete: Cascade)
+  memberBalances      MemberBenefitBalance[]
+  
+  @@map("plan_benefits")
+}
+
+model MemberBenefitBalance {
+  id                  String      @id @default(uuid())
+  tenantId            String
+  branchId            String
+  memberId            String
+  benefitId           String
+  
+  currentBalance      Int         @default(0) // Current available credits
+  totalAccrued        Int         @default(0) // Total credits accrued lifetime
+  totalConsumed       Int         @default(0) // Total credits consumed lifetime
+  
+  lastAccrualDate     DateTime?   // When credits were last added
+  nextAccrualDate     DateTime?   // When next accrual is scheduled
+  expiryDate          DateTime?   // When current balance expires
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  
+  // Relationships
+  tenant              Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch              Branch      @relation(fields: [branchId], references: [id])
+  member              Member      @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  benefit             PlanBenefit @relation(fields: [benefitId], references: [id], onDelete: Cascade)
+  transactions        BenefitTransaction[]
+  
+  @@unique([memberId, benefitId])
+  @@map("member_benefit_balances")
+}
+
+enum BenefitTransactionType {
+  ACCRUAL           // Credits added
+  CONSUMPTION       // Credits used
+  EXPIRY            // Credits expired
+  ADJUSTMENT        // Manual adjustment
+  ROLLOVER          // Credits rolled over
+}
+
+model BenefitTransaction {
+  id                  String                  @id @default(uuid())
+  tenantId            String
+  branchId            String
+  memberId            String
+  benefitBalanceId    String
+  transactionType     BenefitTransactionType
+  quantity            Int                     // Positive for accrual, negative for consumption
+  balanceAfter        Int                     // Balance after this transaction
+  
+  reference           String?                 // Reference to booking, purchase, etc.
+  performedBy         String?                 // User ID who performed the transaction
+  notes               String?
+  metadata            Json?
+  
+  createdAt           DateTime                @default(now())
+  
+  // Relationships
+  tenant              Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch              Branch                  @relation(fields: [branchId], references: [id])
+  member              Member                  @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  benefitBalance      MemberBenefitBalance    @relation(fields: [benefitBalanceId], references: [id], onDelete: Cascade)
+  
+  @@index([memberId])
+  @@index([benefitBalanceId])
+  @@map("benefit_transactions")
+}
+
+// ============================================================================
+// MEMBERSHIPS & ENTITLEMENTS - COUPONS & DISCOUNTS
+// ============================================================================
+
+enum DiscountType {
+  PERCENTAGE
+  FLAT_AMOUNT
+  FREE_MONTHS
+  FREE_ADDON
+}
+
+enum CouponStatus {
+  ACTIVE
+  INACTIVE
+  EXPIRED
+  DEPLETED
+}
+
+model Coupon {
+  id                  String        @id @default(uuid())
+  tenantId            String
+  branchId            String?       // Null = tenant-wide
+  code                String        @unique // e.g., "SUMMER2024"
+  name                String
+  description         String?
+  
+  // Discount Settings
+  discountType        DiscountType
+  discountValue       Decimal       @db.Decimal(10, 2) // Percentage or amount
+  maxDiscountAmount   Decimal?      @db.Decimal(10, 2) // Cap for percentage discounts
+  
+  // Applicability
+  applicablePlans     String[]      @default([]) // Plan IDs (empty = all plans)
+  minPurchaseAmount   Decimal?      @db.Decimal(10, 2)
+  
+  // Usage Limits
+  maxUsageCount       Int?          // Total usage limit (null = unlimited)
+  maxUsagePerMember   Int?          @default(1)
+  currentUsageCount   Int           @default(0)
+  
+  // Validity
+  validFrom           DateTime      @default(now())
+  validUntil          DateTime?
+  
+  // Referral Integration
+  isReferralCoupon    Boolean       @default(false)
+  referralMemberId    String?       // If tied to a specific referral
+  
+  status              CouponStatus  @default(ACTIVE)
+  createdBy           String?       // User ID
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  
+  // Relationships
+  tenant              Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch              Branch?       @relation(fields: [branchId], references: [id])
+  usages              CouponUsage[]
+  
+  @@map("coupons")
+}
+
+model CouponUsage {
+  id                  String    @id @default(uuid())
+  tenantId            String
+  branchId            String? // Nullable for tenant-wide operations
+  couponId            String
+  memberId            String
+  invoiceId           String?   // Invoice where coupon was applied
+  
+  discountApplied     Decimal   @db.Decimal(10, 2)
+  usedAt              DateTime  @default(now())
+  
+  // Relationships
+  tenant              Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch              Branch?   @relation(fields: [branchId], references: [id])
+  coupon              Coupon    @relation(fields: [couponId], references: [id], onDelete: Cascade)
+  member              Member    @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  invoice             Invoice?  @relation(fields: [invoiceId], references: [id])
+  
+  @@map("coupon_usages")
+}
+
+// ============================================================================
+// MEMBERSHIPS & ENTITLEMENTS - LIFECYCLE TRACKING
+// ============================================================================
+
+enum LifecycleEventType {
+  CREATED
+  ACTIVATED
+  PAUSED
+  RESUMED
+  FROZEN
+  UNFROZEN
+  EXTENDED
+  UPGRADED
+  DOWNGRADED
+  TRANSFERRED
+  RENEWED
+  CANCELLED
+  EXPIRED
+  REACTIVATED
+}
+
+model MembershipLifecycleEvent {
+  id                  String              @id @default(uuid())
+  tenantId            String
+  branchId            String? // Nullable for tenant-wide operations
+  memberId            String
+  membershipId        String              // MemberMembership ID
+  eventType           LifecycleEventType
+  
+  // Event Details
+  effectiveDate       DateTime            // When the change takes effect
+  previousData        Json?               // Previous state snapshot
+  newData             Json?               // New state snapshot
+  reason              String?
+  notes               String?
+  
+  // Additional Fields
+  durationDays        Int?                // For freeze/extension
+  oldPlanId           String?             // For upgrades/downgrades
+  newPlanId           String?
+  transferredToMemberId String?           // For transfers
+  
+  performedBy         String?             // User ID who performed the action
+  createdAt           DateTime            @default(now())
+  
+  // Relationships
+  tenant              Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch              Branch?             @relation(fields: [branchId], references: [id])
+  member              Member              @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  membership          MemberMembership    @relation(fields: [membershipId], references: [id], onDelete: Cascade)
+  
+  @@index([memberId])
+  @@index([membershipId])
+  @@map("membership_lifecycle_events")
+}
+
+// ============================================================================
+// ECOMMERCE - SHOPPING CART & CUSTOMER ORDERS
+// ============================================================================
+
+model Cart {
+  id          String     @id @default(uuid())
+  tenantId    String
+  branchId    String
+  memberId    String
+  status      CartStatus @default(ACTIVE)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  expiresAt   DateTime?
+
+  tenant      Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch      Branch     @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  member      Member     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  items       CartItem[]
+
+  @@unique([memberId, status])
+  @@map("carts")
+}
+
+model CartItem {
+  id          String   @id @default(uuid())
+  cartId      String
+  productId   String
+  quantity    Int      @default(1)
+  unitPrice   Decimal  @db.Decimal(10, 2)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  cart        Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+  @@map("cart_items")
+}
+
+enum CartStatus {
+  ACTIVE
+  ABANDONED
+  CONVERTED
+  EXPIRED
+}
+
+model CustomerOrder {
+  id              String              @id @default(uuid())
+  tenantId        String
+  branchId        String
+  memberId        String
+  orderNumber     String              @unique
+  subtotal        Decimal             @default(0) @db.Decimal(10, 2)
+  taxAmount       Decimal             @default(0) @db.Decimal(10, 2)
+  discountAmount  Decimal             @default(0) @db.Decimal(10, 2)
+  totalAmount     Decimal             @default(0) @db.Decimal(10, 2)
+  status          CustomerOrderStatus @default(PENDING)
+  paymentStatus   PaymentStatus       @default(PENDING)
+  stripeSessionId String?
+  notes           String?
+  shippingAddress String?
+  orderDate       DateTime            @default(now())
+  paidAt          DateTime?
+  fulfilledAt     DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  tenant          Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch              @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  member          Member              @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  items           CustomerOrderItem[]
+
+  @@map("customer_orders")
+}
+
+model CustomerOrderItem {
+  id          String        @id @default(uuid())
+  orderId     String
+  productId   String
+  productName String
+  quantity    Int
+  unitPrice   Decimal       @db.Decimal(10, 2)
+  taxRate     Decimal       @default(0) @db.Decimal(5, 2)
+  discount    Decimal       @default(0) @db.Decimal(10, 2)
+  totalAmount Decimal       @db.Decimal(10, 2)
+  createdAt   DateTime      @default(now())
+
+  order       CustomerOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product       @relation(fields: [productId], references: [id])
+
+  @@map("customer_order_items")
+}
+
+enum CustomerOrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  READY_FOR_PICKUP
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+// ============================================================================
+// EQUIPMENT TRACKING
+// ============================================================================
+
+model Equipment {
+  id              String            @id @default(uuid())
+  tenantId        String
+  branchId        String
+  name            String
+  category        EquipmentCategory @default(CARDIO)
+  brand           String?
+  model           String?
+  serialNumber    String?
+  purchaseDate    DateTime?
+  purchasePrice   Decimal?          @db.Decimal(10, 2)
+  warrantyExpiry  DateTime?
+  condition       EquipmentCondition @default(GOOD)
+  status          EquipmentStatus   @default(OPERATIONAL)
+  location        String?
+  notes           String?
+  imageUrl        String?
+  lastMaintenance DateTime?
+  nextMaintenance DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  tenant          Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch            @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  maintenance     EquipmentMaintenance[]
+
+  @@map("equipment")
+}
+
+model EquipmentMaintenance {
+  id              String               @id @default(uuid())
+  equipmentId     String
+  maintenanceType MaintenanceType      @default(ROUTINE)
+  description     String
+  performedBy     String?
+  performedAt     DateTime             @default(now())
+  cost            Decimal?             @db.Decimal(10, 2)
+  vendorName      String?
+  nextDueDate     DateTime?
+  status          MaintenanceStatus    @default(COMPLETED)
+  notes           String?
+  createdAt       DateTime             @default(now())
+
+  equipment       Equipment            @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+
+  @@map("equipment_maintenance")
+}
+
+enum EquipmentCategory {
+  CARDIO
+  STRENGTH
+  FREE_WEIGHTS
+  FUNCTIONAL
+  STRETCHING
+  STUDIO
+  ACCESSORIES
+  OTHER
+}
+
+enum EquipmentCondition {
+  EXCELLENT
+  GOOD
+  FAIR
+  POOR
+  NEEDS_REPAIR
+}
+
+enum EquipmentStatus {
+  OPERATIONAL
+  UNDER_MAINTENANCE
+  OUT_OF_ORDER
+  RETIRED
+}
+
+enum MaintenanceType {
+  ROUTINE
+  REPAIR
+  INSPECTION
+  REPLACEMENT
+  CLEANING
+}
+
+enum MaintenanceStatus {
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+// ============================================================================
+// LEAD PIPELINE MANAGEMENT
+// ============================================================================
+
+model Lead {
+  id              String       @id @default(uuid())
+  tenantId        String
+  branchId        String
+  firstName       String
+  lastName        String
+  email           String?
+  phone           String
+  source          LeadSource   @default(WALK_IN)
+  stage           LeadStage    @default(NEW)
+  score           Int          @default(0)
+  interestedIn    String?
+  notes           String?
+  assignedTo      String?
+  nextFollowUp    DateTime?
+  convertedAt     DateTime?
+  convertedToMemberId String?
+  lostReason      String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  tenant          Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch       @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  activities      LeadActivity[]
+
+  @@index([phone])
+  @@index([email])
+  @@map("leads")
+}
+
+model LeadActivity {
+  id          String           @id @default(uuid())
+  leadId      String
+  type        LeadActivityType
+  title       String
+  description String?
+  performedBy String?
+  scheduledAt DateTime?
+  completedAt DateTime?
+  outcome     String?
+  createdAt   DateTime         @default(now())
+
+  lead        Lead             @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("lead_activities")
+}
+
+enum LeadSource {
+  WALK_IN
+  REFERRAL
+  WEBSITE
+  SOCIAL_MEDIA
+  GOOGLE_ADS
+  FACEBOOK_ADS
+  INSTAGRAM
+  PHONE_INQUIRY
+  EMAIL
+  PARTNER
+  EVENT
+  OTHER
+}
+
+enum LeadStage {
+  NEW
+  CONTACTED
+  QUALIFIED
+  TOUR_SCHEDULED
+  TOUR_COMPLETED
+  PROPOSAL_SENT
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadActivityType {
+  CALL
+  EMAIL
+  SMS
+  WHATSAPP
+  MEETING
+  TOUR
+  FOLLOW_UP
+  NOTE
+  PROPOSAL
+  OTHER
+}

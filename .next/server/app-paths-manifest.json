@@ -1,0 +1,4 @@
+{
+  "/[lang]/(dashboard)/(private)/dashboards/crm/page": "app/[lang]/(dashboard)/(private)/dashboards/crm/page.js",
+  "/[lang]/(dashboard)/(private)/apps/dashboard/page": "app/[lang]/(dashboard)/(private)/apps/dashboard/page.js"
+}

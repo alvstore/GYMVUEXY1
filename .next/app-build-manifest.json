@@ -1,0 +1,78 @@
+{
+  "pages": {
+    "/[lang]/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/layout.css",
+      "static/chunks/app/[lang]/layout.js"
+    ],
+    "/[lang]/(dashboard)/(private)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/layout.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/layout.js"
+    ],
+    "/[lang]/(dashboard)/(private)/dashboards/crm/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/dashboards/crm/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
+    ],
+    "/[lang]/[...not-found]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/[...not-found]/page.css",
+      "static/chunks/app/[lang]/[...not-found]/page.js"
+    ],
+    "/api/auth/[...nextauth]/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/auth/[...nextauth]/route.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/lockers/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/lockers/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/coupons/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/coupons/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/members/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/workout-plans/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/workout-plans/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/workout-plans/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/inventory/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/inventory/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/inventory/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/ecommerce/orders/list/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/ecommerce/orders/list/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/ecommerce/orders/list/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/dashboard/page.js"
+    ]
+  }
+}
