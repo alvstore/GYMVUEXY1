@@ -12,76 +12,98 @@ export async function getLockers(): Promise<Locker[]> {
       branchId: context.branchId!,
     },
     include: {
-      member: {
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-        }
+      assignments: {
+        where: { status: 'ACTIVE' },
+        include: {
+          member: {
+            select: {
+              id: true,
+              firstName: true,
+              lastName: true,
+            }
+          }
+        },
+        take: 1,
       }
     },
-    orderBy: [{ floor: 'asc' }, { section: 'asc' }, { lockerNumber: 'asc' }],
+    orderBy: { lockerNumber: 'asc' },
   })
 
-  return lockers.map(locker => ({
-    id: locker.id,
-    number: locker.lockerNumber,
-    floor: locker.floor || 1,
-    section: locker.section || 'A',
-    type: locker.lockerType as 'FREE' | 'PAID',
-    status: locker.status as 'AVAILABLE' | 'OCCUPIED' | 'MAINTENANCE' | 'RESERVED',
-    occupiedBy: locker.memberId || undefined,
-    memberName: locker.member ? `${locker.member.firstName} ${locker.member.lastName}` : undefined,
-    assignedDate: locker.assignedAt?.toISOString().split('T')[0],
-    dueDate: locker.expiresAt?.toISOString().split('T')[0],
-    monthlyFee: locker.monthlyFee ? Number(locker.monthlyFee) : undefined,
-  }))
+  return lockers.map(locker => {
+    const activeAssignment = locker.assignments[0]
+    const locationParts = locker.location?.split(',') || []
+    const floorMatch = locker.location?.match(/Floor (\d+)/)
+    const sectionMatch = locker.location?.match(/Section (\w+)/)
+    
+    return {
+      id: locker.id,
+      number: locker.lockerNumber,
+      floor: floorMatch ? parseInt(floorMatch[1]) : 1,
+      section: sectionMatch ? sectionMatch[1] : 'A',
+      type: locker.lockerType as 'STANDARD' | 'PREMIUM' | 'VIP' | 'TEMPORARY',
+      status: locker.status as 'AVAILABLE' | 'OCCUPIED' | 'MAINTENANCE' | 'OUT_OF_ORDER',
+      size: locker.size as 'SMALL' | 'MEDIUM' | 'LARGE' | undefined,
+      occupiedBy: activeAssignment?.memberId || undefined,
+      memberName: activeAssignment?.member ? `${activeAssignment.member.firstName} ${activeAssignment.member.lastName}` : undefined,
+      assignedDate: activeAssignment?.startDate?.toISOString().split('T')[0],
+      dueDate: activeAssignment?.endDate?.toISOString().split('T')[0],
+      monthlyFee: Number(locker.monthlyRate) || undefined,
+    }
+  })
 }
 
 export async function assignLocker(lockerId: string, memberId: string, months: number = 1) {
   const context = await requirePermission('lockers.update')
   
-  const expiresAt = new Date()
-  expiresAt.setMonth(expiresAt.getMonth() + months)
+  const startDate = new Date()
+  const endDate = new Date()
+  endDate.setMonth(endDate.getMonth() + months)
 
-  const locker = await prisma.locker.update({
-    where: { id: lockerId, branchId: context.branchId! },
-    data: {
-      memberId,
-      status: 'OCCUPIED',
-      assignedAt: new Date(),
-      expiresAt,
-    },
-  })
+  await prisma.$transaction([
+    prisma.lockerAssignment.create({
+      data: {
+        tenantId: context.tenantId!,
+        lockerId,
+        memberId,
+        startDate,
+        endDate,
+        status: 'ACTIVE',
+      }
+    }),
+    prisma.locker.update({
+      where: { id: lockerId },
+      data: {
+        status: 'OCCUPIED',
+        isOccupied: true,
+      }
+    })
+  ])
 
-  return locker
+  return { success: true }
 }
 
 export async function releaseLocker(lockerId: string) {
   const context = await requirePermission('lockers.update')
   
-  const locker = await prisma.locker.update({
-    where: { id: lockerId, branchId: context.branchId! },
-    data: {
-      memberId: null,
-      status: 'AVAILABLE',
-      assignedAt: null,
-      expiresAt: null,
-    },
-  })
+  await prisma.$transaction([
+    prisma.lockerAssignment.updateMany({
+      where: { 
+        lockerId, 
+        status: 'ACTIVE',
+      },
+      data: {
+        status: 'TERMINATED',
+        endDate: new Date(),
+      }
+    }),
+    prisma.locker.update({
+      where: { id: lockerId },
+      data: {
+        status: 'AVAILABLE',
+        isOccupied: false,
+      }
+    })
+  ])
 
-  return locker
-}
-
-export async function setLockerMaintenance(lockerId: string, isMaintenance: boolean) {
-  const context = await requirePermission('lockers.update')
-  
-  const locker = await prisma.locker.update({
-    where: { id: lockerId, branchId: context.branchId! },
-    data: {
-      status: isMaintenance ? 'MAINTENANCE' : 'AVAILABLE',
-    },
-  })
-
-  return locker
+  return { success: true }
 }

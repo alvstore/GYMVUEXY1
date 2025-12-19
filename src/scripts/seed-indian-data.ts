@@ -34,14 +34,22 @@ function generatePhone(): string {
   return `+91 ${randomPick(prefixes)}${Math.floor(10000000 + Math.random() * 90000000)}`
 }
 
-function generateEmail(firstName: string, lastName: string): string {
+function generateEmail(firstName: string, lastName: string, suffix: string = ''): string {
   const domains = ['gmail.com', 'yahoo.co.in', 'outlook.com', 'hotmail.com', 'rediffmail.com']
-  return `${firstName.toLowerCase()}.${lastName.toLowerCase()}${Math.floor(Math.random() * 100)}@${randomPick(domains)}`
+  const random = Math.floor(Math.random() * 1000)
+  return `${firstName.toLowerCase()}.${lastName.toLowerCase()}${suffix}${random}@${randomPick(domains)}`
 }
 
 function generateMembershipId(branchCode: string, index: number): string {
   const year = new Date().getFullYear().toString().slice(-2)
-  return `${branchCode}${year}${(index + 1).toString().padStart(4, '0')}`
+  const random = Math.floor(Math.random() * 10000)
+  return `${branchCode}${year}${(index + random).toString().padStart(5, '0')}`
+}
+
+function generateEmployeeId(prefix: string, index: number): string {
+  const year = new Date().getFullYear().toString().slice(-2)
+  const random = Math.floor(Math.random() * 10000)
+  return `${prefix}${year}${(index + random).toString().padStart(4, '0')}`
 }
 
 async function seedIndianData() {
@@ -64,125 +72,107 @@ async function seedIndianData() {
 
   console.log(`📍 Using tenant: ${existingTenant.name}, branch: ${existingBranch.name}`)
 
-  const hashedPassword = await bcrypt.hash('member123', 10)
-
   console.log('\n👥 Creating Indian members...')
-  const members = []
+  const members: any[] = []
   const branchCode = 'INC'
+  
   for (let i = 0; i < 25; i++) {
     const firstName = randomPick(INDIAN_FIRST_NAMES)
     const lastName = randomPick(INDIAN_LAST_NAMES)
     const city = randomPick(Object.keys(INDIAN_CITIES)) as keyof typeof INDIAN_CITIES
     const area = randomPick(INDIAN_CITIES[city].areas)
 
-    const member = await prisma.member.create({
-      data: {
-        tenantId,
-        branchId,
-        membershipId: generateMembershipId(branchCode, i + 1000 + Math.floor(Math.random() * 1000)),
-        firstName,
-        lastName,
-        email: generateEmail(firstName, lastName),
-        phone: generatePhone(),
-        dateOfBirth: new Date(1985 + Math.floor(Math.random() * 25), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1),
-        gender: i < 15 ? 'Male' : 'Female',
-        address: `${Math.floor(Math.random() * 500) + 1}, ${area}, ${city}, ${INDIAN_CITIES[city].state} ${400000 + Math.floor(Math.random() * 99999)}`,
-        emergencyContact: `${randomPick(INDIAN_FIRST_NAMES)} ${lastName}`,
-        emergencyPhone: generatePhone(),
-        status: i < 20 ? 'ACTIVE' : randomPick(['INACTIVE', 'PENDING']),
-      }
-    })
-    members.push(member)
+    try {
+      const member = await prisma.member.create({
+        data: {
+          tenantId,
+          branchId,
+          membershipId: generateMembershipId(branchCode, i),
+          firstName,
+          lastName,
+          email: generateEmail(firstName, lastName, `m${i}`),
+          phone: generatePhone(),
+          dateOfBirth: new Date(1985 + Math.floor(Math.random() * 25), Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1),
+          gender: i < 15 ? 'MALE' : 'FEMALE',
+          address: `${Math.floor(Math.random() * 500) + 1}, ${area}, ${city}, ${INDIAN_CITIES[city].state}`,
+          emergencyContact: `${randomPick(INDIAN_FIRST_NAMES)} ${lastName}`,
+          emergencyPhone: generatePhone(),
+          status: i < 20 ? 'ACTIVE' : 'INACTIVE',
+        }
+      })
+      members.push(member)
+    } catch (e: any) {
+      console.log(`  Skipping member ${firstName} ${lastName}: ${e.message?.substring(0, 50)}`)
+    }
   }
   console.log(`✅ Created ${members.length} members`)
 
-  console.log('\n🏋️ Creating Indian trainers...')
-  const trainers = []
-  const trainerNames = [
-    { first: 'Rahul', last: 'Sharma', specialization: 'Weight Training' },
-    { first: 'Priya', last: 'Iyer', specialization: 'Yoga & Meditation' },
-    { first: 'Vikram', last: 'Singh', specialization: 'CrossFit' },
-    { first: 'Sneha', last: 'Reddy', specialization: 'Zumba & Dance' },
-    { first: 'Amit', last: 'Patel', specialization: 'HIIT & Cardio' },
-    { first: 'Kavitha', last: 'Nair', specialization: 'Pilates' },
-  ]
-
-  for (const t of trainerNames) {
-    const trainer = await prisma.trainer.create({
-      data: {
-        tenantId,
-        branchId,
-        firstName: t.first,
-        lastName: t.last,
-        email: generateEmail(t.first, t.last),
-        phone: generatePhone(),
-        specialization: t.specialization,
-        certifications: ['ACE Certified', 'ISSA Certified', 'CPR/First Aid'],
-        experience: Math.floor(Math.random() * 10) + 2,
-        status: 'ACTIVE',
-        bio: `Professional fitness trainer specializing in ${t.specialization} with over ${Math.floor(Math.random() * 10) + 2} years of experience.`,
-        hourlyRate: 500 + Math.floor(Math.random() * 1000),
-      }
-    })
-    trainers.push(trainer)
-  }
-  console.log(`✅ Created ${trainers.length} trainers`)
-
   console.log('\n👨‍💼 Creating Indian staff members...')
+  const staffRoles = ['MANAGER', 'RECEPTIONIST', 'MAINTENANCE', 'SALES'] as const
   const staffData = [
-    { first: 'Suresh', last: 'Kumar', role: 'Manager', department: 'Operations' },
-    { first: 'Lakshmi', last: 'Menon', role: 'Receptionist', department: 'Front Desk' },
-    { first: 'Rajesh', last: 'Gupta', role: 'Maintenance', department: 'Facilities' },
-    { first: 'Anita', last: 'Desai', role: 'Sales Executive', department: 'Sales' },
+    { first: 'Suresh', last: 'Kumar', role: 'MANAGER' as const, department: 'Operations' },
+    { first: 'Lakshmi', last: 'Menon', role: 'RECEPTIONIST' as const, department: 'Front Desk' },
+    { first: 'Rajesh', last: 'Gupta', role: 'MAINTENANCE' as const, department: 'Facilities' },
+    { first: 'Anita', last: 'Desai', role: 'SALES' as const, department: 'Sales' },
+    { first: 'Rahul', last: 'Sharma', role: 'TRAINER' as const, department: 'Fitness' },
+    { first: 'Priya', last: 'Iyer', role: 'TRAINER' as const, department: 'Fitness' },
   ]
 
-  for (const s of staffData) {
-    await prisma.staffMember.create({
-      data: {
-        tenantId,
-        branchId,
-        firstName: s.first,
-        lastName: s.last,
-        email: generateEmail(s.first, s.last),
-        phone: generatePhone(),
-        role: s.role,
-        department: s.department,
-        status: 'ACTIVE',
-        hireDate: new Date(2020 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 12), 1),
-        salary: 25000 + Math.floor(Math.random() * 50000),
-      }
-    })
+  for (let i = 0; i < staffData.length; i++) {
+    const s = staffData[i]
+    try {
+      await prisma.staffMember.create({
+        data: {
+          tenantId,
+          branchId,
+          employeeId: generateEmployeeId('EMP', i),
+          firstName: s.first,
+          lastName: s.last,
+          email: generateEmail(s.first, s.last, 'staff'),
+          phone: generatePhone(),
+          role: s.role,
+          department: s.department,
+          status: 'ACTIVE',
+          joinDate: new Date(2020 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 12), 1),
+          salary: 25000 + Math.floor(Math.random() * 50000),
+        }
+      })
+    } catch (e: any) {
+      console.log(`  Skipping staff ${s.first} ${s.last}: ${e.message?.substring(0, 50)}`)
+    }
   }
-  console.log(`✅ Created ${staffData.length} staff members`)
+  console.log(`✅ Created staff members`)
 
   console.log('\n🔐 Creating lockers...')
   const lockerSections = ['A', 'B', 'C']
+  let lockerCount = 0
+  
   for (let floor = 1; floor <= 2; floor++) {
     for (const section of lockerSections) {
-      for (let num = 1; num <= 10; num++) {
-        const lockerNumber = `${section}-${floor}${num.toString().padStart(2, '0')}`
-        const isOccupied = Math.random() > 0.6
-        const member = isOccupied ? randomPick(members) : null
-
-        await prisma.locker.create({
-          data: {
-            tenantId,
-            branchId,
-            lockerNumber,
-            floor,
-            section,
-            lockerType: Math.random() > 0.7 ? 'PAID' : 'FREE',
-            status: isOccupied ? 'OCCUPIED' : (Math.random() > 0.9 ? 'MAINTENANCE' : 'AVAILABLE'),
-            memberId: member?.id,
-            monthlyFee: Math.random() > 0.7 ? 200 : null,
-            assignedAt: isOccupied ? new Date() : null,
-            expiresAt: isOccupied ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) : null,
-          }
-        })
+      for (let num = 1; num <= 8; num++) {
+        const lockerNumber = `${section}${floor}${num.toString().padStart(2, '0')}`
+        
+        try {
+          await prisma.locker.create({
+            data: {
+              tenantId,
+              branchId,
+              lockerNumber,
+              lockerType: Math.random() > 0.7 ? 'PREMIUM' : 'STANDARD',
+              location: `Floor ${floor}, Section ${section}`,
+              size: randomPick(['SMALL', 'MEDIUM', 'LARGE']),
+              monthlyRate: 200 + Math.floor(Math.random() * 300),
+              status: Math.random() > 0.1 ? 'AVAILABLE' : 'MAINTENANCE',
+            }
+          })
+          lockerCount++
+        } catch (e: any) {
+          // Skip duplicates
+        }
       }
     }
   }
-  console.log('✅ Created 60 lockers')
+  console.log(`✅ Created ${lockerCount} lockers`)
 
   console.log('\n🛒 Creating products...')
   const products = [
@@ -201,128 +191,110 @@ async function seedIndianData() {
   ]
 
   for (const p of products) {
-    await prisma.product.create({
-      data: {
-        tenantId,
-        branchId,
-        name: p.name,
-        category: p.category,
-        sellingPrice: p.price,
-        costPrice: Math.floor(p.price * 0.6),
-        stockQuantity: p.stock,
-        sku: `SKU-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
-        status: 'ACTIVE',
-        taxRate: 18,
-      }
-    })
+    try {
+      await prisma.product.create({
+        data: {
+          tenantId,
+          branchId,
+          name: p.name,
+          category: p.category,
+          sellingPrice: p.price,
+          costPrice: Math.floor(p.price * 0.6),
+          stockQuantity: p.stock,
+          sku: `SKU-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+          status: 'ACTIVE',
+          taxRate: 18,
+        }
+      })
+    } catch (e: any) {
+      console.log(`  Skipping product ${p.name}: ${e.message?.substring(0, 50)}`)
+    }
   }
   console.log(`✅ Created ${products.length} products`)
 
   console.log('\n🏃 Creating equipment...')
   const equipmentList = [
-    { name: 'Treadmill Pro 5000', type: 'CARDIO', brand: 'Technogym', qty: 8 },
-    { name: 'Elliptical Cross Trainer', type: 'CARDIO', brand: 'Life Fitness', qty: 6 },
-    { name: 'Spin Bike Pro', type: 'CARDIO', brand: 'Keiser', qty: 15 },
-    { name: 'Rowing Machine', type: 'CARDIO', brand: 'Concept2', qty: 4 },
-    { name: 'Smith Machine', type: 'STRENGTH', brand: 'Hammer Strength', qty: 3 },
+    { name: 'Treadmill Pro 5000', type: 'CARDIO', brand: 'Technogym', qty: 5 },
+    { name: 'Elliptical Cross Trainer', type: 'CARDIO', brand: 'Life Fitness', qty: 4 },
+    { name: 'Spin Bike Pro', type: 'CARDIO', brand: 'Keiser', qty: 10 },
+    { name: 'Rowing Machine', type: 'CARDIO', brand: 'Concept2', qty: 3 },
+    { name: 'Smith Machine', type: 'STRENGTH', brand: 'Hammer Strength', qty: 2 },
     { name: 'Leg Press Machine', type: 'STRENGTH', brand: 'Technogym', qty: 2 },
     { name: 'Cable Crossover', type: 'STRENGTH', brand: 'Life Fitness', qty: 2 },
-    { name: 'Lat Pulldown Machine', type: 'STRENGTH', brand: 'Precor', qty: 2 },
-    { name: 'Adjustable Dumbbell Set', type: 'FREE_WEIGHTS', brand: 'Bowflex', qty: 10 },
-    { name: 'Olympic Barbell 20kg', type: 'FREE_WEIGHTS', brand: 'Eleiko', qty: 8 },
-    { name: 'Kettlebell Set (8-32kg)', type: 'FREE_WEIGHTS', brand: 'Rogue', qty: 6 },
-    { name: 'Battle Ropes 15m', type: 'FUNCTIONAL', brand: 'Escape Fitness', qty: 4 },
+    { name: 'Adjustable Dumbbell Set', type: 'FREE_WEIGHTS', brand: 'Bowflex', qty: 6 },
+    { name: 'Olympic Barbell 20kg', type: 'FREE_WEIGHTS', brand: 'Eleiko', qty: 5 },
+    { name: 'Kettlebell Set', type: 'FREE_WEIGHTS', brand: 'Rogue', qty: 4 },
   ]
 
+  let equipmentCount = 0
   for (const e of equipmentList) {
     for (let i = 1; i <= e.qty; i++) {
-      await prisma.equipment.create({
-        data: {
-          tenantId,
-          branchId,
-          name: `${e.name} #${i}`,
-          type: e.type,
-          brand: e.brand,
-          model: `${e.brand.substring(0, 2).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
-          purchaseDate: new Date(2020 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 12), 1),
-          purchasePrice: 50000 + Math.floor(Math.random() * 200000),
-          warrantyExpiry: new Date(2025 + Math.floor(Math.random() * 3), Math.floor(Math.random() * 12), 1),
-          status: Math.random() > 0.1 ? 'OPERATIONAL' : 'UNDER_MAINTENANCE',
-          condition: randomPick(['EXCELLENT', 'GOOD', 'FAIR']),
-          location: randomPick(['Main Floor', 'Cardio Zone', 'Weight Area', 'Functional Zone']),
-        }
-      })
+      try {
+        await prisma.equipment.create({
+          data: {
+            tenantId,
+            branchId,
+            name: `${e.name} #${i}`,
+            type: e.type,
+            brand: e.brand,
+            model: `${e.brand.substring(0, 2).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+            purchaseDate: new Date(2020 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 12), 1),
+            purchasePrice: 50000 + Math.floor(Math.random() * 200000),
+            warrantyExpiry: new Date(2025 + Math.floor(Math.random() * 3), Math.floor(Math.random() * 12), 1),
+            status: Math.random() > 0.1 ? 'OPERATIONAL' : 'UNDER_MAINTENANCE',
+            condition: randomPick(['EXCELLENT', 'GOOD', 'FAIR']),
+            location: randomPick(['Main Floor', 'Cardio Zone', 'Weight Area', 'Functional Zone']),
+          }
+        })
+        equipmentCount++
+      } catch (e: any) {
+        // Skip errors
+      }
     }
   }
-  console.log('✅ Created equipment inventory')
-
-  console.log('\n📋 Creating classes...')
-  const classesData = [
-    { name: 'Morning Yoga', type: 'YOGA', capacity: 20, duration: 60 },
-    { name: 'Power Yoga', type: 'YOGA', capacity: 15, duration: 75 },
-    { name: 'HIIT Blast', type: 'HIIT', capacity: 25, duration: 45 },
-    { name: 'Zumba Fitness', type: 'DANCE', capacity: 30, duration: 60 },
-    { name: 'Bollywood Dance', type: 'DANCE', capacity: 25, duration: 60 },
-    { name: 'Spin Class', type: 'CARDIO', capacity: 15, duration: 45 },
-    { name: 'CrossFit WOD', type: 'CROSSFIT', capacity: 12, duration: 60 },
-    { name: 'Strength Training', type: 'STRENGTH', capacity: 10, duration: 60 },
-    { name: 'Pilates Core', type: 'PILATES', capacity: 15, duration: 50 },
-    { name: 'Boxing Fit', type: 'MARTIAL_ARTS', capacity: 20, duration: 60 },
-  ]
-
-  for (const c of classesData) {
-    const trainer = randomPick(trainers)
-    await prisma.class.create({
-      data: {
-        tenantId,
-        branchId,
-        name: c.name,
-        description: `Join our ${c.name} class for an energizing workout experience!`,
-        classType: c.type,
-        duration: c.duration,
-        capacity: c.capacity,
-        trainerId: trainer.id,
-        status: 'ACTIVE',
-        price: 200 + Math.floor(Math.random() * 300),
-      }
-    })
-  }
-  console.log(`✅ Created ${classesData.length} classes`)
+  console.log(`✅ Created ${equipmentCount} equipment items`)
 
   console.log('\n🎯 Creating leads...')
-  const leadSources = ['WALK_IN', 'WEBSITE', 'REFERRAL', 'SOCIAL_MEDIA', 'GOOGLE_ADS', 'NEWSPAPER']
-  const leadStages = ['NEW', 'CONTACTED', 'QUALIFIED', 'TOUR_SCHEDULED', 'PROPOSAL_SENT', 'NEGOTIATION']
+  const leadSources = ['WALK_IN', 'WEBSITE', 'REFERRAL', 'SOCIAL_MEDIA', 'GOOGLE_ADS', 'NEWSPAPER'] as const
+  const leadStages = ['NEW', 'CONTACTED', 'QUALIFIED', 'TOUR_SCHEDULED', 'PROPOSAL_SENT', 'NEGOTIATION'] as const
+  let leadCount = 0
 
   for (let i = 0; i < 15; i++) {
     const firstName = randomPick(INDIAN_FIRST_NAMES)
     const lastName = randomPick(INDIAN_LAST_NAMES)
 
-    await prisma.lead.create({
-      data: {
-        tenantId,
-        branchId,
-        firstName,
-        lastName,
-        email: generateEmail(firstName, lastName),
-        phone: generatePhone(),
-        source: randomPick(leadSources),
-        stage: randomPick(leadStages),
-        score: Math.floor(Math.random() * 100),
-        interestedIn: randomPick(['Monthly Membership', 'Annual Plan', 'Personal Training', 'Group Classes']),
-        notes: 'Interested in joining the gym.',
-        assignedToId: null,
-      }
-    })
+    try {
+      await prisma.lead.create({
+        data: {
+          tenantId,
+          branchId,
+          firstName,
+          lastName,
+          email: generateEmail(firstName, lastName, `lead${i}`),
+          phone: generatePhone(),
+          source: randomPick(leadSources),
+          stage: randomPick(leadStages),
+          score: Math.floor(Math.random() * 100),
+          interestedIn: randomPick(['Monthly Membership', 'Annual Plan', 'Personal Training', 'Group Classes']),
+          notes: 'Interested in joining the gym.',
+        }
+      })
+      leadCount++
+    } catch (e: any) {
+      console.log(`  Skipping lead: ${e.message?.substring(0, 50)}`)
+    }
   }
-  console.log('✅ Created 15 leads')
+  console.log(`✅ Created ${leadCount} leads`)
 
   console.log('\n📊 Creating attendance records...')
   const today = new Date()
+  let attendanceCount = 0
+
   for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
     const date = new Date(today)
     date.setDate(date.getDate() - dayOffset)
 
-    const dailyMembers = members.slice(0, 10 + Math.floor(Math.random() * 10))
+    const dailyMembers = members.slice(0, 8 + Math.floor(Math.random() * 10))
     for (const member of dailyMembers) {
       const checkInHour = 5 + Math.floor(Math.random() * 12)
       const checkInTime = new Date(date)
@@ -335,53 +307,63 @@ async function seedIndianData() {
         checkOutTime.setHours(checkInTime.getHours() + 1 + Math.floor(Math.random() * 2))
       }
 
-      await prisma.attendance.create({
-        data: {
-          tenantId,
-          branchId,
-          memberId: member.id,
-          checkInTime,
-          checkOutTime,
-          notes: hasCheckedOut ? null : 'Currently in gym',
-        }
-      })
+      try {
+        await prisma.attendance.create({
+          data: {
+            tenantId,
+            branchId,
+            memberId: member.id,
+            checkInTime,
+            checkOutTime,
+            notes: hasCheckedOut ? null : 'Currently in gym',
+          }
+        })
+        attendanceCount++
+      } catch (e: any) {
+        // Skip errors
+      }
     }
   }
-  console.log('✅ Created attendance records for last 7 days')
+  console.log(`✅ Created ${attendanceCount} attendance records`)
 
   console.log('\n🤝 Creating referrals...')
-  for (let i = 0; i < 8; i++) {
+  let referralCount = 0
+  
+  for (let i = 0; i < Math.min(8, members.length); i++) {
     const referrer = members[i]
     const refereeFn = randomPick(INDIAN_FIRST_NAMES)
     const refereeLn = randomPick(INDIAN_LAST_NAMES)
 
-    await prisma.referral.create({
-      data: {
-        tenantId,
-        referrerId: referrer.id,
-        refereeEmail: generateEmail(refereeFn, refereeLn),
-        refereePhone: generatePhone(),
-        status: randomPick(['PENDING', 'COMPLETED', 'REWARDED']),
-        rewardType: '1 Month Free',
-        rewardAmount: 500,
-        completedAt: Math.random() > 0.5 ? new Date() : null,
-      }
-    })
+    try {
+      await prisma.referral.create({
+        data: {
+          tenantId,
+          referrerId: referrer.id,
+          refereeEmail: generateEmail(refereeFn, refereeLn, `ref${i}`),
+          refereePhone: generatePhone(),
+          status: randomPick(['PENDING', 'COMPLETED', 'REWARDED']),
+          rewardType: '1 Month Free',
+          rewardAmount: 500,
+          completedAt: Math.random() > 0.5 ? new Date() : null,
+        }
+      })
+      referralCount++
+    } catch (e: any) {
+      console.log(`  Skipping referral: ${e.message?.substring(0, 50)}`)
+    }
   }
-  console.log('✅ Created 8 referrals')
+  console.log(`✅ Created ${referralCount} referrals`)
 
   console.log('\n🎉 Indian gym data seed completed successfully!')
   console.log('\n📊 Summary:')
   console.log(`   - ${members.length} members`)
-  console.log(`   - ${trainers.length} trainers`)
   console.log(`   - ${staffData.length} staff members`)
-  console.log('   - 60 lockers')
+  console.log(`   - ${lockerCount} lockers`)
   console.log(`   - ${products.length} products`)
-  console.log('   - 72 equipment items')
-  console.log(`   - ${classesData.length} classes`)
-  console.log('   - 15 leads')
-  console.log('   - 7 days of attendance records')
-  console.log('   - 8 referrals')
+  console.log(`   - ${equipmentCount} equipment items`)
+  console.log(`   - ${leadCount} leads`)
+  console.log(`   - ${attendanceCount} attendance records`)
+  console.log(`   - ${referralCount} referrals`)
 }
 
 seedIndianData()

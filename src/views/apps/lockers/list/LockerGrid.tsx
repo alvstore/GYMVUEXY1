@@ -18,7 +18,7 @@ const statusColors: { [key in LockerStatus]: ThemeColor } = {
   AVAILABLE: 'success',
   OCCUPIED: 'primary',
   MAINTENANCE: 'warning',
-  RESERVED: 'info'
+  OUT_OF_ORDER: 'error'
 }
 
 const LockerGrid = () => {
@@ -111,7 +111,7 @@ const LockerGrid = () => {
                         Floor {locker.floor} - Section {locker.section}
                       </Typography>
                     </div>
-                    <Chip label={locker.type} size='small' color={locker.type === 'PAID' ? 'warning' : 'secondary'} />
+                    <Chip label={locker.type} size='small' color={locker.type === 'PREMIUM' || locker.type === 'VIP' ? 'warning' : 'secondary'} />
                   </div>
 
                   <Chip
