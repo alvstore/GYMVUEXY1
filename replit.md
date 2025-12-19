@@ -1,6 +1,6 @@
 # Gym Management System (Incline)
 
-## ✅ LATEST UPDATE - December 19, 2025 (Session 10 - Bug Fixes & Workflow Audit)
+## ✅ LATEST UPDATE - December 19, 2025 (Session 11 - Admin Dashboard CRM/Sales & Member Benefits)
 
 ### Test Login Credentials
 
@@ -11,6 +11,39 @@
 | **Trainer** | trainer@incline.gym | trainer | View members, manage classes |
 | **Staff** | staff@incline.gym | staff | Attendance check-in, view members |
 | **Member** | member@incline.gym | member | Member portal only |
+
+### Session 11 Updates
+
+**Admin Dashboard Enhancements** (`/dashboards/admin`):
+- ✅ Added CRM & Analytics section:
+  - Lead pipeline metrics (total leads, new this month, converted, conversion rate)
+  - Lead funnel visualization (New → Contacted → Qualified → Proposal → Won/Lost)
+  - Member growth chart (6-month trend with new vs total members)
+- ✅ Added Sales & Revenue section:
+  - Membership revenue and count (30-day window)
+  - Product sales revenue and count
+  - Total transactions counter
+  - Recent transactions table with member, type, branch, payment method
+  - Payment method breakdown with revenue per method
+
+**Member Portal Enhancements** (`/member-portal`):
+- ✅ Plan Benefits display - shows all benefits included with membership
+- ✅ Benefit balances - tracks consumed/available credits (guest passes, class credits, PT sessions)
+- ✅ Quick access chips showing gym/pool/locker/class/trainer access
+- ✅ Improved membership status display with plan description and expiration
+
+**New Server Actions**:
+- `getLeadPipelineMetrics()` - Lead funnel and conversion metrics
+- `getMemberGrowthData()` - 6-month member growth trend
+- `getSalesAnalytics()` - Revenue by type, transactions, payment methods
+- `getMembershipPlans()` - List all plans with benefits for plan browsing
+
+**Membership Plans Seed Script** (`npm run tsx src/scripts/seed-membership-plans.ts`):
+- 6 membership tiers: Basic (₹2,999), Standard (₹7,999), Premium (₹14,999), Platinum (₹49,999), Student (₹1,499), Corporate (₹24,999)
+- Plan benefits: Guest passes, class credits, PT sessions, locker access, spa treatments, supplements
+- Accrual types: One-time, monthly, quarterly, yearly benefits
+
+---
 
 ### Session 10 Fixes
 
