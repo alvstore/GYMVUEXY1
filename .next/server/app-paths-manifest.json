@@ -1,7 +1,4 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/[lang]/(dashboard)/(private)/dashboards/crm/page": "app/[lang]/(dashboard)/(private)/dashboards/crm/page.js",
-  "/[lang]/(dashboard)/(private)/dashboards/manager/page": "app/[lang]/(dashboard)/(private)/dashboards/manager/page.js",
-  "/[lang]/(dashboard)/(private)/apps/member/page": "app/[lang]/(dashboard)/(private)/apps/member/page.js",
-  "/[lang]/(dashboard)/(private)/apps/dashboard/page": "app/[lang]/(dashboard)/(private)/apps/dashboard/page.js"
+  "/[lang]/(dashboard)/(private)/dashboards/manager/page": "app/[lang]/(dashboard)/(private)/dashboards/manager/page.js"
 }
