@@ -9,24 +9,32 @@ const verticalMenuData = (dictionary: Awaited<ReturnType<typeof getDictionary>>)
     icon: 'tabler-smart-home',
     children: [
       {
-        label: 'Gym Dashboard',
-        icon: 'tabler-circle',
-        href: '/apps/dashboard',
+        label: 'Manager Dashboard',
+        icon: 'tabler-building',
+        href: '/dashboards/manager',
         permissions: ['dashboard.view']
       },
       {
-        label: dictionary['navigation'].crm,
-        icon: 'tabler-circle',
-        href: '/dashboards/crm',
-        permissions: ['dashboard.view']
+        label: 'Staff Dashboard',
+        icon: 'tabler-clipboard-check',
+        href: '/dashboards/staff',
+        permissions: ['attendance.view']
       },
       {
-        label: dictionary['navigation'].analytics,
-        icon: 'tabler-circle',
-        href: '/dashboards/analytics',
-        permissions: ['dashboard.view']
+        label: 'Finance Dashboard',
+        icon: 'tabler-report-money',
+        href: '/dashboards/finance',
+        permissions: ['finance.view']
       }
     ]
+  },
+
+  // MEMBER PORTAL (Self-service)
+  {
+    label: 'My Portal',
+    icon: 'tabler-user-circle',
+    href: '/member-portal',
+    permissions: ['member-portal.*', 'self.view']
   },
 
   // MAIN GYM OPERATIONS

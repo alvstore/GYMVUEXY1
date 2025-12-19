@@ -58,6 +58,17 @@ export const users: UserTable[] = [
     tenantId: 'tenant-demo-001',
     branchId: '576332a0-e48c-4931-933d-92dedd4e460f',
     roles: ['member'],
-    permissions: ['member-portal.*']
+    permissions: ['member-portal.*', 'self.view']
+  },
+  {
+    id: 5,
+    name: 'Sneha Gupta',
+    password: 'staff',
+    email: 'staff@incline.gym',
+    image: '/images/avatars/5.png',
+    tenantId: 'tenant-demo-001',
+    branchId: '576332a0-e48c-4931-933d-92dedd4e460f',
+    roles: ['staff'],
+    permissions: ['attendance.*', 'members.view', 'classes.view', 'lockers.view', 'products.view', 'dashboard.view']
   }
 ]

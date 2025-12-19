@@ -1,11 +1,34 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/libs/auth'
 
 export const metadata: Metadata = {
-  title: 'Gym Dashboard',
-  description: 'Branch management dashboard',
+  title: 'Dashboard',
+  description: 'Role-based dashboard redirect',
 }
 
-export default async function DashboardCRM() {
-  redirect('/en/dashboards/manager')
+type Props = {
+  params: Promise<{ lang: string }>
+}
+
+export default async function DashboardCRM({ params }: Props) {
+  const { lang } = await params
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user) {
+    redirect(`/${lang}/login`)
+  }
+
+  const roles = (session.user as any).roles || []
+
+  if (roles.includes('member')) {
+    redirect(`/${lang}/member-portal`)
+  }
+
+  if (roles.includes('staff') || roles.includes('trainer')) {
+    redirect(`/${lang}/dashboards/staff`)
+  }
+
+  redirect(`/${lang}/dashboards/manager`)
 }

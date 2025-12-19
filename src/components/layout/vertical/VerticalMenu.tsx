@@ -1,3 +1,5 @@
+'use client'
+
 // Next Imports
 import { useParams } from 'next/navigation'
 
@@ -6,14 +8,14 @@ import { useTheme } from '@mui/material/styles'
 
 // Third-party Imports
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import { useSession } from 'next-auth/react'
 
 // Type Imports
 import type { getDictionary } from '@/utils/getDictionary'
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
-import { Menu, SubMenu, MenuItem, MenuSection } from '@menu/vertical-menu'
-import CustomChip from '@core/components/mui/Chip'
+import { Menu } from '@menu/vertical-menu'
 import { GenerateVerticalMenu } from '@components/GenerateMenu'
 
 // Hook Imports
@@ -28,6 +30,9 @@ import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
 
 // Menu Data Imports
 import menuData from '@/data/navigation/verticalMenuData'
+
+// Utils
+import { filterMenuByPermissions } from '@/utils/menuUtils'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -50,6 +55,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()
   const params = useParams()
+  const { data: session } = useSession()
 
   // Vars
   const { isBreakpointReached, transitionDuration } = verticalNavOptions
@@ -57,9 +63,13 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
 
   const ScrollWrapper = isBreakpointReached ? 'div' : PerfectScrollbar
 
+  // Get user permissions from session
+  const userPermissions = (session?.user as any)?.permissions || []
+
+  // Filter menu based on permissions
+  const filteredMenuData = filterMenuByPermissions(menuData(dictionary), userPermissions)
+
   return (
-    // eslint-disable-next-line lines-around-comment
-    /* Custom scrollbar instead of browser scroll, remove if you want browser scroll only */
     <ScrollWrapper
       {...(isBreakpointReached
         ? {
@@ -71,8 +81,6 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
             onScrollY: container => scrollMenu(container, true)
           })}
     >
-      {/* Incase you also want to scroll NavHeader to scroll with Vertical Menu, remove NavHeader from above and paste it below this comment */}
-      {/* Vertical Menu */}
       <Menu
         popoutMenuOffset={{ mainAxis: 23 }}
         menuItemStyles={menuItemStyles(verticalNavOptions, theme)}
@@ -80,7 +88,7 @@ const VerticalMenu = ({ dictionary, scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
-        <GenerateVerticalMenu menuData={menuData(dictionary)} />
+        <GenerateVerticalMenu menuData={filteredMenuData} />
       </Menu>
     </ScrollWrapper>
   )
