@@ -1,4 +1,4 @@
-export type MemberStatus = 'ACTIVE' | 'INACTIVE' | 'EXPIRED' | 'FROZEN' | 'PENDING'
+export type MemberStatus = 'ACTIVE' | 'INACTIVE' | 'SUSPENDED' | 'PENDING' | 'CANCELLED' | 'FROZEN'
 
 export type Member = {
   id: string

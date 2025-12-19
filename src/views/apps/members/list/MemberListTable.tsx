@@ -110,9 +110,10 @@ const DebouncedInput = ({
 const memberStatusObj: MemberStatusColor = {
   ACTIVE: 'success',
   INACTIVE: 'secondary',
-  EXPIRED: 'error',
-  FROZEN: 'warning',
-  PENDING: 'info'
+  SUSPENDED: 'error',
+  PENDING: 'info',
+  CANCELLED: 'error',
+  FROZEN: 'warning'
 }
 
 const columnHelper = createColumnHelper<MemberWithAction>()

@@ -17,6 +17,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
     ],
+    "/api/auth/[...nextauth]/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/auth/[...nextauth]/route.js"
+    ],
     "/[lang]/[...not-found]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -27,33 +32,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/manager/page.js"
-    ],
-    "/api/auth/[...nextauth]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/auth/[...nextauth]/route.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/members/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
-    ],
-    "/[lang]/(blank-layout-pages)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(blank-layout-pages)/layout.css",
-      "static/chunks/app/[lang]/(blank-layout-pages)/layout.js"
-    ],
-    "/[lang]/(blank-layout-pages)/(guest-only)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(blank-layout-pages)/(guest-only)/layout.js"
-    ],
-    "/[lang]/(blank-layout-pages)/(guest-only)/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(blank-layout-pages)/(guest-only)/login/page.js"
     ]
   }
 }
