@@ -60,6 +60,16 @@
       "static/chunks/main-app.js",
       "static/css/app/[lang]/(dashboard)/(private)/apps/leads/page.css",
       "static/chunks/app/[lang]/(dashboard)/(private)/apps/leads/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/member/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/member/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

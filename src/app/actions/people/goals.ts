@@ -7,13 +7,16 @@ import { BranchScopeBuilder, PaginationHelper } from '@/libs/branchScope'
 
 export async function createMemberGoal(data: {
   memberId: string
-  goalType: 'WEIGHT_LOSS' | 'WEIGHT_GAIN' | 'MUSCLE_GAIN' | 'ENDURANCE' | 'FLEXIBILITY' | 'CUSTOM'
-  targetValue?: number
-  targetUnit?: string
-  startDate: Date
+  goalType: 'WEIGHT_LOSS' | 'WEIGHT_GAIN' | 'MUSCLE_BUILDING' | 'FAT_LOSS' | 'STRENGTH_GAIN' | 'ENDURANCE' | 'FLEXIBILITY' | 'GENERAL_FITNESS' | 'CUSTOM'
+  title: string
+  description?: string
+  targetWeight?: number
+  targetBodyFat?: number
+  targetMuscle?: number
+  customMetric?: string
+  customTarget?: string
   targetDate: Date
   assignedTrainerId?: string
-  description?: string
 }) {
   const context = await requirePermission('members.update')
 
@@ -29,13 +32,17 @@ export async function createMemberGoal(data: {
       branchId: member.branchId,
       memberId: data.memberId,
       goalType: data.goalType,
-      targetValue: data.targetValue,
-      targetUnit: data.targetUnit,
-      startDate: data.startDate,
+      title: data.title,
+      description: data.description,
+      targetWeight: data.targetWeight,
+      targetBodyFat: data.targetBodyFat,
+      targetMuscle: data.targetMuscle,
+      customMetric: data.customMetric,
+      customTarget: data.customTarget,
       targetDate: data.targetDate,
       assignedTrainerId: data.assignedTrainerId,
-      description: data.description,
       status: 'ACTIVE',
+      progress: 0,
     },
   })
 
@@ -57,9 +64,8 @@ export async function createMemberGoal(data: {
 }
 
 export async function updateGoalProgress(goalId: string, data: {
-  currentValue?: number
-  progressNotes?: string
-  completionPercentage?: number
+  progress?: number
+  notes?: string
 }) {
   const context = await requirePermission('members.update')
 
@@ -76,10 +82,9 @@ export async function updateGoalProgress(goalId: string, data: {
   const updated = await prisma.memberGoal.update({
     where: { id: goalId },
     data: {
-      currentValue: data.currentValue,
-      progressNotes: data.progressNotes,
-      completionPercentage: data.completionPercentage,
-      ...(data.completionPercentage === 100 && { status: 'COMPLETED', completedAt: new Date() }),
+      progress: data.progress,
+      notes: data.notes,
+      ...(data.progress === 100 && { status: 'ACHIEVED', achievedDate: new Date() }),
     },
   })
 
@@ -91,8 +96,7 @@ export async function updateGoalProgress(goalId: string, data: {
     resource: 'MemberGoal',
     resourceId: goalId,
     newValues: {
-      currentValue: data.currentValue,
-      completionPercentage: data.completionPercentage,
+      progress: data.progress,
       status: updated.status
     }
   })
@@ -107,7 +111,7 @@ export async function getAllGoals(filters?: {
   const context = await requirePermission('members.view')
   const { page, limit, skip, take } = PaginationHelper.getSkipTake(filters)
 
-  const results = await Promise.all([
+  const [goals, total] = await Promise.all([
     prisma.memberGoal.findMany({
       where: {
         tenantId: context.tenantId,
@@ -122,10 +126,13 @@ export async function getAllGoals(filters?: {
           },
         },
         assignedTrainer: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
           },
         },
       },
@@ -140,8 +147,6 @@ export async function getAllGoals(filters?: {
       },
     }),
   ])
-
-  const [goals, total] = results
 
   return PaginationHelper.buildResult(goals, total, page, limit)
 }
@@ -162,10 +167,13 @@ export async function getMemberGoals(memberId: string) {
     },
     include: {
       assignedTrainer: {
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
       },
     },
@@ -175,41 +183,37 @@ export async function getMemberGoals(memberId: string) {
   return goals
 }
 
-export async function uploadProgressPhoto(goalId: string, photoUrl: string, notes?: string) {
+export async function uploadProgressPhoto(memberId: string, memberPlanId: string, imageUrl: string, caption?: string, photoType?: string) {
   const context = await requirePermission('members.update')
 
-  const goal = await prisma.memberGoal.findFirst({
-    where: {
-      id: goalId,
-      tenantId: context.tenantId,
-      ...(context.branchId && { branchId: context.branchId }),
-    },
-    include: { member: true },
+  const member = await prisma.member.findFirst({
+    where: BranchScopeBuilder.memberWhere(context, { id: memberId }),
   })
 
-  if (!goal) throw new Error('Goal not found')
+  if (!member) throw new Error('Member not found')
 
   const photo = await prisma.progressPhoto.create({
     data: {
-      tenantId: context.tenantId,
-      branchId: goal.branchId,
-      memberId: goal.memberId,
-      photoUrl,
-      notes,
-      takenAt: new Date(),
+      memberPlanId,
+      memberId,
+      branchId: member.branchId,
+      imageUrl,
+      caption,
+      photoType,
+      measurementDate: new Date(),
     },
   })
 
   await AuditLogger.log({
     userId: context.userId,
     tenantId: context.tenantId,
-    branchId: goal.branchId,
+    branchId: member.branchId,
     action: 'ProgressPhoto.uploaded',
     resource: 'ProgressPhoto',
     resourceId: photo.id,
     newValues: {
-      goalId: goalId,
-      memberId: goal.memberId
+      memberId,
+      photoType
     }
   })
 
