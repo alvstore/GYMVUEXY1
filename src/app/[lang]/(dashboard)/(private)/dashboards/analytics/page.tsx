@@ -35,9 +35,6 @@ import ProjectsTable from '@views/dashboards/analytics/ProjectsTable'
 } */
 
 const DashboardAnalytics = async () => {
-  // Vars
-  const data = // await getProfileData()
-
   return (
     <Grid container spacing={6}>
       <Grid size={{ xs: 12, lg: 6 }}>

@@ -108,7 +108,6 @@ async function seedIndianData() {
   console.log(`✅ Created ${members.length} members`)
 
   console.log('\n👨‍💼 Creating Indian staff members...')
-  const staffRoles = ['MANAGER', 'RECEPTIONIST', 'MAINTENANCE', 'SALES'] as const
   const staffData = [
     { first: 'Suresh', last: 'Kumar', role: 'MANAGER' as const, department: 'Operations' },
     { first: 'Lakshmi', last: 'Menon', role: 'RECEPTIONIST' as const, department: 'Front Desk' },
@@ -160,14 +159,14 @@ async function seedIndianData() {
               lockerNumber,
               lockerType: Math.random() > 0.7 ? 'PREMIUM' : 'STANDARD',
               location: `Floor ${floor}, Section ${section}`,
-              size: randomPick(['SMALL', 'MEDIUM', 'LARGE']),
+              size: randomPick(['SMALL', 'MEDIUM', 'LARGE']) as 'SMALL' | 'MEDIUM' | 'LARGE',
               monthlyRate: 200 + Math.floor(Math.random() * 300),
               status: Math.random() > 0.1 ? 'AVAILABLE' : 'MAINTENANCE',
             }
           })
           lockerCount++
         } catch (e: any) {
-          // Skip duplicates
+          // Skip duplicates silently
         }
       }
     }
@@ -190,6 +189,7 @@ async function seedIndianData() {
     { name: 'Pre-Workout Energy Drink', category: 'Supplements', price: 1599, stock: 35 },
   ]
 
+  let productCount = 0
   for (const p of products) {
     try {
       await prisma.product.create({
@@ -206,49 +206,50 @@ async function seedIndianData() {
           taxRate: 18,
         }
       })
+      productCount++
     } catch (e: any) {
       console.log(`  Skipping product ${p.name}: ${e.message?.substring(0, 50)}`)
     }
   }
-  console.log(`✅ Created ${products.length} products`)
+  console.log(`✅ Created ${productCount} products`)
 
   console.log('\n🏃 Creating equipment...')
   const equipmentList = [
-    { name: 'Treadmill Pro 5000', type: 'CARDIO', brand: 'Technogym', qty: 5 },
-    { name: 'Elliptical Cross Trainer', type: 'CARDIO', brand: 'Life Fitness', qty: 4 },
-    { name: 'Spin Bike Pro', type: 'CARDIO', brand: 'Keiser', qty: 10 },
-    { name: 'Rowing Machine', type: 'CARDIO', brand: 'Concept2', qty: 3 },
-    { name: 'Smith Machine', type: 'STRENGTH', brand: 'Hammer Strength', qty: 2 },
-    { name: 'Leg Press Machine', type: 'STRENGTH', brand: 'Technogym', qty: 2 },
-    { name: 'Cable Crossover', type: 'STRENGTH', brand: 'Life Fitness', qty: 2 },
-    { name: 'Adjustable Dumbbell Set', type: 'FREE_WEIGHTS', brand: 'Bowflex', qty: 6 },
-    { name: 'Olympic Barbell 20kg', type: 'FREE_WEIGHTS', brand: 'Eleiko', qty: 5 },
-    { name: 'Kettlebell Set', type: 'FREE_WEIGHTS', brand: 'Rogue', qty: 4 },
+    { name: 'Treadmill Pro 5000', category: 'CARDIO' as const, brand: 'Technogym', qty: 5 },
+    { name: 'Elliptical Cross Trainer', category: 'CARDIO' as const, brand: 'Life Fitness', qty: 4 },
+    { name: 'Spin Bike Pro', category: 'CARDIO' as const, brand: 'Keiser', qty: 10 },
+    { name: 'Rowing Machine', category: 'CARDIO' as const, brand: 'Concept2', qty: 3 },
+    { name: 'Smith Machine', category: 'STRENGTH' as const, brand: 'Hammer Strength', qty: 2 },
+    { name: 'Leg Press Machine', category: 'STRENGTH' as const, brand: 'Technogym', qty: 2 },
+    { name: 'Cable Crossover', category: 'STRENGTH' as const, brand: 'Life Fitness', qty: 2 },
+    { name: 'Adjustable Dumbbell Set', category: 'FREE_WEIGHTS' as const, brand: 'Bowflex', qty: 6 },
+    { name: 'Olympic Barbell 20kg', category: 'FREE_WEIGHTS' as const, brand: 'Eleiko', qty: 5 },
+    { name: 'Kettlebell Set', category: 'FREE_WEIGHTS' as const, brand: 'Rogue', qty: 4 },
   ]
 
   let equipmentCount = 0
-  for (const e of equipmentList) {
-    for (let i = 1; i <= e.qty; i++) {
+  for (const eq of equipmentList) {
+    for (let i = 1; i <= eq.qty; i++) {
       try {
         await prisma.equipment.create({
           data: {
             tenantId,
             branchId,
-            name: `${e.name} #${i}`,
-            type: e.type,
-            brand: e.brand,
-            model: `${e.brand.substring(0, 2).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
+            name: `${eq.name} #${i}`,
+            category: eq.category,
+            brand: eq.brand,
+            model: `${eq.brand.substring(0, 2).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`,
             purchaseDate: new Date(2020 + Math.floor(Math.random() * 4), Math.floor(Math.random() * 12), 1),
             purchasePrice: 50000 + Math.floor(Math.random() * 200000),
             warrantyExpiry: new Date(2025 + Math.floor(Math.random() * 3), Math.floor(Math.random() * 12), 1),
             status: Math.random() > 0.1 ? 'OPERATIONAL' : 'UNDER_MAINTENANCE',
-            condition: randomPick(['EXCELLENT', 'GOOD', 'FAIR']),
+            condition: randomPick(['EXCELLENT', 'GOOD', 'FAIR']) as 'EXCELLENT' | 'GOOD' | 'FAIR',
             location: randomPick(['Main Floor', 'Cardio Zone', 'Weight Area', 'Functional Zone']),
           }
         })
         equipmentCount++
       } catch (e: any) {
-        // Skip errors
+        console.log(`  Skipping equipment ${eq.name} #${i}: ${e.message?.substring(0, 50)}`)
       }
     }
   }
@@ -272,8 +273,8 @@ async function seedIndianData() {
           lastName,
           email: generateEmail(firstName, lastName, `lead${i}`),
           phone: generatePhone(),
-          source: randomPick(leadSources),
-          stage: randomPick(leadStages),
+          source: randomPick([...leadSources]),
+          stage: randomPick([...leadStages]),
           score: Math.floor(Math.random() * 100),
           interestedIn: randomPick(['Monthly Membership', 'Annual Plan', 'Personal Training', 'Group Classes']),
           notes: 'Interested in joining the gym.',
@@ -302,25 +303,30 @@ async function seedIndianData() {
 
       const hasCheckedOut = Math.random() > 0.2
       let checkOutTime = null
+      let duration = null
       if (hasCheckedOut) {
         checkOutTime = new Date(checkInTime)
-        checkOutTime.setHours(checkInTime.getHours() + 1 + Math.floor(Math.random() * 2))
+        const hoursSpent = 1 + Math.floor(Math.random() * 2)
+        checkOutTime.setHours(checkInTime.getHours() + hoursSpent)
+        duration = hoursSpent * 60
       }
 
       try {
-        await prisma.attendance.create({
+        await prisma.attendanceRecord.create({
           data: {
             tenantId,
             branchId,
             memberId: member.id,
             checkInTime,
             checkOutTime,
+            duration,
+            entryMethod: 'MANUAL',
             notes: hasCheckedOut ? null : 'Currently in gym',
           }
         })
         attendanceCount++
       } catch (e: any) {
-        // Skip errors
+        console.log(`  Skipping attendance: ${e.message?.substring(0, 50)}`)
       }
     }
   }
@@ -329,27 +335,28 @@ async function seedIndianData() {
   console.log('\n🤝 Creating referrals...')
   let referralCount = 0
   
-  for (let i = 0; i < Math.min(8, members.length); i++) {
-    const referrer = members[i]
-    const refereeFn = randomPick(INDIAN_FIRST_NAMES)
-    const refereeLn = randomPick(INDIAN_LAST_NAMES)
-
-    try {
-      await prisma.referral.create({
-        data: {
-          tenantId,
-          referrerId: referrer.id,
-          refereeEmail: generateEmail(refereeFn, refereeLn, `ref${i}`),
-          refereePhone: generatePhone(),
-          status: randomPick(['PENDING', 'COMPLETED', 'REWARDED']),
-          rewardType: '1 Month Free',
-          rewardAmount: 500,
-          completedAt: Math.random() > 0.5 ? new Date() : null,
+  if (members.length >= 4) {
+    for (let i = 0; i < Math.min(8, Math.floor(members.length / 2)); i++) {
+      const referrer = members[i]
+      const referred = members[members.length - 1 - i]
+      
+      if (referrer.id !== referred.id) {
+        try {
+          await prisma.referralTracking.create({
+            data: {
+              referrerId: referrer.id,
+              referredId: referred.id,
+              bonusAwarded: Math.random() > 0.5 ? 500 : 0,
+              status: randomPick(['PENDING', 'COMPLETED', 'REWARDED']) as 'PENDING' | 'COMPLETED' | 'REWARDED',
+              completedAt: Math.random() > 0.5 ? new Date() : null,
+              notes: 'Member referred via gym referral program',
+            }
+          })
+          referralCount++
+        } catch (e: any) {
+          console.log(`  Skipping referral: ${e.message?.substring(0, 50)}`)
         }
-      })
-      referralCount++
-    } catch (e: any) {
-      console.log(`  Skipping referral: ${e.message?.substring(0, 50)}`)
+      }
     }
   }
   console.log(`✅ Created ${referralCount} referrals`)
@@ -359,7 +366,7 @@ async function seedIndianData() {
   console.log(`   - ${members.length} members`)
   console.log(`   - ${staffData.length} staff members`)
   console.log(`   - ${lockerCount} lockers`)
-  console.log(`   - ${products.length} products`)
+  console.log(`   - ${productCount} products`)
   console.log(`   - ${equipmentCount} equipment items`)
   console.log(`   - ${leadCount} leads`)
   console.log(`   - ${attendanceCount} attendance records`)
