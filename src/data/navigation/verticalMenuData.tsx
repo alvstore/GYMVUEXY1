@@ -9,6 +9,12 @@ const verticalMenuData = (dictionary: Awaited<ReturnType<typeof getDictionary>>)
     icon: 'tabler-smart-home',
     children: [
       {
+        label: 'Admin Dashboard',
+        icon: 'tabler-crown',
+        href: '/dashboards/admin',
+        permissions: ['branches.view', 'users.view']
+      },
+      {
         label: 'Manager Dashboard',
         icon: 'tabler-building',
         href: '/dashboards/manager',

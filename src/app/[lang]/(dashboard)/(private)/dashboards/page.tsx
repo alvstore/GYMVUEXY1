@@ -24,5 +24,9 @@ export default async function DashboardRouter({ params }: Props) {
     redirect(`/${lang}/dashboards/staff`)
   }
 
+  if (roles.includes('admin')) {
+    redirect(`/${lang}/dashboards/admin`)
+  }
+
   redirect(`/${lang}/dashboards/manager`)
 }

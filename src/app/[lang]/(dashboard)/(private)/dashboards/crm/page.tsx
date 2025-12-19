@@ -30,5 +30,9 @@ export default async function DashboardCRM({ params }: Props) {
     redirect(`/${lang}/dashboards/staff`)
   }
 
+  if (roles.includes('admin')) {
+    redirect(`/${lang}/dashboards/admin`)
+  }
+
   redirect(`/${lang}/dashboards/manager`)
 }
