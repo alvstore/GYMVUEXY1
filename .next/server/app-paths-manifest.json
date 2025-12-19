@@ -1,4 +1,9 @@
 {
-  "/[lang]/(dashboard)/(private)/dashboards/crm/page": "app/[lang]/(dashboard)/(private)/dashboards/crm/page.js",
-  "/[lang]/(dashboard)/(private)/dashboards/manager/page": "app/[lang]/(dashboard)/(private)/dashboards/manager/page.js"
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/[lang]/(dashboard)/(private)/apps/members/page": "app/[lang]/(dashboard)/(private)/apps/members/page.js",
+  "/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page": "app/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page.js",
+  "/[lang]/(dashboard)/(private)/apps/dashboard/page": "app/[lang]/(dashboard)/(private)/apps/dashboard/page.js",
+  "/[lang]/(dashboard)/(private)/apps/goals/page": "app/[lang]/(dashboard)/(private)/apps/goals/page.js",
+  "/[lang]/(dashboard)/(private)/apps/referrals/page": "app/[lang]/(dashboard)/(private)/apps/referrals/page.js",
+  "/[lang]/(dashboard)/(private)/apps/leads/page": "app/[lang]/(dashboard)/(private)/apps/leads/page.js"
 }
