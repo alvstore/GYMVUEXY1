@@ -17,6 +17,12 @@
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
     ],
+    "/[lang]/[...not-found]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/[...not-found]/page.css",
+      "static/chunks/app/[lang]/[...not-found]/page.js"
+    ],
     "/[lang]/(dashboard)/(private)/dashboards/manager/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -33,43 +39,21 @@
       "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
       "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
     ],
-    "/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page": [
+    "/[lang]/(blank-layout-pages)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/ecommerce/dashboard/page.js"
+      "static/css/app/[lang]/(blank-layout-pages)/layout.css",
+      "static/chunks/app/[lang]/(blank-layout-pages)/layout.js"
     ],
-    "/[lang]/(dashboard)/(private)/apps/dashboard/page": [
+    "/[lang]/(blank-layout-pages)/(guest-only)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/dashboard/page.js"
+      "static/chunks/app/[lang]/(blank-layout-pages)/(guest-only)/layout.js"
     ],
-    "/[lang]/(dashboard)/(private)/apps/goals/page": [
+    "/[lang]/(blank-layout-pages)/(guest-only)/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/goals/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/referrals/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/referrals/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/referrals/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/leads/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/leads/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/leads/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/member/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/member/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/[lang]/(blank-layout-pages)/(guest-only)/login/page.js"
     ]
   }
 }

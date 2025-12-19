@@ -1,9 +1,7 @@
 {
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/[lang]/(dashboard)/(private)/apps/goals/page": "app/[lang]/(dashboard)/(private)/apps/goals/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/[lang]/(dashboard)/(private)/dashboards/manager/page": "app/[lang]/(dashboard)/(private)/dashboards/manager/page.js",
   "/[lang]/(dashboard)/(private)/apps/members/page": "app/[lang]/(dashboard)/(private)/apps/members/page.js",
-  "/[lang]/(dashboard)/(private)/apps/referrals/page": "app/[lang]/(dashboard)/(private)/apps/referrals/page.js",
-  "/[lang]/(dashboard)/(private)/apps/member/page": "app/[lang]/(dashboard)/(private)/apps/member/page.js",
-  "/[lang]/(dashboard)/(private)/apps/leads/page": "app/[lang]/(dashboard)/(private)/apps/leads/page.js"
+  "/[lang]/(blank-layout-pages)/(guest-only)/login/page": "app/[lang]/(blank-layout-pages)/(guest-only)/login/page.js"
 }
