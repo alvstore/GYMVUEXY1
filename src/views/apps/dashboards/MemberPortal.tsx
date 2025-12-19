@@ -208,7 +208,7 @@ export default function MemberPortal({ memberId }: { memberId: string }) {
         </Card>
       </Grid>
 
-      {member.activeMembership && member.activeMembership.benefits.length > 0 && (
+      {member.activeMembership && member.activeMembership.benefits && member.activeMembership.benefits.length > 0 && (
         <Grid size={12}>
           <Card>
             <CardHeader 
@@ -256,7 +256,7 @@ export default function MemberPortal({ memberId }: { memberId: string }) {
         </Grid>
       )}
 
-      {member.benefitBalances && member.benefitBalances.length > 0 && (
+      {member.benefitBalances && Array.isArray(member.benefitBalances) && member.benefitBalances.length > 0 && (
         <Grid size={12}>
           <Card>
             <CardHeader title="Your Benefit Balances" subheader="Credits available to use" />

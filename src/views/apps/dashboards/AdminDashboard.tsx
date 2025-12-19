@@ -18,12 +18,16 @@ import TableRow from '@mui/material/TableRow'
 import Chip from '@mui/material/Chip'
 import CircularProgress from '@mui/material/CircularProgress'
 import Divider from '@mui/material/Divider'
+import LinearProgress from '@mui/material/LinearProgress'
 import { 
   getAdminDashboardMetrics, 
   getAllBranches, 
   getAllUsers, 
   getBranchStats,
-  getRecentActivity 
+  getRecentActivity,
+  getLeadPipelineMetrics,
+  getMemberGrowthData,
+  getSalesAnalytics,
 } from '@/app/actions/dashboards/admin'
 import { toast } from 'react-toastify'
 
@@ -65,12 +69,53 @@ interface BranchStat {
   revenue: number
 }
 
+interface LeadMetrics {
+  funnel: {
+    new: number
+    contacted: number
+    qualified: number
+    proposal: number
+    negotiation: number
+    won: number
+    lost: number
+  }
+  totalLeads: number
+  convertedLeads: number
+  newLeadsThisMonth: number
+  conversionRate: number
+}
+
+interface SalesData {
+  membershipRevenue: number
+  membershipCount: number
+  productRevenue: number
+  productCount: number
+  totalTransactions: number
+  recentTransactions: Array<{
+    id: string
+    amount: number
+    type: string
+    paymentMethod: string
+    memberName: string
+    branch: string
+    date: Date
+  }>
+  paymentBreakdown: Array<{
+    method: string
+    amount: number
+    count: number
+  }>
+}
+
 export default function AdminDashboard() {
   const [metrics, setMetrics] = useState<Metrics | null>(null)
   const [branches, setBranches] = useState<Branch[]>([])
   const [users, setUsers] = useState<User[]>([])
   const [branchStats, setBranchStats] = useState<BranchStat[]>([])
   const [recentActivity, setRecentActivity] = useState<any>(null)
+  const [leadMetrics, setLeadMetrics] = useState<LeadMetrics | null>(null)
+  const [memberGrowth, setMemberGrowth] = useState<any[]>([])
+  const [salesData, setSalesData] = useState<SalesData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -79,12 +124,15 @@ export default function AdminDashboard() {
 
   const loadDashboardData = async () => {
     try {
-      const [metricsData, branchesData, usersData, statsData, activityData] = await Promise.all([
+      const [metricsData, branchesData, usersData, statsData, activityData, leadData, growthData, salesInfo] = await Promise.all([
         getAdminDashboardMetrics(),
         getAllBranches(),
         getAllUsers(),
         getBranchStats(),
         getRecentActivity(),
+        getLeadPipelineMetrics(),
+        getMemberGrowthData(),
+        getSalesAnalytics(),
       ])
 
       setMetrics(metricsData)
@@ -92,6 +140,9 @@ export default function AdminDashboard() {
       setUsers(usersData)
       setBranchStats(statsData)
       setRecentActivity(activityData)
+      setLeadMetrics(leadData)
+      setMemberGrowth(growthData)
+      setSalesData(salesInfo)
     } catch (error) {
       toast.error('Failed to load dashboard data')
     } finally {
@@ -106,6 +157,17 @@ export default function AdminDashboard() {
       </Box>
     )
   }
+
+  const funnelStages = leadMetrics ? [
+    { label: 'New', value: leadMetrics.funnel.new, color: 'info.main' },
+    { label: 'Contacted', value: leadMetrics.funnel.contacted, color: 'primary.main' },
+    { label: 'Qualified', value: leadMetrics.funnel.qualified, color: 'secondary.main' },
+    { label: 'Proposal', value: leadMetrics.funnel.proposal, color: 'warning.main' },
+    { label: 'Won', value: leadMetrics.funnel.won, color: 'success.main' },
+    { label: 'Lost', value: leadMetrics.funnel.lost, color: 'error.main' },
+  ] : []
+
+  const maxFunnel = Math.max(...funnelStages.map(s => s.value), 1)
 
   return (
     <Grid container spacing={6}>
@@ -198,6 +260,317 @@ export default function AdminDashboard() {
             </Box>
           </CardContent>
         </Card>
+      </Grid>
+
+      <Grid size={12}>
+        <Divider><Chip label="CRM & Analytics" /></Divider>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'info.main', width: 48, height: 48 }}>
+                <i className="ri-user-follow-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">{leadMetrics?.totalLeads || 0}</Typography>
+                <Typography variant="body2" color="text.secondary">Total Leads</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'success.main', width: 48, height: 48 }}>
+                <i className="ri-user-add-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">{leadMetrics?.newLeadsThisMonth || 0}</Typography>
+                <Typography variant="body2" color="text.secondary">New This Month</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'warning.main', width: 48, height: 48 }}>
+                <i className="ri-medal-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">{leadMetrics?.convertedLeads || 0}</Typography>
+                <Typography variant="body2" color="text.secondary">Converted</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'primary.main', width: 48, height: 48 }}>
+                <i className="ri-percent-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">{leadMetrics?.conversionRate || 0}%</Typography>
+                <Typography variant="body2" color="text.secondary">Conversion Rate</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 6 }}>
+        <Card sx={{ height: '100%' }}>
+          <CardHeader title="Lead Funnel" subheader="Pipeline stages breakdown" />
+          <Divider />
+          <CardContent>
+            {funnelStages.length === 0 || leadMetrics?.totalLeads === 0 ? (
+              <Typography color="text.secondary" textAlign="center" py={4}>
+                No leads in the pipeline yet
+              </Typography>
+            ) : (
+              <Box display="flex" flexDirection="column" gap={2}>
+                {funnelStages.map((stage) => (
+                  <Box key={stage.label}>
+                    <Box display="flex" justifyContent="space-between" mb={0.5}>
+                      <Typography variant="body2" fontWeight="medium">{stage.label}</Typography>
+                      <Typography variant="body2" fontWeight="bold">{stage.value}</Typography>
+                    </Box>
+                    <LinearProgress
+                      variant="determinate"
+                      value={(stage.value / maxFunnel) * 100}
+                      sx={{ 
+                        height: 8, 
+                        borderRadius: 4,
+                        bgcolor: 'grey.200',
+                        '& .MuiLinearProgress-bar': { bgcolor: stage.color }
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 6 }}>
+        <Card sx={{ height: '100%' }}>
+          <CardHeader title="Member Growth" subheader="Last 6 months" />
+          <Divider />
+          <CardContent>
+            {memberGrowth.length === 0 ? (
+              <Typography color="text.secondary" textAlign="center" py={4}>
+                No growth data available
+              </Typography>
+            ) : (
+              <Box display="flex" flexDirection="column" gap={3}>
+                {memberGrowth.map((month) => (
+                  <Box key={month.month}>
+                    <Box display="flex" justifyContent="space-between" mb={0.5}>
+                      <Typography variant="body2" fontWeight="medium">{month.month}</Typography>
+                      <Box display="flex" gap={2}>
+                        <Chip 
+                          size="small" 
+                          label={`+${month.newMembers} new`} 
+                          color="success" 
+                          variant="outlined" 
+                        />
+                        <Typography variant="body2" color="text.secondary">
+                          Total: {month.totalMembers}
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <LinearProgress
+                      variant="determinate"
+                      value={Math.min(100, (month.totalMembers / Math.max(...memberGrowth.map(m => m.totalMembers), 1)) * 100)}
+                      sx={{ height: 6, borderRadius: 3 }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={12}>
+        <Divider><Chip label="Sales & Revenue" /></Divider>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'primary.main', width: 48, height: 48 }}>
+                <i className="ri-vip-crown-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">
+                  ₹{(salesData?.membershipRevenue || 0).toLocaleString('en-IN')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">Membership Revenue</Typography>
+                <Typography variant="caption" color="text.secondary">
+                  {salesData?.membershipCount || 0} memberships
+                </Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'success.main', width: 48, height: 48 }}>
+                <i className="ri-shopping-bag-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">
+                  ₹{(salesData?.productRevenue || 0).toLocaleString('en-IN')}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">Product Sales</Typography>
+                <Typography variant="caption" color="text.secondary">
+                  {salesData?.productCount || 0} orders
+                </Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'warning.main', width: 48, height: 48 }}>
+                <i className="ri-exchange-funds-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">{salesData?.totalTransactions || 0}</Typography>
+                <Typography variant="body2" color="text.secondary">Transactions</Typography>
+                <Typography variant="caption" color="text.secondary">Last 30 days</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Card>
+          <CardContent>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Avatar sx={{ bgcolor: 'info.main', width: 48, height: 48 }}>
+                <i className="ri-bank-card-line" />
+              </Avatar>
+              <Box>
+                <Typography variant="h5" fontWeight="bold">
+                  {salesData?.paymentBreakdown?.length || 0}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">Payment Methods</Typography>
+                <Typography variant="caption" color="text.secondary">Active</Typography>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 8 }}>
+        <Card>
+          <CardHeader title="Recent Transactions" subheader="Last 10 transactions" />
+          <Divider />
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Member</TableCell>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Branch</TableCell>
+                  <TableCell>Payment</TableCell>
+                  <TableCell align="right">Amount</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {!salesData?.recentTransactions?.length ? (
+                  <TableRow>
+                    <TableCell colSpan={5} align="center">
+                      <Typography color="text.secondary" py={4}>
+                        No transactions found
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  salesData.recentTransactions.map((t) => (
+                    <TableRow key={t.id} hover>
+                      <TableCell>{t.memberName}</TableCell>
+                      <TableCell>
+                        <Chip 
+                          label={t.type} 
+                          size="small" 
+                          color={t.type === 'MEMBERSHIP' ? 'primary' : 'secondary'}
+                          variant="outlined"
+                        />
+                      </TableCell>
+                      <TableCell>{t.branch}</TableCell>
+                      <TableCell>{t.paymentMethod}</TableCell>
+                      <TableCell align="right">
+                        <Typography fontWeight="bold" color="success.main">
+                          ₹{t.amount.toLocaleString('en-IN')}
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Card>
+      </Grid>
+
+      <Grid size={{ xs: 12, md: 4 }}>
+        <Card sx={{ height: '100%' }}>
+          <CardHeader title="Payment Methods" subheader="Revenue breakdown (30 days)" />
+          <Divider />
+          <CardContent>
+            {!salesData?.paymentBreakdown?.length ? (
+              <Typography color="text.secondary" textAlign="center" py={4}>
+                No payment data available
+              </Typography>
+            ) : (
+              <Box display="flex" flexDirection="column" gap={2}>
+                {salesData.paymentBreakdown.map((pm) => (
+                  <Box key={pm.method}>
+                    <Box display="flex" justifyContent="space-between" mb={0.5}>
+                      <Typography variant="body2" fontWeight="medium">{pm.method || 'Other'}</Typography>
+                      <Typography variant="body2" fontWeight="bold" color="success.main">
+                        ₹{pm.amount.toLocaleString('en-IN')}
+                      </Typography>
+                    </Box>
+                    <Typography variant="caption" color="text.secondary">
+                      {pm.count} transactions
+                    </Typography>
+                  </Box>
+                ))}
+              </Box>
+            )}
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid size={12}>
+        <Divider><Chip label="Branches & Users" /></Divider>
       </Grid>
 
       <Grid size={{ xs: 12, md: 8 }}>
