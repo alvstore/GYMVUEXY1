@@ -1,5 +1,5 @@
 {
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/[lang]/(dashboard)/(private)/dashboards/crm/page": "app/[lang]/(dashboard)/(private)/dashboards/crm/page.js",
   "/[lang]/(dashboard)/(private)/dashboards/manager/page": "app/[lang]/(dashboard)/(private)/dashboards/manager/page.js"
 }

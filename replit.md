@@ -9,9 +9,17 @@
 | **Admin** | admin@vuexy.com | admin | Full access (all permissions) |
 | **Manager** | manager@incline.gym | manager | Branch manager - members, classes, staff |
 | **Trainer** | trainer@incline.gym | trainer | View members, manage classes |
+| **Staff** | staff@incline.gym | staff | Attendance check-in, view members |
 | **Member** | member@incline.gym | member | Member portal only |
 
 ### Session 10 Fixes
+
+**Role-Based Dashboard System:**
+- ✅ Created Staff Dashboard (`src/views/apps/dashboards/StaffDashboard.tsx`)
+- ✅ Added Staff Dashboard route (`/dashboards/staff`)
+- ✅ Implemented role-based login redirect (members → member-portal, staff/trainers → staff dashboard, others → manager)
+- ✅ Added permission-based menu filtering in VerticalMenu.tsx
+- ✅ Created menuUtils.ts for permission filtering logic
 
 **Bug Fixes:**
 - ✅ Fixed `referrals.ts` - changed `prisma.referral` to `prisma.referralTracking`
@@ -19,10 +27,15 @@
 - ✅ Fixed member list authentication - updated test users with correct branchId
 - ✅ Fixed type errors in member transformation (null → undefined for optional fields)
 
+**Security Fixes:**
+- ✅ Fixed tenant isolation in `getMembershipRenewalAlerts` - added tenantId filter through member relation
+- ✅ Fixed locale hardcoding in dashboard redirects - now uses dynamic locale from params
+
 **Server Action Fixes:**
 - `src/app/actions/referrals.ts` - Uses correct ReferralTracking model
 - `src/app/actions/people/goals.ts` - Uses correct MemberGoal schema fields
 - `src/app/actions/members.ts` - Fixed type transformations
+- `src/app/actions/dashboards/manager.ts` - Fixed tenant isolation in renewal alerts
 
 ---
 
