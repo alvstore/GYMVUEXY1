@@ -1,165 +1,154 @@
 {
   "node": {
-    "0017976f20393c5a66d6ce3980bd77cfcf1201be03": {
+    "00a4cd66d70681e7d5c617c393f8b83003d772f06b": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/[lang]/[...not-found]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/apps/member/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/apps/dashboard/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/[...not-found]/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/member/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "403c100ae69d295b42dbddc891034d9c5bcfdeff43": {
+    "40a652070e3cdae4c05b300904b3d00e9b231ddea3": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/[lang]/[...not-found]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/apps/member/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/apps/dashboard/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/[...not-found]/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/member/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "4097cb53819b6b2574d75f208d64ec63c17ae40bcc": {
+    "40cf930c9f99c1be3918742f3a0dae39a5262a915a": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/[lang]/[...not-found]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/apps/member/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/apps/dashboard/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/[...not-found]/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/member/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "6009547c0e4884cb4baaa57034803cded199cadb1e": {
+    "609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/[lang]/[...not-found]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/apps/member/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/apps/dashboard/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/[...not-found]/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/member/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/dashboard/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d": {
+    "000c1cc47ca315414bde4eb394a352c43877afef71": {
       "workers": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "4083f597cc38bbbf33f97a58cdf51c1f233b848ed0": {
+    "0085c722e38aa32f9778b28e9f773e8fc0960949d8": {
       "workers": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "408649d9e3eed01be67290e46a3488b614d22778e0": {
+    "00a61e69f524b1a0940bb11606101e19d624c6cf47": {
       "workers": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     },
-    "40ddb29fe19ff31d87c4f0d8c3d451b5aba114a288": {
+    "00f8853bcca14655d37936d6a9bf32e6de622875fd": {
       "workers": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a4cd66d70681e7d5c617c393f8b83003d772f06b%22%2C%22getBranches%22%5D%2C%5B%2240a652070e3cdae4c05b300904b3d00e9b231ddea3%22%2C%22deleteBranch%22%5D%2C%5B%2240cf930c9f99c1be3918742f3a0dae39a5262a915a%22%2C%22createBranch%22%5D%2C%5B%22609e9d3c4b7cbb8d3a90a82f2aaa3dd0f2ed8930ea%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fmanager.ts%22%2C%5B%5B%22000c1cc47ca315414bde4eb394a352c43877afef71%22%2C%22getStaffList%22%5D%2C%5B%220085c722e38aa32f9778b28e9f773e8fc0960949d8%22%2C%22getClassScheduleOverview%22%5D%2C%5B%2200a61e69f524b1a0940bb11606101e19d624c6cf47%22%2C%22getManagerDashboardMetrics%22%5D%2C%5B%2200f8853bcca14655d37936d6a9bf32e6de622875fd%22%2C%22getMembershipRenewalAlerts%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser"
-      }
-    },
-    "606e23d11874157d4ae35befbfb89a5a5f519b9b39": {
-      "workers": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220017976f20393c5a66d6ce3980bd77cfcf1201be03%22%2C%22getBranches%22%5D%2C%5B%22403c100ae69d295b42dbddc891034d9c5bcfdeff43%22%2C%22deleteBranch%22%5D%2C%5B%224097cb53819b6b2574d75f208d64ec63c17ae40bcc%22%2C%22createBranch%22%5D%2C%5B%226009547c0e4884cb4baaa57034803cded199cadb1e%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fmembers.ts%22%2C%5B%5B%22407628fffafd5b9d6a4dcf7bcdb136878984e2aa8d%22%2C%22getMember%22%5D%2C%5B%224083f597cc38bbbf33f97a58cdf51c1f233b848ed0%22%2C%22deleteMember%22%5D%2C%5B%22408649d9e3eed01be67290e46a3488b614d22778e0%22%2C%22getMembers%22%5D%2C%5B%2240ddb29fe19ff31d87c4f0d8c3d451b5aba114a288%22%2C%22createMember%22%5D%2C%5B%22606e23d11874157d4ae35befbfb89a5a5f519b9b39%22%2C%22updateMember%22%5D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/manager/page": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "hu1bmAl3921kCD917XMBPA79UA1wE4NDuLOF+V92GbA="
+  "encryptionKey": "gcQTPzbrufAI8DMAU+OmaEGi7lHXVqAdv7uB6bGmcgM="
 }

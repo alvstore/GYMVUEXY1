@@ -1,10 +1,5 @@
 {
   "pages": {
-    "/api/auth/[...nextauth]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/auth/[...nextauth]/route.js"
-    ],
     "/[lang]/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -20,25 +15,27 @@
     "/[lang]/(dashboard)/(private)/dashboards/crm/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/dashboards/crm/page.css",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
     ],
-    "/[lang]/(dashboard)/(private)/apps/members/page": [
+    "/api/auth/[...nextauth]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
+      "static/chunks/app/api/auth/[...nextauth]/route.js"
     ],
-    "/[lang]/[...not-found]/page": [
+    "/[lang]/(dashboard)/(private)/apps/member/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/[lang]/[...not-found]/page.css",
-      "static/chunks/app/[lang]/[...not-found]/page.js"
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/member/page.js"
     ],
     "/[lang]/(dashboard)/(private)/apps/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/apps/dashboard/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/dashboards/manager/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/manager/page.js"
     ]
   }
 }
