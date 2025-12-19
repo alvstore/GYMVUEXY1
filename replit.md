@@ -15,9 +15,14 @@
 ### Session 10 Fixes
 
 **Role-Based Dashboard System:**
+- ✅ Created Admin Dashboard (`src/views/apps/dashboards/AdminDashboard.tsx`) for tenant-wide management
 - ✅ Created Staff Dashboard (`src/views/apps/dashboards/StaffDashboard.tsx`)
-- ✅ Added Staff Dashboard route (`/dashboards/staff`)
-- ✅ Implemented role-based login redirect (members → member-portal, staff/trainers → staff dashboard, others → manager)
+- ✅ Added Admin Dashboard route (`/dashboards/admin`) and Staff Dashboard route (`/dashboards/staff`)
+- ✅ Implemented role-based login redirect:
+  - Admin → Admin Dashboard (tenant-wide: all branches, users, metrics)
+  - Manager → Manager Dashboard (branch-specific operations)
+  - Staff/Trainer → Staff Dashboard
+  - Member → Member Portal
 - ✅ Added permission-based menu filtering in VerticalMenu.tsx
 - ✅ Created menuUtils.ts for permission filtering logic
 

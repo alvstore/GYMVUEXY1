@@ -5,10 +5,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": "action-browser"
       }
     },
     "4072a55a437b4834b7ee89798a8cdee1b75df8f6f4": {
@@ -16,10 +21,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": "action-browser"
       }
     },
     "40ed0f611a7093ad2a824151b69121d1a34a424c34": {
@@ -27,10 +37,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": "action-browser"
       }
     },
     "60a3f24d6329e2ce391df6521b31f3465fd98a6f70": {
@@ -38,10 +53,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200cc71f6540b394f3e98ac290ccfca01c7a2408eb3%22%2C%22getBranches%22%5D%2C%5B%224072a55a437b4834b7ee89798a8cdee1b75df8f6f4%22%2C%22deleteBranch%22%5D%2C%5B%2240ed0f611a7093ad2a824151b69121d1a34a424c34%22%2C%22createBranch%22%5D%2C%5B%2260a3f24d6329e2ce391df6521b31f3465fd98a6f70%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(blank-layout-pages)/(guest-only)/login/page": "action-browser"
       }
     }
   },
