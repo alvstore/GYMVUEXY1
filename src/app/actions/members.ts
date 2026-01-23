@@ -293,3 +293,352 @@ export async function deleteMember(id: string) {
 
   return { success: true }
 }
+
+export async function getMemberProfile(id: string) {
+  const context = await requirePermission('members.view')
+
+  const member = await prisma.member.findFirst({
+    where: {
+      id,
+      tenantId: context.tenantId,
+      ...(context.branchId && { branchId: context.branchId }),
+    },
+    include: {
+      branch: { select: { id: true, name: true, address: true, phone: true } },
+      memberships: {
+        include: { 
+          plan: { 
+            include: { 
+              benefits: true 
+            } 
+          } 
+        },
+        orderBy: { startDate: 'desc' },
+      },
+      attendanceRecords: {
+        orderBy: { checkInTime: 'desc' },
+        take: 20,
+      },
+      transactions: {
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+        include: { branch: { select: { name: true } } },
+      },
+      goals: {
+        orderBy: { createdAt: 'desc' },
+        take: 5,
+      },
+      benefitBalances: {
+        where: { currentBalance: { gt: 0 } },
+        include: { benefit: true },
+      },
+      trainerAssignments: {
+        where: { status: 'ACTIVE' },
+        include: { 
+          trainer: { 
+            include: { 
+              user: { select: { id: true } } 
+            } 
+          } 
+        },
+        take: 1,
+      },
+      classBookings: {
+        orderBy: { bookedAt: 'desc' },
+        take: 10,
+        include: { 
+          schedule: { 
+            include: { 
+              class: { select: { name: true, classType: true } } 
+            } 
+          } 
+        },
+      },
+      lifecycleEvents: {
+        orderBy: { createdAt: 'desc' },
+        take: 20,
+      },
+    },
+  })
+
+  if (!member) {
+    throw new Error('Member not found')
+  }
+
+  const attendanceCount = await prisma.attendanceRecord.count({
+    where: { memberId: id },
+  })
+
+  const activityTimeline = buildActivityTimeline(member)
+
+  return {
+    ...member,
+    totalAttendance: attendanceCount,
+    activityTimeline,
+  }
+}
+
+function buildActivityTimeline(member: any): Array<{
+  id: string
+  type: 'attendance' | 'payment' | 'membership' | 'class' | 'goal' | 'lifecycle'
+  title: string
+  description: string
+  date: Date
+  icon: string
+  color: string
+}> {
+  const timeline: Array<{
+    id: string
+    type: 'attendance' | 'payment' | 'membership' | 'class' | 'goal' | 'lifecycle'
+    title: string
+    description: string
+    date: Date
+    icon: string
+    color: string
+  }> = []
+
+  member.attendanceRecords?.forEach((record: any) => {
+    timeline.push({
+      id: `att-${record.id}`,
+      type: 'attendance',
+      title: 'Gym Visit',
+      description: record.checkOutTime 
+        ? `Checked in and worked out for ${Math.round((new Date(record.checkOutTime).getTime() - new Date(record.checkInTime).getTime()) / 60000)} minutes`
+        : 'Checked in at gym',
+      date: record.checkInTime,
+      icon: 'tabler-run',
+      color: 'success',
+    })
+  })
+
+  member.transactions?.forEach((tx: any) => {
+    timeline.push({
+      id: `tx-${tx.id}`,
+      type: 'payment',
+      title: tx.transactionType === 'MEMBERSHIP' ? 'Membership Payment' : 'Payment',
+      description: `₹${tx.amount.toFixed(2)} via ${tx.paymentMethod || 'N/A'}`,
+      date: tx.createdAt,
+      icon: 'tabler-credit-card',
+      color: tx.status === 'COMPLETED' ? 'primary' : 'warning',
+    })
+  })
+
+  member.memberships?.forEach((ms: any) => {
+    timeline.push({
+      id: `ms-${ms.id}`,
+      type: 'membership',
+      title: ms.status === 'ACTIVE' ? 'Membership Activated' : `Membership ${ms.status}`,
+      description: `${ms.plan?.name || 'Unknown Plan'} - ${new Date(ms.startDate).toLocaleDateString()} to ${new Date(ms.endDate).toLocaleDateString()}`,
+      date: ms.startDate,
+      icon: 'tabler-id-badge',
+      color: ms.status === 'ACTIVE' ? 'success' : 'secondary',
+    })
+  })
+
+  member.classBookings?.forEach((booking: any) => {
+    timeline.push({
+      id: `class-${booking.id}`,
+      type: 'class',
+      title: 'Class Booked',
+      description: booking.classSchedule?.gymClass?.name || 'Unknown Class',
+      date: booking.bookedAt,
+      icon: 'tabler-yoga',
+      color: 'info',
+    })
+  })
+
+  member.lifecycleEvents?.forEach((event: any) => {
+    timeline.push({
+      id: `lc-${event.id}`,
+      type: 'lifecycle',
+      title: formatLifecycleEvent(event.eventType),
+      description: event.notes || '',
+      date: event.createdAt,
+      icon: getLifecycleIcon(event.eventType),
+      color: getLifecycleColor(event.eventType),
+    })
+  })
+
+  return timeline.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 30)
+}
+
+function formatLifecycleEvent(eventType: string): string {
+  const map: Record<string, string> = {
+    CREATED: 'Account Created',
+    ACTIVATED: 'Membership Activated',
+    RENEWED: 'Membership Renewed',
+    FROZEN: 'Membership Frozen',
+    UNFROZEN: 'Membership Unfrozen',
+    CANCELLED: 'Membership Cancelled',
+    UPGRADED: 'Plan Upgraded',
+    DOWNGRADED: 'Plan Downgraded',
+    EXPIRED: 'Membership Expired',
+    TRANSFERRED: 'Membership Transferred',
+  }
+  return map[eventType] || eventType
+}
+
+function getLifecycleIcon(eventType: string): string {
+  const map: Record<string, string> = {
+    CREATED: 'tabler-user-plus',
+    ACTIVATED: 'tabler-check',
+    RENEWED: 'tabler-refresh',
+    FROZEN: 'tabler-snowflake',
+    UNFROZEN: 'tabler-sun',
+    CANCELLED: 'tabler-x',
+    UPGRADED: 'tabler-arrow-up',
+    DOWNGRADED: 'tabler-arrow-down',
+    EXPIRED: 'tabler-clock-off',
+    TRANSFERRED: 'tabler-transfer',
+  }
+  return map[eventType] || 'tabler-info-circle'
+}
+
+function getLifecycleColor(eventType: string): string {
+  const map: Record<string, string> = {
+    CREATED: 'primary',
+    ACTIVATED: 'success',
+    RENEWED: 'success',
+    FROZEN: 'info',
+    UNFROZEN: 'success',
+    CANCELLED: 'error',
+    UPGRADED: 'primary',
+    DOWNGRADED: 'warning',
+    EXPIRED: 'error',
+    TRANSFERRED: 'secondary',
+  }
+  return map[eventType] || 'secondary'
+}
+
+export async function freezeMembership(membershipId: string, reason?: string) {
+  const context = await requirePermission('members.update')
+
+  const membership = await prisma.memberMembership.findFirst({
+    where: { id: membershipId },
+    include: { member: true },
+  })
+
+  if (!membership) {
+    throw new Error('Membership not found')
+  }
+
+  if (membership.member.tenantId !== context.tenantId) {
+    throw new Error('Unauthorized')
+  }
+
+  if (context.branchId && membership.member.branchId !== context.branchId) {
+    throw new Error('Unauthorized')
+  }
+
+  if (membership.status !== 'ACTIVE') {
+    throw new Error('Only active memberships can be frozen')
+  }
+
+  const updated = await prisma.memberMembership.update({
+    where: { id: membershipId },
+    data: {
+      status: 'FROZEN',
+      notes: `Frozen on ${new Date().toISOString()}${reason ? `: ${reason}` : ''}`,
+    },
+  })
+
+  await prisma.membershipLifecycleEvent.create({
+    data: {
+      tenantId: context.tenantId,
+      branchId: membership.member.branchId,
+      membershipId,
+      memberId: membership.memberId,
+      eventType: 'FROZEN',
+      effectiveDate: new Date(),
+      reason: reason,
+      performedBy: context.userId,
+    },
+  })
+
+  await AuditLogger.log({
+    userId: context.userId,
+    tenantId: context.tenantId,
+    branchId: membership.member.branchId,
+    action: 'Membership.frozen',
+    resource: 'MemberMembership',
+    resourceId: membershipId,
+    newValues: { status: 'FROZEN', reason },
+  })
+
+  return updated
+}
+
+export async function unfreezeMembership(membershipId: string) {
+  const context = await requirePermission('members.update')
+
+  const membership = await prisma.memberMembership.findFirst({
+    where: { id: membershipId },
+    include: { member: true },
+  })
+
+  if (!membership) {
+    throw new Error('Membership not found')
+  }
+
+  if (membership.member.tenantId !== context.tenantId) {
+    throw new Error('Unauthorized')
+  }
+
+  if (context.branchId && membership.member.branchId !== context.branchId) {
+    throw new Error('Unauthorized')
+  }
+
+  if (membership.status !== 'FROZEN') {
+    throw new Error('Only frozen memberships can be unfrozen')
+  }
+
+  const lastFreezeEvent = await prisma.membershipLifecycleEvent.findFirst({
+    where: { membershipId, eventType: 'FROZEN' },
+    orderBy: { createdAt: 'desc' },
+  })
+
+  const frozenDays = lastFreezeEvent
+    ? Math.ceil((Date.now() - lastFreezeEvent.effectiveDate.getTime()) / (1000 * 60 * 60 * 24))
+    : 0
+
+  const newEndDate = new Date(membership.endDate)
+  newEndDate.setDate(newEndDate.getDate() + frozenDays)
+
+  const totalFreezeDays = membership.freezeDays + frozenDays
+
+  const updated = await prisma.memberMembership.update({
+    where: { id: membershipId },
+    data: {
+      status: 'ACTIVE',
+      freezeDays: totalFreezeDays,
+      endDate: newEndDate,
+      notes: null,
+    },
+  })
+
+  await prisma.membershipLifecycleEvent.create({
+    data: {
+      tenantId: context.tenantId,
+      branchId: membership.member.branchId,
+      membershipId,
+      memberId: membership.memberId,
+      eventType: 'UNFROZEN',
+      effectiveDate: new Date(),
+      durationDays: frozenDays,
+      notes: `Extended by ${frozenDays} days`,
+      performedBy: context.userId,
+    },
+  })
+
+  await AuditLogger.log({
+    userId: context.userId,
+    tenantId: context.tenantId,
+    branchId: membership.member.branchId,
+    action: 'Membership.unfrozen',
+    resource: 'MemberMembership',
+    resourceId: membershipId,
+    newValues: { status: 'ACTIVE', extendedDays: frozenDays, newEndDate },
+  })
+
+  return updated
+}

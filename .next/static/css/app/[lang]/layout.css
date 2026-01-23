@@ -1088,6 +1088,9 @@
 #__next .pb-4 {
   padding-bottom: 1rem;
 }
+#__next .pt-8 {
+  padding-top: 2rem;
+}
 #__next .text-center {
   text-align: center;
 }
