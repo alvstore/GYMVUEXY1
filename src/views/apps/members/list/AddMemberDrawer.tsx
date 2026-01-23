@@ -60,7 +60,6 @@ const AddMemberDrawer = (props: Props) => {
       })
 
       if (result) {
-        console.log('Member created successfully:', result)
         handleClose()
         resetForm()
         // Optionally add member to the list
