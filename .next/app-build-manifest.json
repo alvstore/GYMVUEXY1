@@ -32,6 +32,18 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/admin/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/members/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/classes/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/classes/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/classes/page.js"
     ]
   }
 }
