@@ -44,6 +44,28 @@
       "static/chunks/main-app.js",
       "static/css/app/[lang]/(dashboard)/(private)/apps/classes/page.css",
       "static/chunks/app/[lang]/(dashboard)/(private)/apps/classes/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/diet-plans/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/diet-plans/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/diet-plans/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/team/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/team/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/team/page.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/settings/page.js"
+    ],
+    "/api/apps/settings/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/apps/settings/route.js"
     ]
   }
 }

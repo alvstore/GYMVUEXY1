@@ -21,6 +21,18 @@
         "app/[lang]/(dashboard)/(private)/apps/classes/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fclasses.ts%22%2C%5B%5B%2240807ee23db5b0b9d2d84abca0a13876f4c29a01fe%22%2C%22getClasses%22%5D%2C%5B%2240aae9c470d57c05601c0e34a5c700751ad16bb36b%22%2C%22cancelClass%22%5D%2C%5B%2240bd215d9704044d2a80716bc2373ce2f7f7cb6cfe%22%2C%22scheduleClass%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/team/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
@@ -28,7 +40,10 @@
         "app/[lang]/[...not-found]/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/team/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": "action-browser"
       }
     },
     "402525d960dca5a7e216f03cc6535c718240563583": {
@@ -52,6 +67,18 @@
         "app/[lang]/(dashboard)/(private)/apps/classes/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fclasses.ts%22%2C%5B%5B%2240807ee23db5b0b9d2d84abca0a13876f4c29a01fe%22%2C%22getClasses%22%5D%2C%5B%2240aae9c470d57c05601c0e34a5c700751ad16bb36b%22%2C%22cancelClass%22%5D%2C%5B%2240bd215d9704044d2a80716bc2373ce2f7f7cb6cfe%22%2C%22scheduleClass%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/team/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
@@ -59,7 +86,10 @@
         "app/[lang]/[...not-found]/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/team/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": "action-browser"
       }
     },
     "406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3": {
@@ -83,6 +113,18 @@
         "app/[lang]/(dashboard)/(private)/apps/classes/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fclasses.ts%22%2C%5B%5B%2240807ee23db5b0b9d2d84abca0a13876f4c29a01fe%22%2C%22getClasses%22%5D%2C%5B%2240aae9c470d57c05601c0e34a5c700751ad16bb36b%22%2C%22cancelClass%22%5D%2C%5B%2240bd215d9704044d2a80716bc2373ce2f7f7cb6cfe%22%2C%22scheduleClass%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/team/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
@@ -90,7 +132,10 @@
         "app/[lang]/[...not-found]/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/team/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": "action-browser"
       }
     },
     "60d0ee37c2d6593c28981713298e7767124dc443f0": {
@@ -114,6 +159,18 @@
         "app/[lang]/(dashboard)/(private)/apps/classes/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fclasses.ts%22%2C%5B%5B%2240807ee23db5b0b9d2d84abca0a13876f4c29a01fe%22%2C%22getClasses%22%5D%2C%5B%2240aae9c470d57c05601c0e34a5c700751ad16bb36b%22%2C%22cancelClass%22%5D%2C%5B%2240bd215d9704044d2a80716bc2373ce2f7f7cb6cfe%22%2C%22scheduleClass%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/team/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22004c4bdc7a07222a1c67581fdb293c0916255195fd%22%2C%22getBranches%22%5D%2C%5B%22402525d960dca5a7e216f03cc6535c718240563583%22%2C%22deleteBranch%22%5D%2C%5B%22406f5c4c2a338d1cfca92acf8a746ca62d8fbbaae3%22%2C%22createBranch%22%5D%2C%5B%2260d0ee37c2d6593c28981713298e7767124dc443f0%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
@@ -121,7 +178,10 @@
         "app/[lang]/[...not-found]/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
         "app/[lang]/(dashboard)/(private)/apps/members/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/classes/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/diet-plans/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/team/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/settings/page": "action-browser"
       }
     },
     "001800fe6e408d4a114ce91d187617570d9c6caf1c": {
