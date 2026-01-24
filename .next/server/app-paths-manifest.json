@@ -1,3 +1,4 @@
 {
-  "/[lang]/(dashboard)/(private)/dashboards/crm/page": "app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/[lang]/(dashboard)/(private)/apps/lockers/page": "app/[lang]/(dashboard)/(private)/apps/lockers/page.js"
 }

@@ -5,10 +5,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
       }
     },
     "40b79bd6e6bba0f0556b95021fefbf7a3a44b15438": {
@@ -16,10 +21,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
       }
     },
     "40f16fbb93ba7c93fd6c834330825faeaa4ac843c7": {
@@ -27,10 +37,15 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
       }
     },
     "60fd012198b524dc085792e6550908d33caf58d332": {
@@ -38,10 +53,48 @@
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
           "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
         }
       },
       "layer": {
-        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
+      }
+    },
+    "00a107cf9a693fd2d034899214d8ad36cadecaed33": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
+      }
+    },
+    "40b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
+      }
+    },
+    "70fc0637495b3bc6a8ca09043445c8b2d9488f7504": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%220009ca2ffee68afa5cfa21e6b4dccc8a96f4ea046b%22%2C%22getBranches%22%5D%2C%5B%2240b79bd6e6bba0f0556b95021fefbf7a3a44b15438%22%2C%22deleteBranch%22%5D%2C%5B%2240f16fbb93ba7c93fd6c834330825faeaa4ac843c7%22%2C%22createBranch%22%5D%2C%5B%2260fd012198b524dc085792e6550908d33caf58d332%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Flockers.ts%22%2C%5B%5B%2200a107cf9a693fd2d034899214d8ad36cadecaed33%22%2C%22getLockers%22%5D%2C%5B%2240b6b3c6c18e64f5a80da81d1991ca07c7b42a89d8%22%2C%22releaseLocker%22%5D%2C%5B%2270fc0637495b3bc6a8ca09043445c8b2d9488f7504%22%2C%22assignLocker%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/lockers/page": "action-browser"
       }
     }
   },
