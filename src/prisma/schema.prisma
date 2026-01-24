@@ -142,6 +142,10 @@ model Tenant {
   // Lead Pipeline
   leads                 Lead[]
 
+  // Facility Bookings
+  facilities            Facility[]
+  facilityBookings      FacilityBooking[]
+
   @@map("tenants")
 }
 
@@ -245,6 +249,10 @@ model Branch {
   
   // Lead Pipeline
   leads               Lead[]
+
+  // Facility Bookings
+  facilities          Facility[]
+  facilityBookings    FacilityBooking[]
 
   @@unique([tenantId, code])
   @@map("branches")
@@ -536,6 +544,9 @@ model Member {
   // Ecommerce
   carts             Cart[]
   customerOrders    CustomerOrder[]
+
+  // Facility Bookings
+  facilityBookings  FacilityBooking[]
 
   @@map("members")
 }
@@ -3151,6 +3162,7 @@ model BenefitLedger {
   // Relationships
   memberMembership    MemberMembership    @relation(fields: [memberMembershipId], references: [id], onDelete: Cascade)
   benefit             PlanBenefit         @relation(fields: [benefitId], references: [id], onDelete: Cascade)
+  facilityBookings    FacilityBooking[]
   
   @@unique([memberMembershipId, benefitId])
   @@map("benefit_ledgers")
@@ -3645,4 +3657,109 @@ enum LeadActivityType {
   NOTE
   PROPOSAL
   OTHER
+}
+
+// ==========================================
+// FACILITY BOOKING SYSTEM
+// ==========================================
+
+enum FacilityType {
+  SAUNA
+  ICE_BATH
+  STEAM_ROOM
+  POOL
+  MASSAGE
+  GROUP_CLASS
+  PERSONAL_TRAINING
+  OTHER
+}
+
+model Facility {
+  id                String        @id @default(uuid())
+  tenantId          String
+  branchId          String
+  
+  name              String        // e.g., "Infrared Sauna", "Ice Bath"
+  facilityType      FacilityType
+  description       String?
+  maxCapacity       Int           // Max people per time slot
+  durationMinutes   Int           // Duration of each booking slot
+  isActive          Boolean       @default(true)
+  
+  // Optional: Link to a PlanBenefit for credit deduction
+  linkedBenefitName String?       // e.g., "Infrared Sauna" to match PlanBenefit.name
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  // Relationships
+  tenant            Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch            Branch        @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  bookingSlots      BookingSlot[]
+  bookings          FacilityBooking[]
+  
+  @@unique([branchId, name])
+  @@map("facilities")
+}
+
+model BookingSlot {
+  id                String        @id @default(uuid())
+  facilityId        String
+  
+  dayOfWeek         Int           // 0 = Sunday, 1 = Monday, etc.
+  startTime         String        // HH:MM format, e.g., "06:00"
+  endTime           String        // HH:MM format, e.g., "06:30"
+  isActive          Boolean       @default(true)
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  // Relationships
+  facility          Facility      @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  bookings          FacilityBooking[]
+  
+  @@unique([facilityId, dayOfWeek, startTime])
+  @@map("booking_slots")
+}
+
+enum FacilityBookingStatus {
+  CONFIRMED
+  ATTENDED
+  NO_SHOW
+  CANCELLED
+}
+
+model FacilityBooking {
+  id                  String                @id @default(uuid())
+  tenantId            String
+  branchId            String
+  facilityId          String
+  bookingSlotId       String
+  memberId            String
+  benefitLedgerId     String?               // Link to BenefitLedger for credit tracking
+  
+  bookingDate         DateTime              // The specific date of the booking
+  status              FacilityBookingStatus @default(CONFIRMED)
+  
+  // Audit fields
+  bookedAt            DateTime              @default(now())
+  cancelledAt         DateTime?
+  cancelledBy         String?               // User ID who cancelled
+  cancelReason        String?
+  attendedAt          DateTime?
+  markedAttendedBy    String?               // Staff ID who marked attendance
+  
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  
+  // Relationships
+  tenant              Tenant                @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch              Branch                @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  facility            Facility              @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  bookingSlot         BookingSlot           @relation(fields: [bookingSlotId], references: [id], onDelete: Cascade)
+  member              Member                @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  benefitLedger       BenefitLedger?        @relation(fields: [benefitLedgerId], references: [id])
+  
+  @@unique([facilityId, bookingSlotId, bookingDate, memberId])
+  @@map("facility_bookings")
 }

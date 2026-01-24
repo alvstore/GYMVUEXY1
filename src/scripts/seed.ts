@@ -25,6 +25,9 @@ const SEED_SCRIPTS_ORDER = [
   
   // Indian test data (members, trainers, staff, products, equipment, etc.)
   'seed-indian-data',
+  
+  // Facilities and booking slots
+  'seed-facilities',
 ];
 
 async function runSeedScript(scriptName: string) {
