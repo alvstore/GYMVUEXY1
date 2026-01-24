@@ -1,0 +1,69 @@
+To finalize the "Incline" gym management app and move beyond mock data to a production-ready state, you need to implement dynamic logic for your notifications, menus, and error handling.
+
+The image you provided shows the Vuexy Admin Template structure within the Replit environment. Based on your request to remove hardcoded data and audit the console errors, here are the targeted prompts and steps to complete the build.
+
+1. Remove Mock Data from Notification System
+The current system uses hardcoded JSON for alerts. You need to link this to the BenefitLedger and MemberMembership tables we built in Phase 1.
+
+Prompt for Replit Agent:
+
+"Audit the NotificationComponent and the NotificationDropdown. Remove all hardcoded 'demo' or 'mock' notifications.
+
+Create an API route GET /api/notifications that queries the database for:
+
+Members with balanceDue > 0.
+
+Memberships expiring in less than 7 days.
+
+Bookings for 'Ice Bath' or 'Sauna' occurring in the next 2 hours.
+
+Update the frontend to fetch from this API and display real-time counts in the notification bell.
+
+Implement a 'Mark as Read' function that updates a NotificationLog table in Prisma."
+
+2. Dynamic Admin Dashboard & Sidebar
+The Sidebar in the image shows generic "Dashboards" and "Gym Operations." These should only appear based on the logged-in user's role (Admin, Manager, Staff).
+
+Prompt for Replit Agent:
+
+"Implement Role-Based Access Control (RBAC) for the Vuexy Navigation Menu.
+
+In src/navigation/vertical/index.ts, replace the static array with a dynamic function that filters menu items based on the user's role from the session.
+
+Permissions:
+
+Admin: Access to 'Finance Dashboard', 'Promotions', and 'System Settings'.
+
+Manager: Access to 'Members', 'POS', and 'Locker Management'.
+
+Trainer: Access to 'Trainers & PT' and 'Class Schedules' only.
+
+Ensure that navigating to a restricted URL (e.g., a Staff member trying to access /dashboards/finance) triggers a 403 error page instead of loading mock data."
+
+3. Audit Console Errors & Broken Page Handlers
+Replit often shows console errors when Next.js hydration fails or when Prisma cannot find a environment variable.
+
+Prompt for Replit Agent:
+
+"Perform a full system audit of console errors and page handlers:
+
+Hydration Audit: Fix any 'Hydration failed' errors by ensuring that dates and dynamic data are wrapped in useEffect or use the suppressHydrationWarning prop where appropriate.
+
+API Audit: Check every page handler in src/app/. If a page is using useEffect with a local state for mock data, rewrite it as a Server Component that fetches directly from Prisma.
+
+Error Boundaries: Add a global-error.tsx and a not-found.tsx to the root directory to catch and log runtime errors without crashing the Replit container."
+
+4. Working POS & Facility Bookings (No Mock Data)
+The "POS" and "Sales" menu items in your screenshot must be linked to your actual product/membership database.
+
+Prompt for Replit Agent:
+
+"Convert the 'Sales & POS' module into a working system:
+
+Create a Product model in Prisma for gym merchandise (protein, straps) and link it to the existing Payment table.
+
+Update the POS checkout page to query real members and products.
+
+On successful checkout, decrement the inventory count in the database and create a real transaction record.
+
+Ensure the 'Sales & Revenue' cards on the Admin Dashboard reflect the SUM of these real transactions from the database."
