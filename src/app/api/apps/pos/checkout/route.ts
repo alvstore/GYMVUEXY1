@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { POSService } from '@/lib/services/posService'
-import { RBACService } from '@/lib/rbac'
+import { POSService } from '@/libs/services/posService'
+import { RBACService } from '@/libs/rbac'
 
 export async function POST(request: NextRequest) {
   try {

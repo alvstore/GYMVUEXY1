@@ -88,9 +88,11 @@ export default function StaffDashboard() {
   const [lockerStats, setLockerStats] = useState<any>(null)
   const [pendingReviews, setPendingReviews] = useState<any[]>([])
   const [searchQuery, setSearchQuery] = useState('')
-  const [currentTime, setCurrentTime] = useState(new Date())
+  const [currentTime, setCurrentTime] = useState<Date | null>(null)
 
   useEffect(() => {
+    setCurrentTime(new Date())
+    
     const loadData = async () => {
       setLoading(true)
       try {
@@ -134,7 +136,7 @@ export default function StaffDashboard() {
         <Box>
           <Typography variant="h4" gutterBottom>Staff Dashboard</Typography>
           <Typography variant="body1" color="textSecondary">
-            {formatDate(currentTime)} | {formatTime(currentTime)}
+            {currentTime ? `${formatDate(currentTime)} | ${formatTime(currentTime)}` : 'Loading...'}
           </Typography>
         </Box>
         <TextField
