@@ -104,3 +104,68 @@ No specific user preferences were provided in the original document.
 - Ice Bath (15-min slots, capacity 2)
 - Steam Room (20-min slots, capacity 6)
 - Time slots from 6:00 AM to 9:00 PM for all days
+
+#### Locker Management System (January 2026)
+**Schema Additions:**
+- `Locker` model: lockerNumber, floor, section, size, monthlyRate, isPremium flag, status enum
+- `LockerAssignment` model: startDate, endDate (synced with membership.endDate), totalFee, includedInPlan, paymentStatus, PENDING_REVIEW status
+- `LockerStatus` enum: AVAILABLE, OCCUPIED, MAINTENANCE, OUT_OF_ORDER
+- `LockerAssignmentStatus` enum: ACTIVE, RELEASED, EXPIRED, PENDING_REVIEW
+
+**Server Actions (src/app/actions/lockers.ts):**
+- `assignLocker`: Assigns locker with membership sync, auto-calculates fee and adds to balanceDue if not included in plan
+- `releaseLocker`: Releases locker and creates audit log
+- `getLockerGrid`: Returns grid data with assignment info
+- `getLockerStats`: Returns occupancy stats, pending reviews, premium lockers
+- `flagExpiredLockerAssignments`: Flags PENDING_REVIEW when membership expires/freezes
+
+**UI Components:**
+- Locker Grid View (`/apps/lockers/grid`): Visual grid with Vuexy color coding (Success=Vacant, Danger=Occupied), assignment/release modals
+- Stats dashboard with occupancy rate, pending reviews, premium locker count
+
+#### Staff RBAC System (January 2026)
+**Permissions Utility (src/libs/permissions/rolePermissions.ts):**
+- Role definitions: ADMIN (full access), MANAGER (override bookings, freeze memberships, assign lockers), STAFF (check-ins, view profiles, create bookings), TRAINER (classes only)
+- `hasRolePermission()`: Checks if role has specific permission
+- `canPerformAction()`: Maps actions to required permissions
+- Permission guards applied to server actions and API routes
+
+**Staff Dashboard (src/views/dashboards/StaffDashboard.tsx):**
+- 6 Quick Action cards: Check-in, Attendance, Lockers, Bookings, New Member, Classes
+- Locker overview panel with pending reviews
+- Real-time clock and member search
+
+#### Automated Notifications (January 2026)
+**Schema Additions:**
+- `NotificationLog` model: notificationType, channel, status, dedupeKey (prevents spam), scheduledFor, sentAt
+- `NotificationLogType` enum: MEMBERSHIP_EXPIRY_7_DAYS, MEMBERSHIP_EXPIRY_3_DAYS, MEMBERSHIP_EXPIRY_1_DAY, PAYMENT_DUE_REMINDER, BOOKING_REMINDER_2_HOURS
+
+**Cron API Route (/api/cron/notifications):**
+- Membership expiry notifications at 7, 3, and 1 day intervals
+- Weekly payment due reminders for outstanding balances
+- Booking reminders 2 hours before scheduled sessions
+- Deduplication via dedupeKey to prevent duplicate messages
+- Protected by CRON_SECRET environment variable
+
+#### Owner Analytics Dashboard (January 2026)
+**Dashboard (src/views/dashboards/OwnerAnalyticsDashboard.tsx):**
+- Revenue Trends chart (collected vs projected)
+- Member Distribution donut chart (active, expiring, new, expired)
+- Facility Utilization bar chart with percentage breakdown
+- Staff Performance metrics (check-ins, lockers, bookings)
+- Period selector (month, quarter, year)
+
+**Data Export (/api/export/[type]):**
+- CSV export for: revenue, members, outstanding dues, all data
+- Admin-only middleware protection
+- Proper CSV formatting with escaped values
+
+#### UI Components (January 2026)
+**Toast Notification System (src/contexts/ToastContext.tsx):**
+- `useToast()` hook for showSuccess, showError, showWarning, showInfo
+- Stacked toast notifications with auto-dismiss
+- Consistent styling with MUI Alert component
+
+**Empty State Component (src/components/EmptyState.tsx):**
+- Variants: default, relaxed, minimal
+- Pre-built components: NoBookingsToday, NoMembersFound, NoPendingReviews, etc.

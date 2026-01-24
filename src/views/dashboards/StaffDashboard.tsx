@@ -70,7 +70,7 @@ const quickActions: QuickAction[] = [
     title: 'New Member',
     description: 'Register a new gym member',
     icon: 'i-tabler-user-plus',
-    href: '/en/apps/members/add',
+    href: '/en/apps/members',
     color: 'secondary',
   },
   {

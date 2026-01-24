@@ -16,22 +16,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/dashboards/admin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/admin/page.js"
-    ],
-    "/api/auth/[...nextauth]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/auth/[...nextauth]/route.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/ecommerce/products/list/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/ecommerce/products/list/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/ecommerce/products/list/page.js"
     ]
   }
 }

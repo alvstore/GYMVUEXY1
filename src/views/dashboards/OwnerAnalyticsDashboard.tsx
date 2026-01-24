@@ -69,36 +69,6 @@ export default function OwnerAnalyticsDashboard() {
       setData(result)
     } catch (err: any) {
       setError(err.message || 'Failed to load analytics data')
-      setData({
-        revenue: {
-          monthly: [
-            { month: 'Jan', collected: 125000, projected: 150000 },
-            { month: 'Feb', collected: 142000, projected: 150000 },
-            { month: 'Mar', collected: 168000, projected: 160000 },
-            { month: 'Apr', collected: 155000, projected: 165000 },
-            { month: 'May', collected: 178000, projected: 175000 },
-            { month: 'Jun', collected: 192000, projected: 185000 },
-          ],
-          total: 960000,
-          outstanding: 45000,
-        },
-        facilityUtilization: [
-          { name: 'Infrared Sauna', bookings: 245, capacity: 320, utilizationRate: 76.5 },
-          { name: 'Ice Bath', bookings: 189, capacity: 240, utilizationRate: 78.8 },
-          { name: 'Steam Room', bookings: 156, capacity: 300, utilizationRate: 52.0 },
-        ],
-        memberChurn: {
-          expiringSoon: 23,
-          newSignups: 45,
-          expired: 12,
-          active: 312,
-        },
-        staffPerformance: [
-          { name: 'Raj Kumar', checkIns: 156, lockerAssignments: 23, bookingsManaged: 89 },
-          { name: 'Priya Sharma', checkIns: 142, lockerAssignments: 18, bookingsManaged: 67 },
-          { name: 'Amit Patel', checkIns: 98, lockerAssignments: 31, bookingsManaged: 45 },
-        ],
-      })
     } finally {
       setLoading(false)
     }
