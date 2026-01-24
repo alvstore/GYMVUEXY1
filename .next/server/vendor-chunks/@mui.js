@@ -2411,6 +2411,28 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "(rsc)/./node_modules/@mui/material/Box/Box.js":
+/*!***********************************************!*\
+  !*** ./node_modules/@mui/material/Box/Box.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-server-dom-webpack/server.edge */ "(rsc)/./node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-webpack-server-edge.js");
+/* harmony import */ var react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__.registerClientReference)(
+function() { throw new Error("Attempted to call the default export of \"/home/runner/workspace/node_modules/@mui/material/Box/Box.js\" from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."); },
+"/home/runner/workspace/node_modules/@mui/material/Box/Box.js",
+"default",
+));
+
+
+/***/ }),
+
 /***/ "(rsc)/./node_modules/@mui/material/Button/Button.js":
 /*!*****************************************************!*\
   !*** ./node_modules/@mui/material/Button/Button.js ***!
@@ -2440,6 +2462,33 @@ function() { throw new Error("Attempted to call the default export of \"/home/ru
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   defaultConfig: () => (/* binding */ defaultConfig)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"(rsc)/./node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _mui_system_InitColorSchemeScript__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/system/InitColorSchemeScript */ \"(rsc)/./node_modules/@mui/system/esm/InitColorSchemeScript/InitColorSchemeScript.js\");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"(rsc)/./node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-runtime.js\");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\nconst defaultConfig = {\n    attribute: 'data-mui-color-scheme',\n    colorSchemeStorageKey: 'mui-color-scheme',\n    defaultLightColorScheme: 'light',\n    defaultDarkColorScheme: 'dark',\n    modeStorageKey: 'mui-mode'\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function InitColorSchemeScript(props) {\n    return /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_system_InitColorSchemeScript__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n        ...defaultConfig,\n        ...props\n    });\n});\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvQG11aS9tYXRlcmlhbC9Jbml0Q29sb3JTY2hlbWVTY3JpcHQvSW5pdENvbG9yU2NoZW1lU2NyaXB0LmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7QUFBK0I7QUFDNkM7QUFDNUI7QUFDekMsTUFBTUksZ0JBQWdCO0lBQzNCQyxXQUFXO0lBQ1hDLHVCQUF1QjtJQUN2QkMseUJBQXlCO0lBQ3pCQyx3QkFBd0I7SUFDeEJDLGdCQUFnQjtBQUNsQixFQUFFO0FBQ0YsaUVBQWdCLFNBQVNDLHNCQUFzQkMsS0FBSztJQUNsRCxPQUFPLFdBQVcsR0FBRVIsc0RBQUlBLENBQUNGLHlFQUEyQkEsRUFBRTtRQUNwRCxHQUFHRyxhQUFhO1FBQ2hCLEdBQUdPLEtBQUs7SUFDVjtBQUNGLEdBQUciLCJzb3VyY2VzIjpbIi9ob21lL3J1bm5lci93b3Jrc3BhY2Uvbm9kZV9tb2R1bGVzL0BtdWkvbWF0ZXJpYWwvSW5pdENvbG9yU2NoZW1lU2NyaXB0L0luaXRDb2xvclNjaGVtZVNjcmlwdC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgU3lzdGVtSW5pdENvbG9yU2NoZW1lU2NyaXB0IGZyb20gJ0BtdWkvc3lzdGVtL0luaXRDb2xvclNjaGVtZVNjcmlwdCc7XG5pbXBvcnQgeyBqc3ggYXMgX2pzeCB9IGZyb20gXCJyZWFjdC9qc3gtcnVudGltZVwiO1xuZXhwb3J0IGNvbnN0IGRlZmF1bHRDb25maWcgPSB7XG4gIGF0dHJpYnV0ZTogJ2RhdGEtbXVpLWNvbG9yLXNjaGVtZScsXG4gIGNvbG9yU2NoZW1lU3RvcmFnZUtleTogJ211aS1jb2xvci1zY2hlbWUnLFxuICBkZWZhdWx0TGlnaHRDb2xvclNjaGVtZTogJ2xpZ2h0JyxcbiAgZGVmYXVsdERhcmtDb2xvclNjaGVtZTogJ2RhcmsnLFxuICBtb2RlU3RvcmFnZUtleTogJ211aS1tb2RlJ1xufTtcbmV4cG9ydCBkZWZhdWx0IChmdW5jdGlvbiBJbml0Q29sb3JTY2hlbWVTY3JpcHQocHJvcHMpIHtcbiAgcmV0dXJuIC8qI19fUFVSRV9fKi9fanN4KFN5c3RlbUluaXRDb2xvclNjaGVtZVNjcmlwdCwge1xuICAgIC4uLmRlZmF1bHRDb25maWcsXG4gICAgLi4ucHJvcHNcbiAgfSk7XG59KTsiXSwibmFtZXMiOlsiUmVhY3QiLCJTeXN0ZW1Jbml0Q29sb3JTY2hlbWVTY3JpcHQiLCJqc3giLCJfanN4IiwiZGVmYXVsdENvbmZpZyIsImF0dHJpYnV0ZSIsImNvbG9yU2NoZW1lU3RvcmFnZUtleSIsImRlZmF1bHRMaWdodENvbG9yU2NoZW1lIiwiZGVmYXVsdERhcmtDb2xvclNjaGVtZSIsIm1vZGVTdG9yYWdlS2V5IiwiSW5pdENvbG9yU2NoZW1lU2NyaXB0IiwicHJvcHMiXSwiaWdub3JlTGlzdCI6WzBdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/@mui/material/InitColorSchemeScript/InitColorSchemeScript.js\n");
+
+/***/ }),
+
+/***/ "(rsc)/./node_modules/@mui/material/Typography/Typography.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@mui/material/Typography/Typography.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   TypographyRoot: () => (/* binding */ TypographyRoot),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-server-dom-webpack/server.edge */ "(rsc)/./node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-server-dom-webpack-server-edge.js");
+/* harmony import */ var react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__);
+
+const TypographyRoot = (0,react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__.registerClientReference)(
+function() { throw new Error("Attempted to call TypographyRoot() from the server but TypographyRoot is on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."); },
+"/home/runner/workspace/node_modules/@mui/material/Typography/Typography.js",
+"TypographyRoot",
+);/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_server_dom_webpack_server_edge__WEBPACK_IMPORTED_MODULE_0__.registerClientReference)(
+function() { throw new Error("Attempted to call the default export of \"/home/runner/workspace/node_modules/@mui/material/Typography/Typography.js\" from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component."); },
+"/home/runner/workspace/node_modules/@mui/material/Typography/Typography.js",
+"default",
+));
+
 
 /***/ }),
 

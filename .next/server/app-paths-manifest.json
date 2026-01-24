@@ -1,5 +1,5 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/notifications/route": "app/api/notifications/route.js",
   "/[lang]/(dashboard)/(private)/dashboards/admin/page": "app/[lang]/(dashboard)/(private)/dashboards/admin/page.js",
   "/[lang]/(dashboard)/(private)/member-portal/page": "app/[lang]/(dashboard)/(private)/member-portal/page.js"
 }

@@ -1,10 +1,8 @@
 'use client'
 
-// React Imports
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import type { MouseEvent, ReactNode } from 'react'
 
-// MUI Imports
 import IconButton from '@mui/material/IconButton'
 import Badge from '@mui/material/Badge'
 import Popper from '@mui/material/Popper'
@@ -18,33 +16,31 @@ import Divider from '@mui/material/Divider'
 import Avatar from '@mui/material/Avatar'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
 import type { Theme } from '@mui/material/styles'
 
-// Third Party Components
 import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-// Type Imports
 import type { ThemeColor } from '@core/types'
 import type { CustomAvatarProps } from '@core/components/mui/Avatar'
 
-// Component Imports
 import CustomAvatar from '@core/components/mui/Avatar'
 
-// Config Imports
 import themeConfig from '@configs/themeConfig'
 
-// Hook Imports
 import { useSettings } from '@core/hooks/useSettings'
 
-// Util Imports
 import { getInitials } from '@/utils/getInitials'
 
 export type NotificationsType = {
+  id?: string
   title: string
   subtitle: string
   time: string
   read: boolean
+  type?: string
 } & (
   | {
       avatarImage?: string
@@ -103,23 +99,47 @@ const getAvatar = (
   }
 }
 
-const NotificationDropdown = ({ notifications }: { notifications: NotificationsType[] }) => {
-  // States
+const NotificationDropdown = ({ notifications: initialNotifications }: { notifications?: NotificationsType[] }) => {
   const [open, setOpen] = useState(false)
-  const [notificationsState, setNotificationsState] = useState(notifications)
+  const [notificationsState, setNotificationsState] = useState<NotificationsType[]>(initialNotifications || [])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  // Vars
   const notificationCount = notificationsState.filter(notification => !notification.read).length
   const readAll = notificationsState.every(notification => notification.read)
 
-  // Refs
   const anchorRef = useRef<HTMLButtonElement>(null)
   const ref = useRef<HTMLDivElement | null>(null)
 
-  // Hooks
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
   const isSmallScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'))
   const { settings } = useSettings()
+
+  const fetchNotifications = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const response = await fetch('/api/notifications')
+      if (!response.ok) {
+        throw new Error('Failed to fetch notifications')
+      }
+      const data = await response.json()
+      if (data.notifications && data.notifications.length > 0) {
+        setNotificationsState(data.notifications)
+      }
+    } catch (err: any) {
+      console.error('Failed to fetch notifications:', err)
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchNotifications()
+    const interval = setInterval(fetchNotifications, 60000)
+    return () => clearInterval(interval)
+  }, [fetchNotifications])
 
   const handleClose = () => {
     setOpen(false)
@@ -127,47 +147,69 @@ const NotificationDropdown = ({ notifications }: { notifications: NotificationsT
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen)
+    if (!open) {
+      fetchNotifications()
+    }
   }
 
-  // Read notification when notification is clicked
-  const handleReadNotification = (event: MouseEvent<HTMLElement>, value: boolean, index: number) => {
+  const handleReadNotification = async (event: MouseEvent<HTMLElement>, value: boolean, index: number) => {
     event.stopPropagation()
     const newNotifications = [...notificationsState]
-
     newNotifications[index].read = value
     setNotificationsState(newNotifications)
+
+    const notification = notificationsState[index]
+    if (notification.id) {
+      try {
+        await fetch('/api/notifications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'markRead', notificationId: notification.id }),
+        })
+      } catch (err) {
+        console.error('Failed to mark notification as read:', err)
+      }
+    }
   }
 
-  // Remove notification when close icon is clicked
   const handleRemoveNotification = (event: MouseEvent<HTMLElement>, index: number) => {
     event.stopPropagation()
     const newNotifications = [...notificationsState]
-
     newNotifications.splice(index, 1)
     setNotificationsState(newNotifications)
   }
 
-  // Read or unread all notifications when read all icon is clicked
-  const readAllNotifications = () => {
+  const readAllNotifications = async () => {
     const newNotifications = [...notificationsState]
-
     newNotifications.forEach(notification => {
       notification.read = !readAll
     })
     setNotificationsState(newNotifications)
+
+    const notificationIds = notificationsState.map(n => n.id).filter(Boolean)
+    if (notificationIds.length > 0) {
+      try {
+        await fetch('/api/notifications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'markAllRead', notificationIds }),
+        })
+      } catch (err) {
+        console.error('Failed to mark all as read:', err)
+      }
+    }
   }
 
   useEffect(() => {
     const adjustPopoverHeight = () => {
       if (ref.current) {
-        // Calculate available height, subtracting any fixed UI elements' height as necessary
         const availableHeight = window.innerHeight - 100
-
         ref.current.style.height = `${Math.min(availableHeight, 550)}px`
       }
     }
 
     window.addEventListener('resize', adjustPopoverHeight)
+    return () => window.removeEventListener('resize', adjustPopoverHeight)
   }, [])
 
   return (
@@ -217,6 +259,7 @@ const NotificationDropdown = ({ notifications }: { notifications: NotificationsT
                     <Typography variant='h6' className='flex-auto'>
                       Notifications
                     </Typography>
+                    {loading && <CircularProgress size={16} />}
                     {notificationCount > 0 && (
                       <Chip size='small' variant='tonal' color='primary' label={`${notificationCount} New`} />
                     )}
@@ -245,61 +288,69 @@ const NotificationDropdown = ({ notifications }: { notifications: NotificationsT
                   </div>
                   <Divider />
                   <ScrollWrapper hidden={hidden}>
-                    {notificationsState.map((notification, index) => {
-                      const {
-                        title,
-                        subtitle,
-                        time,
-                        read,
-                        avatarImage,
-                        avatarIcon,
-                        avatarText,
-                        avatarColor,
-                        avatarSkin
-                      } = notification
+                    {notificationsState.length === 0 ? (
+                      <Box display="flex" alignItems="center" justifyContent="center" py={6}>
+                        <Typography variant="body2" color="textSecondary">
+                          {error ? 'Failed to load notifications' : 'No notifications'}
+                        </Typography>
+                      </Box>
+                    ) : (
+                      notificationsState.map((notification, index) => {
+                        const {
+                          title,
+                          subtitle,
+                          time,
+                          read,
+                          avatarImage,
+                          avatarIcon,
+                          avatarText,
+                          avatarColor,
+                          avatarSkin
+                        } = notification
 
-                      return (
-                        <div
-                          key={index}
-                          className={classnames('flex plb-3 pli-4 gap-3 cursor-pointer hover:bg-actionHover group', {
-                            'border-be': index !== notificationsState.length - 1
-                          })}
-                          onClick={e => handleReadNotification(e, true, index)}
-                        >
-                          {getAvatar({ avatarImage, avatarIcon, title, avatarText, avatarColor, avatarSkin })}
-                          <div className='flex flex-col flex-auto'>
-                            <Typography variant='body2' className='font-medium mbe-1' color='text.primary'>
-                              {title}
-                            </Typography>
-                            <Typography variant='caption' color='text.secondary' className='mbe-2'>
-                              {subtitle}
-                            </Typography>
-                            <Typography variant='caption' color='text.disabled'>
-                              {time}
-                            </Typography>
+                        return (
+                          <div
+                            key={notification.id || index}
+                            className={classnames('flex plb-3 pli-4 gap-3 cursor-pointer hover:bg-actionHover group', {
+                              'border-be': index !== notificationsState.length - 1
+                            })}
+                            onClick={e => handleReadNotification(e, true, index)}
+                          >
+                            {getAvatar({ avatarImage, avatarIcon, title, avatarText, avatarColor, avatarSkin })}
+                            <div className='flex flex-col flex-auto'>
+                              <Typography variant='body2' className='font-medium mbe-1' color='text.primary'>
+                                {title}
+                              </Typography>
+                              <Typography variant='caption' color='text.secondary' className='mbe-2'>
+                                {subtitle}
+                              </Typography>
+                              <Typography variant='caption' color='text.disabled'>
+                                {time}
+                              </Typography>
+                            </div>
+                            <div className='flex flex-col items-end gap-2'>
+                              <Badge
+                                variant='dot'
+                                color={read ? 'secondary' : 'primary'}
+                                onClick={e => handleReadNotification(e, !read, index)}
+                                className={classnames('mbs-1 mie-1', {
+                                  'invisible group-hover:visible': read
+                                })}
+                              />
+                              <i
+                                className='tabler-x text-xl invisible group-hover:visible'
+                                onClick={e => handleRemoveNotification(e, index)}
+                              />
+                            </div>
                           </div>
-                          <div className='flex flex-col items-end gap-2'>
-                            <Badge
-                              variant='dot'
-                              color={read ? 'secondary' : 'primary'}
-                              onClick={e => handleReadNotification(e, !read, index)}
-                              className={classnames('mbs-1 mie-1', {
-                                'invisible group-hover:visible': read
-                              })}
-                            />
-                            <i
-                              className='tabler-x text-xl invisible group-hover:visible'
-                              onClick={e => handleRemoveNotification(e, index)}
-                            />
-                          </div>
-                        </div>
-                      )
-                    })}
+                        )
+                      })
+                    )}
                   </ScrollWrapper>
                   <Divider />
                   <div className='p-4'>
-                    <Button fullWidth variant='contained' size='small'>
-                      View All Notifications
+                    <Button fullWidth variant='contained' size='small' onClick={fetchNotifications}>
+                      {loading ? 'Refreshing...' : 'Refresh Notifications'}
                     </Button>
                   </div>
                 </div>
