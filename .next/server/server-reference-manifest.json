@@ -1,73 +1,212 @@
 {
   "node": {
-    "001cc95401675680c272afc47b41e3041dcf68e779": {
+    "00a6da626e2fcfa22a9fe67422514f927f1b5b61c2": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": "action-browser"
       }
     },
-    "403e2d9a642fbff05c453db70a6c2a79a671878f46": {
+    "400278080f6732b9b514fbb4e11b800784747cdfbf": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": "action-browser"
       }
     },
-    "40bb24edbc830ed679ac0dc0535896dd9bfc1b144a": {
+    "40840fd86deb596f66eccf432106f45cdc4544572e": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": "action-browser"
       }
     },
-    "60addf5f9177d93805305bbe24af980f2cb16c8a97": {
+    "606942956e4086f4f992f7a1cb0d4454586f64769d": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        },
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
         "app/[lang]/(dashboard)/(private)/dashboards/crm/page": "action-browser",
-        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser",
+        "app/[lang]/(dashboard)/(private)/apps/calendar/page": "action-browser"
       }
     },
-    "001a0393c227bc9db0c0cab43f152325cc4d67ae95": {
+    "406af4e150ed57ad0ad17ee64a610bd35faf3d95a6": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "4099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "409af240c8a146595cd9cf8ce1ee394fe67d0e685a": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "40a3b64c52632bc3dae282101f68d82e819dca1e98": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "40ad56da2279b016bf27218f8fa98285d91210026a": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "40e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "40e222efe7c5f87b153d5275faaee231bb275f877d": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "40e7074d0325a6bc1a9ca9db292232c9b5a1b890fc": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "600f7130ad5b1d70a374f9a74d582231b7ea3526aa": {
+      "workers": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbookings.ts%22%2C%5B%5B%22406af4e150ed57ad0ad17ee64a610bd35faf3d95a6%22%2C%22cancelBooking%22%5D%2C%5B%224099c9bc1f1bf89cf690169dfb2c6d259c9ea4f2ab%22%2C%22markAsAttended%22%5D%2C%5B%22409af240c8a146595cd9cf8ce1ee394fe67d0e685a%22%2C%22getAvailableSlots%22%5D%2C%5B%2240a3b64c52632bc3dae282101f68d82e819dca1e98%22%2C%22getAllBookingsForCalendar%22%5D%2C%5B%2240ad56da2279b016bf27218f8fa98285d91210026a%22%2C%22markAsNoShow%22%5D%2C%5B%2240e1a970ef5f5d0ab80172119ec1a3bbfeff0de94c%22%2C%22getMemberCredits%22%5D%2C%5B%2240e222efe7c5f87b153d5275faaee231bb275f877d%22%2C%22getFacilities%22%5D%2C%5B%2240e7074d0325a6bc1a9ca9db292232c9b5a1b890fc%22%2C%22createBooking%22%5D%2C%5B%22600f7130ad5b1d70a374f9a74d582231b7ea3526aa%22%2C%22getMemberBookings%22%5D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/[lang]/(dashboard)/(private)/apps/facility-calendar/page": "rsc"
+      }
+    },
+    "00449e81f290d74a95433e213f1cd66caa865fde16": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -75,10 +214,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "0020c7b0b576b43db75700ca4d621412069176efab": {
+    "0053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -86,10 +225,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "003faa069fadd55b61ea8004572b5c94415b780a17": {
+    "00598d0a658a752f829deec045fa5c0552bc603937": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -97,10 +236,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "004a563ca009f6cbc7f22e309b976209354baadf7b": {
+    "007657f3abbd7093434a6e92f767bed8a76f1aaa47": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -108,10 +247,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "00ab5fef486928bc7c4166a8aaf33846eaf1118f5a": {
+    "007e4d3f164b1497c77fe975b673b8cbba72a106f9": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -119,10 +258,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "00e6fb08c5a9aad37e636b2961eac53678d961ba64": {
+    "00e22520b3ba785d979e3f25a6697f5e91e09a54d6": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -130,10 +269,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "00f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa": {
+    "00e9446e349586fedf52d63db09f8cf67d2de95af5": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -141,10 +280,10 @@
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": "action-browser"
       }
     },
-    "00f53bb1a3a3e851ca809fa788cd06b70387a0d1ad": {
+    "00fa852a91752696d574a9acae8feec70fbc39f39c": {
       "workers": {
         "app/[lang]/(dashboard)/(private)/dashboards/admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%22001cc95401675680c272afc47b41e3041dcf68e779%22%2C%22getBranches%22%5D%2C%5B%22403e2d9a642fbff05c453db70a6c2a79a671878f46%22%2C%22deleteBranch%22%5D%2C%5B%2240bb24edbc830ed679ac0dc0535896dd9bfc1b144a%22%2C%22createBranch%22%5D%2C%5B%2260addf5f9177d93805305bbe24af980f2cb16c8a97%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%22001a0393c227bc9db0c0cab43f152325cc4d67ae95%22%2C%22getAllBranches%22%5D%2C%5B%220020c7b0b576b43db75700ca4d621412069176efab%22%2C%22getSalesAnalytics%22%5D%2C%5B%22003faa069fadd55b61ea8004572b5c94415b780a17%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22004a563ca009f6cbc7f22e309b976209354baadf7b%22%2C%22getAllUsers%22%5D%2C%5B%2200ab5fef486928bc7c4166a8aaf33846eaf1118f5a%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200e6fb08c5a9aad37e636b2961eac53678d961ba64%22%2C%22getRecentActivity%22%5D%2C%5B%2200f0da2d5a6dca1a2ad666a53d1cdeb7c4468df0aa%22%2C%22getBranchStats%22%5D%2C%5B%2200f53bb1a3a3e851ca809fa788cd06b70387a0d1ad%22%2C%22getMemberGrowthData%22%5D%5D%5D%5D&__client_imported__=true!",
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fbranches.ts%22%2C%5B%5B%2200a6da626e2fcfa22a9fe67422514f927f1b5b61c2%22%2C%22getBranches%22%5D%2C%5B%22400278080f6732b9b514fbb4e11b800784747cdfbf%22%2C%22createBranch%22%5D%2C%5B%2240840fd86deb596f66eccf432106f45cdc4544572e%22%2C%22deleteBranch%22%5D%2C%5B%22606942956e4086f4f992f7a1cb0d4454586f64769d%22%2C%22updateBranch%22%5D%5D%5D%2C%5B%22%2Fhome%2Frunner%2Fworkspace%2Fsrc%2Fapp%2Factions%2Fdashboards%2Fadmin.ts%22%2C%5B%5B%2200449e81f290d74a95433e213f1cd66caa865fde16%22%2C%22getRecentActivity%22%5D%2C%5B%220053a788ca7cc6e9d8dbdc11604aebc26ca4d97ca6%22%2C%22getAdminDashboardMetrics%22%5D%2C%5B%2200598d0a658a752f829deec045fa5c0552bc603937%22%2C%22getAllBranches%22%5D%2C%5B%22007657f3abbd7093434a6e92f767bed8a76f1aaa47%22%2C%22getLeadPipelineMetrics%22%5D%2C%5B%22007e4d3f164b1497c77fe975b673b8cbba72a106f9%22%2C%22getAllUsers%22%5D%2C%5B%2200e22520b3ba785d979e3f25a6697f5e91e09a54d6%22%2C%22getBranchStats%22%5D%2C%5B%2200e9446e349586fedf52d63db09f8cf67d2de95af5%22%2C%22getMemberGrowthData%22%5D%2C%5B%2200fa852a91752696d574a9acae8feec70fbc39f39c%22%2C%22getSalesAnalytics%22%5D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
@@ -154,5 +293,5 @@
     }
   },
   "edge": {},
-  "encryptionKey": "VFVWXWD6TWkB1hzlDQReKsmOfKcYDy60gXQWsCQRop0="
+  "encryptionKey": "zdswhnkrD22t/+Cp36s7K180UZZI88ijVFFrO1Lp4ZE="
 }

@@ -75,3 +75,32 @@ No specific user preferences were provided in the original document.
 #### UI Updates
 - Added Zod validation to AddMemberDrawer component using @hookform/resolvers/zod
 - Member List page fetches real data from database via getMembers action
+
+#### Facility Booking System (January 2026)
+**Schema Additions:**
+- `Facility` model: name, facilityType (enum), maxCapacity, durationMinutes, linkedBenefitName
+- `BookingSlot` model: dayOfWeek, startTime, endTime, linked to Facility
+- `FacilityBooking` model: bookingDate, status, audit fields (bookedAt, cancelledAt, attendedAt)
+- `FacilityType` enum: SAUNA, ICE_BATH, STEAM_ROOM, POOL, MASSAGE, GROUP_CLASS, etc.
+- `FacilityBookingStatus` enum: CONFIRMED, ATTENDED, NO_SHOW, CANCELLED
+
+**Server Actions (src/app/actions/bookings.ts):**
+- `createBooking`: Atomic transaction with membership status check, credit check, capacity check, usedCount increment
+- `cancelBooking`: Cancels booking and refunds credit to BenefitLedger
+- `markAsAttended`: Marks booking as attended by staff
+- `markAsNoShow`: Marks booking as no-show
+- `getFacilities`: Gets all active facilities with booking slots
+- `getAvailableSlots`: Gets available slots for a date with capacity info
+- `getMemberCredits`: Gets member's remaining benefit credits
+- `getMemberBookings`: Gets member's bookings with filters
+- `getAllBookingsForCalendar`: Gets bookings for admin calendar view
+
+**UI Components:**
+- Admin Facility Calendar (`/apps/facility-calendar`): FullCalendar view with filter sidebar, booking detail modal with cancel/attend controls
+- Member Booking Portal (`/member-portal/bookings`): Credits display, facility selection, date picker, time slot selection, booking confirmation
+
+**Seeded Data:**
+- Infrared Sauna (30-min slots, capacity 4)
+- Ice Bath (15-min slots, capacity 2)
+- Steam Room (20-min slots, capacity 6)
+- Time slots from 6:00 AM to 9:00 PM for all days

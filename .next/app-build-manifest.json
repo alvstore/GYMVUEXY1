@@ -17,6 +17,12 @@
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
     ],
+    "/[lang]/(dashboard)/(private)/apps/facility-calendar/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/facility-calendar/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/facility-calendar/page.js"
+    ],
     "/[lang]/(dashboard)/(private)/dashboards/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -26,6 +32,12 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/auth/[...nextauth]/route.js"
+    ],
+    "/[lang]/(dashboard)/(private)/apps/calendar/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[lang]/(dashboard)/(private)/apps/calendar/page.css",
+      "static/chunks/app/[lang]/(dashboard)/(private)/apps/calendar/page.js"
     ]
   }
 }
