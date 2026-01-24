@@ -169,3 +169,40 @@ No specific user preferences were provided in the original document.
 **Empty State Component (src/components/EmptyState.tsx):**
 - Variants: default, relaxed, minimal
 - Pre-built components: NoBookingsToday, NoMembersFound, NoPendingReviews, etc.
+
+#### Real-Time Notifications System (January 2026)
+**API Route (/api/notifications):**
+- GET: Queries real database for payment dues (balanceDue > 0), expiring memberships (<7 days), upcoming bookings
+- POST: Persists read/dismiss state via DismissedNotification table with 7-day expiry
+- Supports actions: markRead, markUnread, markAllRead, markAllUnread
+- Notifications scoped by tenant/branch, dismissed state scoped by user
+
+**Schema Additions:**
+- `DismissedNotification` model: userId, notificationKey, expiresAt (7-day TTL)
+- Unique constraint on [userId, notificationKey] for upsert behavior
+
+**UI Integration (NotificationsDropdown):**
+- Real-time fetch from /api/notifications on mount and every 60 seconds
+- Backend persistence replaces localStorage approach
+- Mark as read/unread, remove, and mark all read/unread functionality
+
+#### Ecommerce Dashboard Real Data (January 2026)
+**Server Actions (src/app/actions/dashboards/ecommerce.ts):**
+- `getEcommerceStatistics`: Total revenue, growth %, product count, active members, pending dues
+- `getPopularProducts`: Top 5 products by quantity sold via InvoiceItem model
+- `getRecentTransactions`: Last 10 invoices with amount, status, member info
+- All queries scoped by tenantId and optional branchId
+
+**UI Components Updated:**
+- StatisticsCard: Fetches real statistics, shows loading states
+- PopularProducts: Real product data with sales figures
+- Transactions: Real invoice data with proper formatting
+
+#### Error Handling (January 2026)
+**Error Boundary Components:**
+- `src/app/global-error.tsx`: Root error boundary for unhandled errors
+- `src/app/not-found.tsx`: Custom 404 page with navigation
+- `src/app/(dashboard)/pages/forbidden/page.tsx`: 403 Forbidden page for unauthorized access
+
+**Hydration Error Fixes:**
+- StaffDashboard date state initialized in useEffect to prevent server/client mismatch
