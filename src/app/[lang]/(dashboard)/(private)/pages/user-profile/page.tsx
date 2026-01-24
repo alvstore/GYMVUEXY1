@@ -11,7 +11,7 @@ import type { Data } from '@/types/pages/profileTypes'
 import UserProfile from '@views/pages/user-profile'
 
 // Data Imports
-import { getProfileData } // TEMP: Disabled - fake data removed // from '@/app/server/actions'
+// import { getProfileData } from '@/app/server/actions' // TEMP: Disabled - fake data removed
 
 const ProfileTab = dynamic(() => import('@views/pages/user-profile/profile'))
 const TeamsTab = dynamic(() => import('@views/pages/user-profile/teams'))
@@ -45,8 +45,8 @@ const tabContentList = (data?: Data): { [key: string]: ReactElement } => ({
 } */
 
 const ProfilePage = async () => {
-  // Vars
-  const data = // await getProfileData()
+  // Profile data is currently empty - real data should be fetched when user profile feature is enabled
+  const data: Data | undefined = undefined
 
   return <UserProfile data={data} tabContentList={tabContentList(data)} />
 }

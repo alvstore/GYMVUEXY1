@@ -333,6 +333,9 @@ model User {
 
   // Locker Management
   lockerAssignments    LockerAssignment[] @relation("LockerAssignedBy")
+  
+  // Dismissed Notifications
+  dismissedNotifications DismissedNotification[]
 
   @@map("users")
 }
@@ -3838,4 +3841,18 @@ model NotificationLog {
   @@index([tenantId, memberId, notificationType])
   @@index([status, scheduledFor])
   @@map("notification_logs")
+}
+
+model DismissedNotification {
+  id              String   @id @default(uuid())
+  userId          String
+  notificationKey String
+  dismissedAt     DateTime @default(now())
+  expiresAt       DateTime
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, notificationKey])
+  @@index([userId, expiresAt])
+  @@map("dismissed_notifications")
 }

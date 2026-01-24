@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
     }
 
     const user = session.user as any
+    const userId = user.id
     const tenantId = user.tenantId
     const branchId = user.branchId
 
@@ -31,6 +32,7 @@ export async function GET(request: NextRequest) {
       membersWithDues,
       expiringMemberships,
       upcomingBookings,
+      dismissedNotifications,
     ] = await Promise.all([
       prisma.memberMembership.findMany({
         where: {
@@ -80,19 +82,30 @@ export async function GET(request: NextRequest) {
         orderBy: { bookingDate: 'asc' },
         take: 10,
       }).catch(() => []) ?? Promise.resolve([]),
+
+      userId ? prisma.dismissedNotification.findMany({
+        where: {
+          userId,
+          expiresAt: { gt: now },
+        },
+        select: { notificationKey: true },
+      }) : Promise.resolve([]),
     ])
+
+    const dismissedKeys = new Set(dismissedNotifications.map((d: any) => d.notificationKey))
 
     const notifications: any[] = []
 
     for (const m of membersWithDues) {
       const daysOverdue = Math.floor((now.getTime() - new Date(m.createdAt).getTime()) / (1000 * 60 * 60 * 24))
+      const notificationId = `due_${m.id}`
       notifications.push({
-        id: `due_${m.id}`,
+        id: notificationId,
         type: 'payment_due',
         title: `Payment Due: ${m.member.firstName} ${m.member.lastName}`,
         subtitle: `Outstanding balance: ₹${Number(m.balanceDue).toFixed(0)}`,
         time: daysOverdue > 0 ? `${daysOverdue} days ago` : 'Today',
-        read: false,
+        read: dismissedKeys.has(notificationId),
         avatarIcon: 'tabler-currency-rupee',
         avatarColor: 'error',
       })
@@ -100,13 +113,14 @@ export async function GET(request: NextRequest) {
 
     for (const m of expiringMemberships) {
       const daysUntil = Math.ceil((new Date(m.endDate).getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+      const notificationId = `expiry_${m.id}`
       notifications.push({
-        id: `expiry_${m.id}`,
+        id: notificationId,
         type: 'membership_expiry',
         title: `Membership Expiring: ${m.member.firstName} ${m.member.lastName}`,
         subtitle: `${m.plan.name} expires ${daysUntil === 0 ? 'today' : `in ${daysUntil} day${daysUntil > 1 ? 's' : ''}`}`,
         time: new Date(m.endDate).toLocaleDateString(),
-        read: false,
+        read: dismissedKeys.has(notificationId),
         avatarIcon: 'tabler-calendar-event',
         avatarColor: daysUntil <= 1 ? 'error' : daysUntil <= 3 ? 'warning' : 'info',
       })
@@ -115,14 +129,15 @@ export async function GET(request: NextRequest) {
     for (const b of upcomingBookings) {
       const facilityName = b.facility.name
       const isSaunaOrIceBath = ['SAUNA', 'ICE_BATH'].includes(b.facility.facilityType as string)
+      const notificationId = `booking_${b.id}`
       
       notifications.push({
-        id: `booking_${b.id}`,
+        id: notificationId,
         type: 'upcoming_booking',
         title: `Upcoming: ${b.member.firstName} ${b.member.lastName}`,
         subtitle: `${facilityName} at ${b.bookingSlot.startTime}`,
         time: 'In 2 hours',
-        read: false,
+        read: dismissedKeys.has(notificationId),
         avatarIcon: isSaunaOrIceBath ? 'tabler-flame' : 'tabler-calendar-check',
         avatarColor: isSaunaOrIceBath ? 'warning' : 'success',
       })
@@ -158,15 +173,81 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const user = session.user as any
+    const userId = user.id
+
+    if (!userId) {
+      return NextResponse.json({ error: 'Invalid session' }, { status: 400 })
+    }
+
     const body = await request.json()
     const { action, notificationId, notificationIds } = body
 
+    const expiresAt = new Date()
+    expiresAt.setDate(expiresAt.getDate() + 7)
+
     if (action === 'markRead' && notificationId) {
+      await prisma.dismissedNotification.upsert({
+        where: {
+          userId_notificationKey: {
+            userId,
+            notificationKey: notificationId,
+          },
+        },
+        create: {
+          userId,
+          notificationKey: notificationId,
+          expiresAt,
+        },
+        update: {
+          expiresAt,
+        },
+      })
       return NextResponse.json({ success: true, message: 'Notification marked as read' })
     }
 
-    if (action === 'markAllRead' && notificationIds) {
+    if (action === 'markAllRead' && notificationIds && Array.isArray(notificationIds)) {
+      await Promise.all(
+        notificationIds.map((nId: string) =>
+          prisma.dismissedNotification.upsert({
+            where: {
+              userId_notificationKey: {
+                userId,
+                notificationKey: nId,
+              },
+            },
+            create: {
+              userId,
+              notificationKey: nId,
+              expiresAt,
+            },
+            update: {
+              expiresAt,
+            },
+          })
+        )
+      )
       return NextResponse.json({ success: true, message: 'All notifications marked as read' })
+    }
+
+    if (action === 'markUnread' && notificationId) {
+      await prisma.dismissedNotification.deleteMany({
+        where: {
+          userId,
+          notificationKey: notificationId,
+        },
+      })
+      return NextResponse.json({ success: true, message: 'Notification marked as unread' })
+    }
+
+    if (action === 'markAllUnread' && notificationIds && Array.isArray(notificationIds)) {
+      await prisma.dismissedNotification.deleteMany({
+        where: {
+          userId,
+          notificationKey: { in: notificationIds },
+        },
+      })
+      return NextResponse.json({ success: true, message: 'All notifications marked as unread' })
     }
 
     return NextResponse.json({ error: 'Invalid action' }, { status: 400 })

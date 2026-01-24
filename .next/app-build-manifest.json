@@ -1,5 +1,15 @@
 {
   "pages": {
+    "/global-error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/global-error.js"
+    ],
+    "/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
+    ],
     "/[lang]/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -17,52 +27,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
     ],
-    "/[lang]/(dashboard)/(private)/apps/members/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/pages/user-profile/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/pages/user-profile/page.js"
-    ],
-    "/[lang]/[...not-found]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/[...not-found]/page.css",
-      "static/chunks/app/[lang]/[...not-found]/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/dashboards/admin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/admin/page.js"
-    ],
-    "/api/auth/[...nextauth]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/auth/[...nextauth]/route.js"
-    ],
-    "/[lang]/(dashboard)/(private)/member-portal/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/member-portal/page.js"
-    ],
     "/api/notifications/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/notifications/route.js"
-    ],
-    "/global-error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/global-error.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
     ]
   }
 }

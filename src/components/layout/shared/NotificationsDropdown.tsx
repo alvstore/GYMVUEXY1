@@ -124,7 +124,7 @@ const NotificationDropdown = ({ notifications: initialNotifications }: { notific
         throw new Error('Failed to fetch notifications')
       }
       const data = await response.json()
-      if (data.notifications && data.notifications.length > 0) {
+      if (data.notifications) {
         setNotificationsState(data.notifications)
       }
     } catch (err: any) {
@@ -164,16 +164,31 @@ const NotificationDropdown = ({ notifications: initialNotifications }: { notific
         await fetch('/api/notifications', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'markRead', notificationId: notification.id }),
+          body: JSON.stringify({ 
+            action: value ? 'markRead' : 'markUnread', 
+            notificationId: notification.id 
+          }),
         })
       } catch (err) {
-        console.error('Failed to mark notification as read:', err)
+        console.error('Failed to update notification:', err)
       }
     }
   }
 
-  const handleRemoveNotification = (event: MouseEvent<HTMLElement>, index: number) => {
+  const handleRemoveNotification = async (event: MouseEvent<HTMLElement>, index: number) => {
     event.stopPropagation()
+    const notification = notificationsState[index]
+    if (notification.id) {
+      try {
+        await fetch('/api/notifications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'markRead', notificationId: notification.id }),
+        })
+      } catch (err) {
+        console.error('Failed to dismiss notification:', err)
+      }
+    }
     const newNotifications = [...notificationsState]
     newNotifications.splice(index, 1)
     setNotificationsState(newNotifications)
@@ -181,8 +196,10 @@ const NotificationDropdown = ({ notifications: initialNotifications }: { notific
 
   const readAllNotifications = async () => {
     const newNotifications = [...notificationsState]
+    const markAsRead = !readAll
+    
     newNotifications.forEach(notification => {
-      notification.read = !readAll
+      notification.read = markAsRead
     })
     setNotificationsState(newNotifications)
 
@@ -192,10 +209,13 @@ const NotificationDropdown = ({ notifications: initialNotifications }: { notific
         await fetch('/api/notifications', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'markAllRead', notificationIds }),
+          body: JSON.stringify({ 
+            action: markAsRead ? 'markAllRead' : 'markAllUnread', 
+            notificationIds 
+          }),
         })
       } catch (err) {
-        console.error('Failed to mark all as read:', err)
+        console.error('Failed to update notifications:', err)
       }
     }
   }

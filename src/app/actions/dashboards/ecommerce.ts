@@ -15,12 +15,12 @@ export async function getEcommerceStatistics() {
     totalProducts,
     totalRevenue,
   ] = await Promise.all([
-    prisma.order.count({
+    prisma.invoice.count({
       where: {
         tenantId: context.tenantId,
         ...(context.branchId && { branchId: context.branchId }),
-        status: 'completed',
-        createdAt: { gte: thirtyDaysAgo },
+        status: 'PAID',
+        issueDate: { gte: thirtyDaysAgo },
       },
     }),
     prisma.member.count({
@@ -59,9 +59,28 @@ export async function getEcommerceStatistics() {
 export async function getPopularProducts(limit = 6) {
   const context = await requirePermission('dashboard.view')
 
-  const topProducts = await prisma.orderItem.groupBy({
+  const invoices = await prisma.invoice.findMany({
+    where: {
+      tenantId: context.tenantId,
+      ...(context.branchId && { branchId: context.branchId }),
+      status: 'PAID',
+    },
+    select: { id: true },
+  })
+
+  if (invoices.length === 0) {
+    return []
+  }
+
+  const invoiceIds = invoices.map((inv) => inv.id)
+
+  const topProducts = await prisma.invoiceItem.groupBy({
     by: ['productId'],
-    _sum: { quantity: true, totalPrice: true },
+    where: {
+      invoiceId: { in: invoiceIds },
+      productId: { not: null },
+    },
+    _sum: { quantity: true, totalAmount: true },
     orderBy: { _sum: { quantity: 'desc' } },
     take: limit,
   })
@@ -70,7 +89,10 @@ export async function getPopularProducts(limit = 6) {
     return []
   }
 
-  const productIds = topProducts.map((p) => p.productId)
+  const productIds = topProducts
+    .map((p) => p.productId)
+    .filter((id): id is string => id !== null)
+  
   const products = await prisma.product.findMany({
     where: {
       id: { in: productIds },
@@ -88,23 +110,23 @@ export async function getPopularProducts(limit = 6) {
   const productMap = new Map(products.map((p) => [p.id, p]))
 
   return topProducts.map((item) => {
-    const product = productMap.get(item.productId)
+    const product = item.productId ? productMap.get(item.productId) : null
     return {
-      id: item.productId,
+      id: item.productId || '',
       name: product?.name || 'Unknown Product',
       sku: product?.sku || '',
       imageUrl: product?.imageUrl,
       price: Number(product?.sellingPrice || 0),
       totalSold: item._sum.quantity || 0,
-      totalRevenue: Number(item._sum.totalPrice || 0),
+      totalRevenue: Number(item._sum.totalAmount || 0),
     }
   })
 }
 
-export async function getRecentOrders(limit = 10) {
+export async function getRecentInvoices(limit = 10) {
   const context = await requirePermission('dashboard.view')
 
-  const orders = await prisma.order.findMany({
+  const invoices = await prisma.invoice.findMany({
     where: {
       tenantId: context.tenantId,
       ...(context.branchId && { branchId: context.branchId }),
@@ -112,23 +134,24 @@ export async function getRecentOrders(limit = 10) {
     include: {
       member: { select: { firstName: true, lastName: true } },
       branch: { select: { name: true } },
-      orderItems: { include: { product: { select: { name: true } } } },
+      items: { include: { product: { select: { name: true } } } },
     },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { issueDate: 'desc' },
     take: limit,
   })
 
-  return orders.map((order) => ({
-    id: order.id,
-    orderNumber: order.orderNumber,
-    memberName: order.member ? `${order.member.firstName} ${order.member.lastName}` : 'Walk-in',
-    branch: order.branch?.name || 'Unknown',
-    totalAmount: Number(order.grandTotal || 0),
-    status: order.status,
-    paymentStatus: order.paymentStatus,
-    paymentMethod: order.paymentMethod,
-    itemCount: order.orderItems.length,
-    createdAt: order.createdAt,
+  return invoices.map((invoice) => ({
+    id: invoice.id,
+    invoiceNumber: invoice.invoiceNumber,
+    memberName: invoice.member 
+      ? `${invoice.member.firstName} ${invoice.member.lastName}` 
+      : invoice.customerName || 'Walk-in',
+    branch: invoice.branch?.name || 'Unknown',
+    totalAmount: Number(invoice.totalAmount || 0),
+    status: invoice.status,
+    paymentMethod: invoice.paymentMethod,
+    itemCount: invoice.items.length,
+    issueDate: invoice.issueDate,
   }))
 }
 
