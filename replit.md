@@ -52,3 +52,26 @@ No specific user preferences were provided in the original document.
 - **Styling Utilities:** Tailwind CSS
 - **Admin Template:** Vuexy
 - **Notification Services:** (Currently stubbed, future integration planned for SendGrid, Twilio, etc.)
+- **Validation:** Zod schema validation for forms
+
+### Recent Changes (January 2026)
+
+#### Schema Updates
+- Added `durationMonths` (Int with default 1) and `basePrice` (Decimal) fields to `MembershipPlan` model
+- Added `quantityPerMonth` (Int with default 0) field to `PlanBenefit` model for monthly benefit allocations
+- Added `MembershipStatus` enum with values: ACTIVE, FROZEN, EXPIRED
+- Added payment tracking fields to `MemberMembership`: `totalPrice`, `amountPaid`, `balanceDue` (all Decimal)
+- Created new `BenefitLedger` model for duration-linked benefit tracking with:
+  - `totalAllocated`: Calculated as quantityPerMonth * durationMonths
+  - `usedCount`: Tracked sessions used
+  - `remainingCount`: Remaining benefit balance
+
+#### Backend Logic
+- New `registerMemberWithPlan` server action in `src/app/actions/members.ts` that:
+  - Creates a member with full profile
+  - Creates MemberMembership with auto-calculated endDate based on durationMonths
+  - Populates BenefitLedger entries for each plan benefit
+
+#### UI Updates
+- Added Zod validation to AddMemberDrawer component using @hookform/resolvers/zod
+- Member List page fetches real data from database via getMembers action

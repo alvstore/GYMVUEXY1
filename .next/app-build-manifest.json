@@ -16,38 +16,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/crm/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/dashboards/admin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/dashboards/admin/page.js"
-    ],
-    "/api/auth/[...nextauth]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/auth/[...nextauth]/route.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/member/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/member/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/referrals/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/referrals/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/referrals/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/apps/members/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/[lang]/(dashboard)/(private)/apps/members/page.css",
-      "static/chunks/app/[lang]/(dashboard)/(private)/apps/members/page.js"
-    ],
-    "/[lang]/(dashboard)/(private)/member-portal/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[lang]/(dashboard)/(private)/member-portal/page.js"
     ]
   }
 }

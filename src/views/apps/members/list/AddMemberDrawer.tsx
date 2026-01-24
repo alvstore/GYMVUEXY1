@@ -8,11 +8,29 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 
 import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { createMember } from '@/app/actions/members'
 
-import type { Member, MemberFormData } from '@/types/apps/memberTypes'
+import type { Member } from '@/types/apps/memberTypes'
 
 import CustomTextField from '@core/components/mui/TextField'
+
+const memberFormSchema = z.object({
+  firstName: z.string().min(1, 'First name is required').max(50, 'First name must be 50 characters or less'),
+  lastName: z.string().min(1, 'Last name is required').max(50, 'Last name must be 50 characters or less'),
+  email: z.string().min(1, 'Email is required').email('Invalid email address'),
+  phone: z.string().min(1, 'Phone number is required').regex(/^[\d\s\-\+\(\)]+$/, 'Invalid phone number format'),
+  dateOfBirth: z.string().optional(),
+  gender: z.enum(['MALE', 'FEMALE', 'OTHER']).optional(),
+  address: z.string().max(200, 'Address must be 200 characters or less').optional(),
+  emergencyContact: z.string().max(100, 'Emergency contact name must be 100 characters or less').optional(),
+  emergencyPhone: z.string().regex(/^[\d\s\-\+\(\)]*$/, 'Invalid phone number format').optional().or(z.literal('')),
+  bloodGroup: z.string().optional(),
+  medicalNotes: z.string().max(500, 'Medical notes must be 500 characters or less').optional()
+})
+
+type MemberFormData = z.infer<typeof memberFormSchema>
 
 type Props = {
   open: boolean
@@ -29,6 +47,7 @@ const AddMemberDrawer = (props: Props) => {
     handleSubmit,
     formState: { errors }
   } = useForm<MemberFormData>({
+    resolver: zodResolver(memberFormSchema),
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -100,41 +119,34 @@ const AddMemberDrawer = (props: Props) => {
           <Controller
             name='firstName'
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
               <CustomTextField
                 {...field}
                 fullWidth
                 label='First Name'
                 placeholder='John'
-                {...(errors.firstName && { error: true, helperText: 'This field is required.' })}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
               />
             )}
           />
           <Controller
             name='lastName'
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
               <CustomTextField
                 {...field}
                 fullWidth
                 label='Last Name'
                 placeholder='Doe'
-                {...(errors.lastName && { error: true, helperText: 'This field is required.' })}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
               />
             )}
           />
           <Controller
             name='email'
             control={control}
-            rules={{
-              required: true,
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address'
-              }
-            }}
             render={({ field }) => (
               <CustomTextField
                 {...field}
@@ -142,24 +154,22 @@ const AddMemberDrawer = (props: Props) => {
                 type='email'
                 label='Email'
                 placeholder='john.doe@example.com'
-                {...(errors.email && {
-                  error: true,
-                  helperText: errors.email.message || 'This field is required.'
-                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
               />
             )}
           />
           <Controller
             name='phone'
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
               <CustomTextField
                 {...field}
                 fullWidth
                 label='Phone'
                 placeholder='+1 234 567 8900'
-                {...(errors.phone && { error: true, helperText: 'This field is required.' })}
+                error={!!errors.phone}
+                helperText={errors.phone?.message}
               />
             )}
           />

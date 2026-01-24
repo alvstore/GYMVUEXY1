@@ -441,6 +441,12 @@ enum MemberStatus {
   FROZEN
 }
 
+enum MembershipStatus {
+  ACTIVE
+  FROZEN
+  EXPIRED
+}
+
 enum ReferralStatus {
   PENDING
   COMPLETED
@@ -576,11 +582,13 @@ model MembershipPlan {
   id              String   @id @default(uuid())
   tenantId        String
   branchId        String?  // Nullable for tenant-wide plans
-  name            String
+  name            String   // e.g., Elite, Pro, Founder
   description     String?
   planType        PlanType
-  duration        Int // Duration in days
-  price           Decimal  @db.Decimal(10, 2)
+  duration        Int      // Duration in days (legacy, kept for compatibility)
+  durationMonths  Int      @default(1) // Duration in months (e.g., 3, 6, 12)
+  price           Decimal  @db.Decimal(10, 2) // Legacy price field
+  basePrice       Decimal  @default(0) @db.Decimal(10, 2) // Base price before add-ons
   setupFee        Decimal  @default(0) @db.Decimal(10, 2)
   gymAccess       Boolean  @default(true)
   poolAccess      Boolean  @default(false)
@@ -598,30 +606,37 @@ model MembershipPlan {
   branch          Branch?            @relation(fields: [branchId], references: [id])
   memberPlans     MemberMembership[]
   roomPermissions RoomPermission[]
-  benefits        PlanBenefit[]      // New: Benefit entitlements
+  benefits        PlanBenefit[]      // Benefit entitlements
 
   @@map("membership_plans")
 }
 
 model MemberMembership {
-  id        String       @id @default(uuid())
-  memberId  String
-  planId    String
-  branchId  String? // Nullable for tenant-wide operations
-  startDate DateTime
-  endDate   DateTime
-  status    MemberStatus @default(ACTIVE)
-  freezeDays Int          @default(0)
-  notes     String?
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id          String           @id @default(uuid())
+  memberId    String
+  planId      String
+  branchId    String?          // Nullable for tenant-wide operations
+  startDate   DateTime
+  endDate     DateTime
+  status      MembershipStatus @default(ACTIVE)
+  freezeDays  Int              @default(0)
+  notes       String?
+  
+  // Payment Tracking Fields
+  totalPrice  Decimal          @default(0) @db.Decimal(10, 2) // Calculated: Plan Base Price + Add-ons
+  amountPaid  Decimal          @default(0) @db.Decimal(10, 2) // For partial payment tracking
+  balanceDue  Decimal          @default(0) @db.Decimal(10, 2) // Remaining amount to pay
+  
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 
   // Relationships
   member          Member                      @relation(fields: [memberId], references: [id], onDelete: Cascade)
   plan            MembershipPlan              @relation(fields: [planId], references: [id])
   branch          Branch?                     @relation(fields: [branchId], references: [id])
   invoices        Invoice[]
-  lifecycleEvents MembershipLifecycleEvent[]  // New: Lifecycle tracking
+  lifecycleEvents MembershipLifecycleEvent[]  // Lifecycle tracking
+  benefitLedgers  BenefitLedger[]             // Duration-linked benefit tracking
 
   @@map("member_memberships")
 }
@@ -3091,12 +3106,13 @@ model PlanBenefit {
   tenantId            String
   planId              String              // Link to MembershipPlan
   benefitType         BenefitType
-  name                String              // e.g., "Ice Bath Sessions"
+  name                String              // e.g., "Infrared Sauna", "Ice Bath", "Personal Training"
   description         String?
   
   // Accrual Settings
   accrualType         BenefitAccrualType
   accrualQuantity     Int                 // How many units accrue per period
+  quantityPerMonth    Int                 @default(0) // The allowance for a 30-day period
   maxBalance          Int?                // Max balance cap (null = unlimited)
   
   // Validity
@@ -3114,8 +3130,30 @@ model PlanBenefit {
   tenant              Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   plan                MembershipPlan      @relation(fields: [planId], references: [id], onDelete: Cascade)
   memberBalances      MemberBenefitBalance[]
+  benefitLedgers      BenefitLedger[]     // Duration-linked tracking
   
   @@map("plan_benefits")
+}
+
+model BenefitLedger {
+  id                  String              @id @default(uuid())
+  memberMembershipId  String              // Link to the active contract
+  benefitId           String              // Link to the PlanBenefit
+  
+  // Duration-Linked Tracking
+  totalAllocated      Int                 // Calculated: quantityPerMonth * durationMonths
+  usedCount           Int                 @default(0) // Tracked sessions used
+  remainingCount      Int                 // Calculated: totalAllocated - usedCount
+  
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  
+  // Relationships
+  memberMembership    MemberMembership    @relation(fields: [memberMembershipId], references: [id], onDelete: Cascade)
+  benefit             PlanBenefit         @relation(fields: [benefitId], references: [id], onDelete: Cascade)
+  
+  @@unique([memberMembershipId, benefitId])
+  @@map("benefit_ledgers")
 }
 
 model MemberBenefitBalance {

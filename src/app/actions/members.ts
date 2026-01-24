@@ -196,6 +196,152 @@ export async function createMember(data: {
   return member
 }
 
+export async function registerMemberWithPlan(data: {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  dateOfBirth?: Date
+  gender?: 'MALE' | 'FEMALE' | 'OTHER'
+  address?: string
+  emergencyContact?: string
+  emergencyPhone?: string
+  avatarUrl?: string
+  branchId?: string
+  planId: string
+  startDate?: Date
+  amountPaid?: number
+}) {
+  const context = await requirePermission('members.create')
+
+  let branchId: string
+
+  if (context.branchId) {
+    branchId = context.branchId
+    if (data.branchId && data.branchId !== context.branchId) {
+      throw new Error('Branch-scoped users cannot create members in other branches')
+    }
+  } else {
+    branchId = data.branchId || ''
+    if (branchId) {
+      const branch = await prisma.branch.findFirst({
+        where: { id: branchId, tenantId: context.tenantId },
+      })
+      if (!branch) {
+        throw new Error('Branch not found or does not belong to your tenant')
+      }
+    }
+  }
+
+  const plan = await prisma.membershipPlan.findFirst({
+    where: {
+      id: data.planId,
+      tenantId: context.tenantId,
+    },
+    include: {
+      benefits: {
+        where: { isActive: true },
+      },
+    },
+  })
+
+  if (!plan) {
+    throw new Error('Membership plan not found')
+  }
+
+  const membershipIdCode = `MEM${Date.now().toString().slice(-8)}`
+  const startDate = data.startDate || new Date()
+  
+  const endDate = new Date(startDate)
+  endDate.setMonth(endDate.getMonth() + plan.durationMonths)
+
+  const totalPrice = Number(plan.basePrice) || Number(plan.price)
+  const amountPaid = data.amountPaid || 0
+  const balanceDue = totalPrice - amountPaid
+
+  const result = await prisma.$transaction(async (tx) => {
+    const member = await tx.member.create({
+      data: {
+        tenantId: context.tenantId,
+        branchId,
+        membershipId: membershipIdCode,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        dateOfBirth: data.dateOfBirth,
+        gender: data.gender,
+        address: data.address,
+        emergencyContact: data.emergencyContact,
+        emergencyPhone: data.emergencyPhone,
+        avatarUrl: data.avatarUrl,
+        status: 'ACTIVE',
+      },
+    })
+
+    const membership = await tx.memberMembership.create({
+      data: {
+        memberId: member.id,
+        planId: plan.id,
+        branchId,
+        startDate,
+        endDate,
+        status: 'ACTIVE',
+        totalPrice: String(totalPrice),
+        amountPaid: String(amountPaid),
+        balanceDue: String(balanceDue),
+      },
+    })
+
+    const benefitLedgerPromises = plan.benefits.map((benefit) => {
+      const quantityPerMonth = benefit.quantityPerMonth || 0
+      const totalAllocated = quantityPerMonth * plan.durationMonths
+      return tx.benefitLedger.create({
+        data: {
+          memberMembershipId: membership.id,
+          benefitId: benefit.id,
+          totalAllocated,
+          usedCount: 0,
+          remainingCount: totalAllocated,
+        },
+      })
+    })
+
+    const benefitLedgers = await Promise.all(benefitLedgerPromises)
+
+    return {
+      member,
+      membership,
+      benefitLedgers,
+    }
+  })
+
+  await AuditLogger.log({
+    userId: context.userId,
+    tenantId: context.tenantId,
+    branchId,
+    action: 'Member.registeredWithPlan',
+    resource: 'Member',
+    resourceId: result.member.id,
+    newValues: {
+      membershipId: result.member.membershipId,
+      firstName: result.member.firstName,
+      lastName: result.member.lastName,
+      email: result.member.email,
+      planId: plan.id,
+      planName: plan.name,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      totalPrice,
+      amountPaid,
+      balanceDue,
+      benefitLedgersCreated: result.benefitLedgers.length,
+    }
+  })
+
+  return result
+}
+
 export async function updateMember(
   id: string,
   data: {
